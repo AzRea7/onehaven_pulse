@@ -1,0 +1,12 @@
+{
+  "name": "real-estate-cycle-platform",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm:api\" \"npm:web\"",
+    "api": "cd apps/api && uvicorn app.main:app --reload",
+    "web": "cd apps/web && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}
