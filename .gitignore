@@ -17,3 +17,11 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Local raw data storage
+data/raw/**
+data/manifests/**
+
+# Keep directory placeholders
+!data/raw/.gitkeep
+!data/manifests/.gitkeep
