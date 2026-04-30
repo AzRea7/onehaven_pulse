@@ -28,6 +28,14 @@ class PipelineSettings(BaseSettings):
     redfin_market_tracker_local_path: str = "data/import/redfin/market_tracker.csv"
     redfin_market_tracker_url: str | None = None
 
+    census_year: int = 2025
+    census_state_url: str = (
+        "https://www2.census.gov/geo/tiger/GENZ2025/shp/cb_2025_us_state_500k.zip"
+    )
+    census_cbsa_url: str = (
+        "https://www2.census.gov/geo/tiger/TIGER2025/CBSA/tl_2025_us_cbsa.zip"
+    )
+
     model_config = SettingsConfigDict(
         env_file=".env",
         extra="ignore",

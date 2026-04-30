@@ -14,7 +14,6 @@ from pipelines.loaders.audit_loader import (
 from pipelines.storage.local_raw_store import write_raw_bytes
 from pipelines.storage.manifest import write_manifest
 
-
 SOURCE = "redfin"
 
 
