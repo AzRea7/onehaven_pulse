@@ -25,3 +25,8 @@ data/manifests/**
 # Keep directory placeholders
 !data/raw/.gitkeep
 !data/manifests/.gitkeep
+
+# Local manually imported provider files
+data/import/**
+!data/import/.gitkeep
+!data/import/zillow/.gitkeep

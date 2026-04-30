@@ -18,6 +18,14 @@ class PipelineSettings(BaseSettings):
     fred_api_key: str | None = None
     fred_base_url: str = "https://api.stlouisfed.org/fred"
 
+    zillow_source_mode: str = "local"
+
+    zillow_zhvi_local_path: str = "data/import/zillow/zhvi.csv"
+    zillow_zori_local_path: str = "data/import/zillow/zori.csv"
+
+    zillow_zhvi_url: str | None = None
+    zillow_zori_url: str | None = None
+
     model_config = SettingsConfigDict(
         env_file=".env",
         extra="ignore",
