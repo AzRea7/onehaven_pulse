@@ -31,3 +31,7 @@ data/import/**
 !data/import/.gitkeep
 !data/import/zillow/.gitkeep
 !data/import/redfin/.gitkeep
+
+# Local manually imported Census Building Permits files
+data/import/census_building_permits/**
+!data/import/census_building_permits/.gitkeep

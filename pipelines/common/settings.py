@@ -36,6 +36,26 @@ class PipelineSettings(BaseSettings):
         "https://www2.census.gov/geo/tiger/TIGER2025/CBSA/tl_2025_us_cbsa.zip"
     )
 
+    census_bps_source_mode: str = "local"
+
+    census_bps_state_monthly_local_path: str = (
+        "data/import/census_building_permits/state_jan_2026.xls"
+    )
+    census_bps_cbsa_monthly_local_path: str = (
+        "data/import/census_building_permits/cbsa_jan_2026.xls"
+    )
+    census_bps_state_annual_local_path: str = (
+        "data/import/census_building_permits/state_annual_2025.xls"
+    )
+    census_bps_cbsa_annual_local_path: str = (
+        "data/import/census_building_permits/cbsa_annual_2025.xls"
+    )
+
+    census_bps_state_monthly_url: str | None = None
+    census_bps_cbsa_monthly_url: str | None = None
+    census_bps_state_annual_url: str | None = None
+    census_bps_cbsa_annual_url: str | None = None
+
     model_config = SettingsConfigDict(
         env_file=".env",
         extra="ignore",
