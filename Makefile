@@ -1,4 +1,4 @@
-.PHONY: dev up down restart logs ps api-logs web-logs db-logs db-shell api-shell web-shell clean
+.PHONY: dev up down restart logs ps api-logs web-logs db-logs db-shell api-shell web-shell clean migrate migration downgrade
 
 dev:
 	docker compose up --build
@@ -36,6 +36,15 @@ api-shell:
 
 web-shell:
 	docker exec -it onehaven-web sh
+
+migrate:
+	docker compose exec api alembic upgrade head
+
+migration:
+	docker compose exec api alembic revision -m "$(name)"
+
+downgrade:
+	docker compose exec api alembic downgrade -1
 
 clean:
 	docker compose down -v

@@ -1,23 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic_settings import BaseSettings
-from sqlalchemy import create_engine, text
+from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 
-
-class Settings(BaseSettings):
-    database_url: str = (
-        "postgresql+psycopg2://onehaven:onehaven_dev_password"
-        "@localhost:5432/onehaven_market"
-    )
-    frontend_origin: str = "http://localhost:3000"
-
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
-
-
-settings = Settings()
+from app.core.config import settings
+from app.db.session import engine
 
 app = FastAPI(
     title="OneHaven Market Engine API",
@@ -36,8 +23,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-engine = create_engine(settings.database_url, pool_pre_ping=True)
 
 
 @app.get("/health")
