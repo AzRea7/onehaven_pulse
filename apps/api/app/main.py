@@ -1,7 +1,7 @@
 from fastapi import FastAPI
+from pydantic_settings import BaseSettings
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
-from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
