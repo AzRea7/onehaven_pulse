@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
 from pipelines.common.settings import settings
 from pipelines.common.time import today_iso, utc_now, utc_timestamp_slug
@@ -13,7 +14,7 @@ def build_manifest_path(
     manifest_id: str | None = None,
 ) -> Path:
     safe_load_date = load_date or today_iso()
-    safe_manifest_id = manifest_id or f"{source}_{dataset}_{utc_timestamp_slug()}"
+    safe_manifest_id = manifest_id or f"{source}_{dataset}_{utc_timestamp_slug()}_{uuid4().hex[:8]}"
 
     return (
         settings.manifest_dir
