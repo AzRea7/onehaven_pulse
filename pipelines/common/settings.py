@@ -121,6 +121,14 @@ class PipelineSettings(BaseSettings):
     hud_usps_quarter: int = Field(default=4, validation_alias="HUD_USPS_QUARTER")
     hud_usps_query: str = Field(default="All", validation_alias="HUD_USPS_QUERY")
 
+    bls_api_base_url: str = Field(
+        default="https://api.bls.gov/publicAPI/v2/timeseries/data/",
+        validation_alias="BLS_API_BASE_URL",
+    )
+    bls_api_key: str | None = Field(default=None, validation_alias="BLS_API_KEY")
+    bls_laus_start_year: int = Field(default=2020, validation_alias="BLS_LAUS_START_YEAR")
+    bls_laus_end_year: int = Field(default=2026, validation_alias="BLS_LAUS_END_YEAR")
+
     @field_validator("census_data_api_key")
     @classmethod
     def strip_census_data_api_key(cls, value: str | None) -> str | None:
@@ -153,6 +161,22 @@ class PipelineSettings(BaseSettings):
 
         if clean.lower().startswith("bearer "):
             clean = clean.split(" ", 1)[1].strip()
+
+        if clean.startswith("replace_with_"):
+            return None
+
+        return clean
+
+    @field_validator("bls_api_key")
+    @classmethod
+    def strip_bls_api_key(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+
+        clean = value.strip()
+
+        if not clean:
+            return None
 
         if clean.startswith("replace_with_"):
             return None
