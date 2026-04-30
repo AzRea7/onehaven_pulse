@@ -30,3 +30,4 @@ data/manifests/**
 data/import/**
 !data/import/.gitkeep
 !data/import/zillow/.gitkeep
+!data/import/redfin/.gitkeep
