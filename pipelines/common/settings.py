@@ -129,6 +129,63 @@ class PipelineSettings(BaseSettings):
     bls_laus_start_year: int = Field(default=2020, validation_alias="BLS_LAUS_START_YEAR")
     bls_laus_end_year: int = Field(default=2026, validation_alias="BLS_LAUS_END_YEAR")
 
+    hmda_api_base_url: str = Field(
+        default="https://ffiec.cfpb.gov/v2/data-browser-api/view",
+        validation_alias="HMDA_API_BASE_URL",
+    )
+    hmda_year: int = Field(default=2023, validation_alias="HMDA_YEAR")
+    hmda_geography_type: str = Field(default="states", validation_alias="HMDA_GEOGRAPHY_TYPE")
+    hmda_geography_values: str = Field(default="MI", validation_alias="HMDA_GEOGRAPHY_VALUES")
+    hmda_actions_taken: str = Field(
+        default="1",
+        validation_alias="HMDA_ACTIONS_TAKEN",
+    )
+    hmda_loan_purposes: str = Field(
+        default="1",
+        validation_alias="HMDA_LOAN_PURPOSES",
+    )
+    hmda_loan_types: str = Field(default="", validation_alias="HMDA_LOAN_TYPES")
+    hmda_lien_statuses: str = Field(default="", validation_alias="HMDA_LIEN_STATUSES")
+
+    fema_nri_api_base_url: str = Field(
+        default="https://www.fema.gov/api/open",
+        validation_alias="FEMA_NRI_API_BASE_URL",
+    )
+    fema_nri_api_version: str = Field(default="v2", validation_alias="FEMA_NRI_API_VERSION")
+    fema_nri_entity: str = Field(
+        default="NationalRiskIndexCounties",
+        validation_alias="FEMA_NRI_ENTITY",
+    )
+    fema_nri_top: int = Field(default=10000, validation_alias="FEMA_NRI_TOP")
+    fema_nri_format: str = Field(default="json", validation_alias="FEMA_NRI_FORMAT")
+    fema_nri_select: str = Field(default="", validation_alias="FEMA_NRI_SELECT")
+    fema_nri_filter: str = Field(default="", validation_alias="FEMA_NRI_FILTER")
+
+    fema_nri_source_mode: str = Field(default="arcgis", validation_alias="FEMA_NRI_SOURCE_MODE")
+    fema_nri_arcgis_item_id: str = Field(
+        default="39485e8035d446a5bff03259508ae355",
+        validation_alias="FEMA_NRI_ARCGIS_ITEM_ID",
+    )
+    fema_nri_arcgis_service_url: str = Field(
+        default="",
+        validation_alias="FEMA_NRI_ARCGIS_SERVICE_URL",
+    )
+    fema_nri_arcgis_layer_id: int = Field(default=0, validation_alias="FEMA_NRI_ARCGIS_LAYER_ID")
+    fema_nri_arcgis_page_size: int = Field(
+        default=2000,
+        validation_alias="FEMA_NRI_ARCGIS_PAGE_SIZE",
+    )
+    fema_nri_arcgis_where: str = Field(default="1=1", validation_alias="FEMA_NRI_ARCGIS_WHERE")
+    fema_nri_arcgis_out_fields: str = Field(
+        default="*",
+        validation_alias="FEMA_NRI_ARCGIS_OUT_FIELDS",
+    )
+    fema_nri_version: str = Field(default="1.20", validation_alias="FEMA_NRI_VERSION")
+    fema_nri_release_label: str = Field(
+        default="December 2025",
+        validation_alias="FEMA_NRI_RELEASE_LABEL",
+    )
+
     @field_validator("census_data_api_key")
     @classmethod
     def strip_census_data_api_key(cls, value: str | None) -> str | None:

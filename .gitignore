@@ -35,3 +35,11 @@ data/import/**
 # Local manually imported Census Building Permits files
 data/import/census_building_permits/**
 !data/import/census_building_permits/.gitkeep
+
+# Local manually imported HMDA files
+data/import/hmda/**
+!data/import/hmda/.gitkeep
+
+# Local manually imported FEMA National Risk Index files
+data/import/fema_nri/**
+!data/import/fema_nri/.gitkeep
