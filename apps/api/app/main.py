@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic_settings import BaseSettings
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
-from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
