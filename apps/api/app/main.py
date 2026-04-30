@@ -5,6 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.core.config import settings
 from app.db.session import engine
+from app.routers.geo import router as geo_router
 
 app = FastAPI(
     title="OneHaven Market Engine API",
@@ -23,6 +24,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(geo_router)
 
 
 @app.get("/health")
