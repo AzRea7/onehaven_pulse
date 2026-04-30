@@ -5,6 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.core.config import settings
 from app.db.session import engine
+from app.routers.audit import router as audit_router
 from app.routers.geo import router as geo_router
 
 app = FastAPI(
@@ -26,6 +27,7 @@ app.add_middleware(
 )
 
 app.include_router(geo_router)
+app.include_router(audit_router)
 
 
 @app.get("/health")
