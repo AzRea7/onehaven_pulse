@@ -7,6 +7,7 @@ from app.core.config import settings
 from app.db.session import engine
 from app.routers.audit import router as audit_router
 from app.routers.geo import router as geo_router
+from app.routers.markets import router as markets_router
 
 app = FastAPI(
     title="OneHaven Market Engine API",
@@ -28,6 +29,7 @@ app.add_middleware(
 
 app.include_router(geo_router)
 app.include_router(audit_router)
+app.include_router(markets_router)
 
 
 @app.get("/health")
