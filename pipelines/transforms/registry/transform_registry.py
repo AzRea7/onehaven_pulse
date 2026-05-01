@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from pipelines.transforms.smoke.market_metric_smoke_transform import main as run_smoke_transform
 from pipelines.transforms.fred.macro_transform import main as run_fred_macro_transform
 from pipelines.transforms.fhfa.hpi_transform import main as run_fhfa_hpi_transform
+from pipelines.transforms.zillow.value_rent_transform import main as run_zillow_value_rent_transform
 
 @dataclass(frozen=True)
 class TransformDefinition:
@@ -14,6 +15,12 @@ class TransformDefinition:
 
 
 TRANSFORMS: dict[str, TransformDefinition] = {
+    "zillow_value_rent": TransformDefinition(
+        name="zillow_value_rent",
+        description="Transform Zillow ZHVI/ZORI into monthly value, rent, and growth metrics.",
+        target_table="analytics.market_monthly_metrics",
+        runner=run_zillow_value_rent_transform,
+    ),
     "fhfa_hpi": TransformDefinition(
         name="fhfa_hpi",
         description="Transform FHFA HPI into home price index and appreciation metrics by geography.",

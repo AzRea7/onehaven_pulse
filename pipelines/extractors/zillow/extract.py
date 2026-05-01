@@ -11,6 +11,7 @@ from pipelines.loaders.audit_loader import (
     start_pipeline_run,
     update_source_freshness,
 )
+from pipelines.loaders.zillow_loader import load_zillow_dataset
 from pipelines.storage.local_raw_store import write_raw_bytes
 from pipelines.storage.manifest import write_manifest
 
@@ -106,16 +107,12 @@ def extract_dataset(
         record_count=inspection["row_count"],
         checksum_sha256=raw_result["checksum_sha256"],
         file_size_bytes=raw_result["file_size_bytes"],
-        source_period_start=(
-            inspection["source_period_start"].isoformat()
-            if inspection["source_period_start"]
-            else None
-        ),
-        source_period_end=(
-            inspection["source_period_end"].isoformat()
-            if inspection["source_period_end"]
-            else None
-        ),
+        source_period_start=inspection["source_period_start"].isoformat()
+        if inspection["source_period_start"]
+        else None,
+        source_period_end=inspection["source_period_end"].isoformat()
+        if inspection["source_period_end"]
+        else None,
         metadata={
             "metric_name": dataset.metric_name,
             "description": dataset.description,
@@ -123,11 +120,11 @@ def extract_dataset(
             "date_column_count": inspection["date_column_count"],
             "region_types": inspection["region_types"],
             "state_count": inspection["state_count"],
-            "columns": inspection["columns"],
+            "manifest_columns": inspection["columns"],
         },
     )
 
-    record_source_file(
+    source_file_id = record_source_file(
         pipeline_run_id=pipeline_run_id,
         source=SOURCE,
         dataset=dataset.dataset,
@@ -145,11 +142,18 @@ def extract_dataset(
             "metric_name": dataset.metric_name,
             "description": dataset.description,
             "expected_frequency": dataset.expected_frequency,
-            "manifest_path": manifest_result["manifest_path"],
             "date_column_count": inspection["date_column_count"],
             "region_types": inspection["region_types"],
             "state_count": inspection["state_count"],
+            "manifest_path": manifest_result["manifest_path"],
         },
+    )
+
+    loaded_count = load_zillow_dataset(
+        dataset=dataset.dataset,
+        content=content,
+        source_file_id=source_file_id,
+        load_date=date.fromisoformat(load_date),
     )
 
     update_source_freshness(
@@ -158,22 +162,23 @@ def extract_dataset(
         latest_source_period=inspection["source_period_end"],
         last_successful_run_id=pipeline_run_id,
         last_status="success",
-        record_count=inspection["row_count"],
+        record_count=loaded_count,
     )
 
     print(
         f"Extracted Zillow {dataset.dataset}: "
-        f"{inspection['row_count']} rows -> {raw_result['raw_file_path']}"
+        f"{inspection['row_count']} source rows, "
+        f"{loaded_count} DB rows -> {raw_result['raw_file_path']}"
     )
 
-    return inspection["row_count"]
+    return loaded_count
 
 
 def main() -> None:
     load_date = today_iso()
 
     pipeline_run_id = start_pipeline_run(
-        pipeline_name="zillow_research_extract",
+        pipeline_name="zillow_extract",
         source=SOURCE,
         dataset="zhvi_zori",
         metadata={
@@ -181,37 +186,35 @@ def main() -> None:
         },
     )
 
-    total_rows = 0
-    loaded_files = 0
+    total_loaded = 0
 
     try:
         client = ZillowClient()
 
         for dataset in ZILLOW_DATASETS:
-            total_rows += extract_dataset(
+            total_loaded += extract_dataset(
                 client=client,
                 dataset=dataset,
                 pipeline_run_id=pipeline_run_id,
                 load_date=load_date,
             )
-            loaded_files += 1
 
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="success",
-            records_extracted=total_rows,
-            records_loaded=loaded_files,
+            records_extracted=total_loaded,
+            records_loaded=total_loaded,
             records_failed=0,
         )
 
-        print(f"Zillow extraction complete. Total rows: {total_rows}")
+        print(f"Zillow extraction complete. Total loaded rows: {total_loaded}")
 
     except Exception as exc:
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="failed",
-            records_extracted=total_rows,
-            records_loaded=loaded_files,
+            records_extracted=total_loaded,
+            records_loaded=None,
             records_failed=None,
             error_message=str(exc),
         )
