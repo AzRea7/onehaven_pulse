@@ -1,4 +1,5 @@
 from datetime import date
+import time
 
 from pipelines.common.time import today_iso
 from pipelines.extractors.fred.client import FredClient
@@ -9,6 +10,7 @@ from pipelines.loaders.audit_loader import (
     start_pipeline_run,
     update_source_freshness,
 )
+from pipelines.loaders.fred_loader import load_fred_observations
 from pipelines.storage.local_raw_store import write_raw_text
 from pipelines.storage.manifest import write_manifest
 
@@ -58,10 +60,7 @@ def extract_series(
         overwrite=True,
     )
 
-    source_url = (
-        f"{client.base_url}/series/observations"
-        f"?series_id={series.series_id}"
-    )
+    source_url = f"{client.base_url}/series/observations?series_id={series.series_id}"
 
     manifest_result = write_manifest(
         source=SOURCE,
@@ -86,7 +85,7 @@ def extract_series(
         },
     )
 
-    record_source_file(
+    source_file_id = record_source_file(
         pipeline_run_id=pipeline_run_id,
         source=SOURCE,
         dataset=DATASET,
@@ -111,12 +110,20 @@ def extract_series(
         },
     )
 
-    print(
-        f"Extracted {series.series_id}: "
-        f"{len(observations)} observations -> {raw_result['raw_file_path']}"
+    loaded_count = load_fred_observations(
+        series_id=series.series_id,
+        observations=observations,
+        load_date=date.fromisoformat(load_date),
+        source_file_id=source_file_id,
     )
 
-    return len(observations)
+    print(
+        f"Extracted {series.series_id}: "
+        f"{len(observations)} observations, "
+        f"{loaded_count} DB rows -> {raw_result['raw_file_path']}"
+    )
+
+    return loaded_count
 
 
 def main() -> None:
@@ -133,29 +140,26 @@ def main() -> None:
         },
     )
 
-    total_observations = 0
+    total_loaded = 0
 
     try:
         client = FredClient()
 
-        import time
-
         for series in FRED_SERIES:
-            total_observations += extract_series(
+            total_loaded += extract_series(
                 client=client,
                 series=series,
                 pipeline_run_id=pipeline_run_id,
                 load_date=load_date,
             )
 
-            # Be polite to the FRED API and reduce transient 5xx failures.
             time.sleep(0.5)
 
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="success",
-            records_extracted=total_observations,
-            records_loaded=len(FRED_SERIES),
+            records_extracted=total_loaded,
+            records_loaded=total_loaded,
             records_failed=0,
         )
 
@@ -165,16 +169,16 @@ def main() -> None:
             latest_source_period=None,
             last_successful_run_id=pipeline_run_id,
             last_status="success",
-            record_count=total_observations,
+            record_count=total_loaded,
         )
 
-        print(f"FRED extraction complete. Total observations: {total_observations}")
+        print(f"FRED extraction complete. Total loaded observations: {total_loaded}")
 
     except Exception as exc:
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="failed",
-            records_extracted=total_observations,
+            records_extracted=total_loaded,
             records_loaded=None,
             records_failed=None,
             error_message=str(exc),
@@ -186,7 +190,7 @@ def main() -> None:
             latest_source_period=None,
             last_successful_run_id=None,
             last_status="failed",
-            record_count=total_observations,
+            record_count=total_loaded,
             error_message=str(exc),
         )
 
