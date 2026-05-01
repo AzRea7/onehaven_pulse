@@ -32,6 +32,7 @@ METRIC_COLUMN_MAP: dict[str, str] = {
     "new_listings": "new_listings",
     "new_listings_yoy": "new_listings_yoy",
     "homes_sold": "homes_sold",
+    "pending_sales": "pending_sales",
     "homes_sold_yoy": "homes_sold_yoy",
     "months_supply": "months_supply",
     "median_days_on_market": "median_days_on_market",

@@ -5,6 +5,7 @@ from pipelines.transforms.smoke.market_metric_smoke_transform import main as run
 from pipelines.transforms.fred.macro_transform import main as run_fred_macro_transform
 from pipelines.transforms.fhfa.hpi_transform import main as run_fhfa_hpi_transform
 from pipelines.transforms.zillow.value_rent_transform import main as run_zillow_value_rent_transform
+from pipelines.transforms.redfin.market_tracker_transform import main as run_redfin_market_tracker_transform
 
 @dataclass(frozen=True)
 class TransformDefinition:
@@ -15,6 +16,12 @@ class TransformDefinition:
 
 
 TRANSFORMS: dict[str, TransformDefinition] = {
+    "redfin_market_tracker": TransformDefinition(
+        name="redfin_market_tracker",
+        description="Transform Redfin market tracker into inventory, price, sales, and velocity metrics.",
+        target_table="analytics.market_monthly_metrics",
+        runner=run_redfin_market_tracker_transform,
+    ),
     "zillow_value_rent": TransformDefinition(
         name="zillow_value_rent",
         description="Transform Zillow ZHVI/ZORI into monthly value, rent, and growth metrics.",
