@@ -76,8 +76,18 @@ def upgrade() -> None:
         # Data traceability / quality
         sa.Column("source_flags", sa.JSON(), nullable=True),
         sa.Column("quality_flags", sa.JSON(), nullable=True),
-        sa.Column("created_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("NOW()")),
-        sa.Column("updated_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("NOW()")),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("NOW()"),
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("NOW()"),
+        ),
 
         sa.ForeignKeyConstraint(
             ["geo_id"],
@@ -135,7 +145,12 @@ def upgrade() -> None:
         sa.Column("normalized_value", sa.Numeric(precision=24, scale=8), nullable=True),
         sa.Column("source_period", sa.Date(), nullable=True),
         sa.Column("transformation_notes", sa.Text(), nullable=True),
-        sa.Column("created_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("NOW()")),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("NOW()"),
+        ),
 
         sa.ForeignKeyConstraint(
             ["geo_id"],

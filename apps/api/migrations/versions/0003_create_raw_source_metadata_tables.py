@@ -32,7 +32,12 @@ def upgrade() -> None:
         sa.Column("records_failed", sa.BigInteger(), nullable=True),
         sa.Column("error_message", sa.Text(), nullable=True),
         sa.Column("metadata_json", sa.JSON(), nullable=True),
-        sa.Column("created_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("NOW()")),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("NOW()"),
+        ),
         sa.CheckConstraint(
             "status IN ('pending', 'running', 'success', 'failed', 'cancelled', 'skipped')",
             name="ck_pipeline_runs_status_valid",
@@ -87,7 +92,12 @@ def upgrade() -> None:
         sa.Column("status", sa.String(length=50), nullable=False),
         sa.Column("error_message", sa.Text(), nullable=True),
         sa.Column("metadata_json", sa.JSON(), nullable=True),
-        sa.Column("created_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("NOW()")),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("NOW()"),
+        ),
         sa.ForeignKeyConstraint(
             ["pipeline_run_id"],
             ["audit.pipeline_runs.id"],
@@ -155,8 +165,18 @@ def upgrade() -> None:
         sa.Column("stale_reason", sa.Text(), nullable=True),
         sa.Column("record_count", sa.BigInteger(), nullable=True),
         sa.Column("error_message", sa.Text(), nullable=True),
-        sa.Column("created_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("NOW()")),
-        sa.Column("updated_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("NOW()")),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("NOW()"),
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("NOW()"),
+        ),
         sa.ForeignKeyConstraint(
             ["last_successful_run_id"],
             ["audit.pipeline_runs.id"],
@@ -212,7 +232,12 @@ def upgrade() -> None:
         sa.Column("check_type", sa.String(length=100), nullable=False),
         sa.Column("severity", sa.String(length=50), nullable=False),
         sa.Column("status", sa.String(length=50), nullable=False),
-        sa.Column("checked_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("NOW()")),
+        sa.Column(
+            "checked_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("NOW()"),
+        ),
         sa.Column("failed_row_count", sa.BigInteger(), nullable=True),
         sa.Column("total_row_count", sa.BigInteger(), nullable=True),
         sa.Column("details_json", sa.JSON(), nullable=True),

@@ -21,8 +21,10 @@ class CensusAcsClient:
             **dataset.params,
         }
 
-        if settings.census_data_api_key and not settings.census_data_api_key.startswith("replace_with_"):
-            params["key"] = settings.census_data_api_key
+        census_key = settings.census_data_api_key
+
+        if census_key and not census_key.startswith("replace_with_"):
+            params["key"] = census_key
 
         response = requests.get(
             url,
@@ -33,29 +35,19 @@ class CensusAcsClient:
             },
         )
 
-        safe_url = response.url
-        if settings.census_data_api_key:
-            safe_url = safe_url.replace(settings.census_data_api_key, "***REDACTED***")
+        response_url = str(getattr(response, "url", ""))
+        response_text = str(getattr(response, "text", ""))
 
-        if "invalid_key.html" in response.url or "Invalid Key" in response.text[:500]:
+        safe_url = response_url
+
+        if census_key:
+            safe_url = safe_url.replace(census_key, "***REDACTED***")
+
+        if "invalid_key.html" in response_url or "Invalid Key" in response_text[:500]:
             raise ValueError(
                 "Census rejected CENSUS_DATA_API_KEY as invalid. "
                 "Check that the key is copied exactly, has no quotes, has no spaces, "
-                "and is not prefixed with 'key='. "
-                f"URL={safe_url}"
-            )
-
-        if response.status_code == 400:
-            raise ValueError(
-                "Census ACS API returned 400. This usually means a bad variable, "
-                "bad geography predicate, unavailable ACS year, or malformed request. "
-                f"URL={safe_url} BODY={response.text[:1000]}"
-            )
-
-        if response.status_code == 403:
-            raise ValueError(
-                "Census ACS API returned 403. Check CENSUS_DATA_API_KEY in .env. "
-                f"URL={safe_url} BODY={response.text[:1000]}"
+                f"and is not prefixed with 'key='. URL={safe_url}"
             )
 
         response.raise_for_status()
@@ -65,32 +57,29 @@ class CensusAcsClient:
         except JSONDecodeError as exc:
             raise ValueError(
                 "Census ACS API returned a non-JSON response. "
-                "This usually means a bad variable, unsupported geography, or invalid API key. "
-                f"URL={safe_url} BODY={response.text[:1000]}"
+                "This usually means a bad variable, invalid API key, "
+                f"or unsupported geography. URL={safe_url} "
+                f"BODY={response_text[:1000]}"
             ) from exc
 
-        self._validate_payload(dataset=dataset, payload=payload)
-
-        return payload
-
-    @staticmethod
-    def _validate_payload(dataset: CensusAcsDataset, payload: Any) -> None:
         if not isinstance(payload, list):
             raise ValueError(
-                f"Unexpected ACS response for geography={dataset.geography_level}: "
-                "payload is not a list"
+                "Unexpected Census ACS response shape. "
+                f"Expected list. URL={safe_url}"
             )
 
-        if len(payload) < 2:
+        if len(payload) <= 1:
             raise ValueError(
-                f"Unexpected ACS response for geography={dataset.geography_level}: "
-                "payload has no data rows"
+                "Census ACS API returned no data rows. "
+                f"URL={safe_url} PAYLOAD={payload}"
             )
 
-        headers = payload[0]
+        header = payload[0]
 
-        if "NAME" not in headers:
+        if "NAME" not in header:
             raise ValueError(
-                f"Unexpected ACS response for geography={dataset.geography_level}: "
-                "missing NAME column"
+                "Unexpected Census ACS response: missing NAME column. "
+                f"URL={safe_url} HEADER={header}"
             )
+
+        return payload
