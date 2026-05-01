@@ -186,6 +186,37 @@ class PipelineSettings(BaseSettings):
         validation_alias="FEMA_NRI_RELEASE_LABEL",
     )
 
+    overture_maps_api_base_url: str = Field(
+        default="https://api.overturemapsapi.com",
+        validation_alias="OVERTURE_MAPS_API_BASE_URL",
+    )
+    overture_maps_api_key: str | None = Field(
+        default=None,
+        validation_alias="OVERTURE_MAPS_API_KEY",
+    )
+    overture_maps_api_endpoint: str = Field(
+        default="places",
+        validation_alias="OVERTURE_MAPS_API_ENDPOINT",
+    )
+    overture_maps_api_area_slug: str = Field(
+        default="detroit_metro",
+        validation_alias="OVERTURE_MAPS_API_AREA_SLUG",
+    )
+    overture_maps_api_area_name: str = Field(
+        default="Detroit Metro",
+        validation_alias="OVERTURE_MAPS_API_AREA_NAME",
+    )
+    overture_maps_api_country: str = Field(default="US", validation_alias="OVERTURE_MAPS_API_COUNTRY")
+    overture_maps_api_lat: float = Field(default=42.3314, validation_alias="OVERTURE_MAPS_API_LAT")
+    overture_maps_api_lng: float = Field(default=-83.0458, validation_alias="OVERTURE_MAPS_API_LNG")
+    overture_maps_api_radius: int = Field(default=25000, validation_alias="OVERTURE_MAPS_API_RADIUS")
+    overture_maps_api_categories: str = Field(
+        default="cafes,supermarket,restaurant,school,park,hospital,pharmacy,bank",
+        validation_alias="OVERTURE_MAPS_API_CATEGORIES",
+    )
+    overture_maps_api_brand_name: str = Field(default="", validation_alias="OVERTURE_MAPS_API_BRAND_NAME")
+    overture_maps_api_limit: int = Field(default=5000, validation_alias="OVERTURE_MAPS_API_LIMIT")
+
     @field_validator("census_data_api_key")
     @classmethod
     def strip_census_data_api_key(cls, value: str | None) -> str | None:
@@ -227,6 +258,22 @@ class PipelineSettings(BaseSettings):
     @field_validator("bls_api_key")
     @classmethod
     def strip_bls_api_key(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+
+        clean = value.strip()
+
+        if not clean:
+            return None
+
+        if clean.startswith("replace_with_"):
+            return None
+
+        return clean
+
+    @field_validator("overture_maps_api_key")
+    @classmethod
+    def strip_overture_maps_api_key(cls, value: str | None) -> str | None:
         if value is None:
             return None
 

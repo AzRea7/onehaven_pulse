@@ -4,7 +4,6 @@ import requests
 
 from pipelines.extractors.fema_nri.config import FemaNriDataset
 
-
 ARCGIS_ITEM_URL = "https://www.arcgis.com/sharing/rest/content/items/{item_id}"
 
 

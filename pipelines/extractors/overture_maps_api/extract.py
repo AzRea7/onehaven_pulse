@@ -2,8 +2,11 @@ import json
 from datetime import date
 
 from pipelines.common.time import today_iso
-from pipelines.extractors.fema_nri.client import FemaNriClient
-from pipelines.extractors.fema_nri.config import FEMA_NRI_COUNTY_RISK, FemaNriDataset
+from pipelines.extractors.overture_maps_api.client import OvertureMapsApiClient
+from pipelines.extractors.overture_maps_api.config import (
+    OVERTURE_MAPS_API_PLACES,
+    OvertureMapsApiDataset,
+)
 from pipelines.loaders.audit_loader import (
     finish_pipeline_run,
     record_source_file,
@@ -13,30 +16,32 @@ from pipelines.loaders.audit_loader import (
 from pipelines.storage.local_raw_store import write_raw_text
 from pipelines.storage.manifest import write_manifest
 
-SOURCE = "fema_nri"
-DATASET = "county_risk"
+SOURCE = "overture_maps"
+DATASET = "places"
 
 
-def _source_period_bounds() -> tuple[date, date]:
-    return date(2025, 12, 1), date(2025, 12, 31)
+def _source_period_bounds(load_date: str) -> tuple[date, date]:
+    parsed = date.fromisoformat(load_date)
+    return parsed, parsed
 
 
 def _infer_columns(records: list[dict]) -> list[str]:
     columns: set[str] = set()
 
     for record in records[:25]:
-        columns.update(record.keys())
+        if isinstance(record, dict):
+            columns.update(record.keys())
 
     return sorted(columns)
 
 
 def extract_dataset(
-    client: FemaNriClient,
-    dataset: FemaNriDataset,
+    client: OvertureMapsApiClient,
+    dataset: OvertureMapsApiDataset,
     pipeline_run_id: str,
     load_date: str,
 ) -> int:
-    payload = client.get_dataset(dataset)
+    payload = client.get_places(dataset)
     records = payload["records"]
     record_count = payload["record_count"]
     columns = _infer_columns(records)
@@ -52,8 +57,9 @@ def extract_dataset(
         overwrite=True,
     )
 
-    source_period_start, source_period_end = _source_period_bounds()
-    source_url = payload["request"]["layer_url"]
+    source_period_start, source_period_end = _source_period_bounds(load_date)
+
+    source_url = f"{dataset.base_url.rstrip('/')}/{dataset.endpoint}"
 
     manifest_result = write_manifest(
         source=SOURCE,
@@ -69,22 +75,21 @@ def extract_dataset(
         source_period_start=source_period_start.isoformat(),
         source_period_end=source_period_end.isoformat(),
         metadata={
-            "source_mode": dataset.source_mode,
-            "version": dataset.version,
-            "release_label": dataset.release_label,
+            "endpoint": dataset.endpoint,
+            "area_slug": dataset.area_slug,
+            "area_name": dataset.area_name,
+            "country": dataset.country,
+            "lat": dataset.lat,
+            "lng": dataset.lng,
+            "radius": dataset.radius,
+            "categories": dataset.categories,
+            "brand_name": dataset.brand_name,
+            "limit": dataset.limit,
             "description": dataset.description,
             "expected_frequency": dataset.expected_frequency,
-            "arcgis_item_id": dataset.arcgis_item_id,
-            "service_url": payload["request"]["service_url"],
-            "layer_url": payload["request"]["layer_url"],
-            "layer_id": dataset.arcgis_layer_id,
-            "page_count": payload["page_count"],
-            "page_size": payload["request"]["page_size"],
-            "where": dataset.arcgis_where,
-            "out_fields": dataset.arcgis_out_fields,
-            "return_geometry": False,
-            "api_key_required": False,
+            "api_key_required": True,
             "columns": columns,
+            "note": "Raw Overture Maps API response is stored only. Feature engineering happens in Epic 4.",
         },
     )
 
@@ -103,30 +108,28 @@ def extract_dataset(
         load_date=date.fromisoformat(load_date),
         status="success",
         metadata={
-            "source_mode": dataset.source_mode,
-            "version": dataset.version,
-            "release_label": dataset.release_label,
+            "endpoint": dataset.endpoint,
+            "area_slug": dataset.area_slug,
+            "area_name": dataset.area_name,
+            "country": dataset.country,
+            "lat": dataset.lat,
+            "lng": dataset.lng,
+            "radius": dataset.radius,
+            "categories": dataset.categories,
+            "brand_name": dataset.brand_name,
+            "limit": dataset.limit,
             "description": dataset.description,
             "expected_frequency": dataset.expected_frequency,
             "manifest_path": manifest_result["manifest_path"],
-            "arcgis_item_id": dataset.arcgis_item_id,
-            "service_url": payload["request"]["service_url"],
-            "layer_url": payload["request"]["layer_url"],
-            "layer_id": dataset.arcgis_layer_id,
-            "page_count": payload["page_count"],
-            "page_size": payload["request"]["page_size"],
-            "where": dataset.arcgis_where,
-            "out_fields": dataset.arcgis_out_fields,
-            "return_geometry": False,
-            "api_key_required": False,
+            "api_key_required": True,
             "columns": columns,
+            "note": "Raw Overture Maps API response is stored only. Feature engineering happens in Epic 4.",
         },
     )
 
     print(
-        f"Extracted FEMA NRI county_risk: "
-        f"{record_count} records across {payload['page_count']} pages "
-        f"-> {raw_result['raw_file_path']}"
+        f"Extracted Overture Maps API places: "
+        f"{record_count} records -> {raw_result['raw_file_path']}"
     )
 
     return record_count
@@ -136,27 +139,27 @@ def main() -> None:
     load_date = today_iso()
 
     pipeline_run_id = start_pipeline_run(
-        pipeline_name="fema_nri_county_risk_extract",
+        pipeline_name="overture_maps_api_places_extract",
         source=SOURCE,
         dataset=DATASET,
         metadata={
-            "source_mode": FEMA_NRI_COUNTY_RISK.source_mode,
-            "arcgis_item_id": FEMA_NRI_COUNTY_RISK.arcgis_item_id,
-            "layer_id": FEMA_NRI_COUNTY_RISK.arcgis_layer_id,
-            "api_key_required": False,
+            "endpoint": OVERTURE_MAPS_API_PLACES.endpoint,
+            "area_slug": OVERTURE_MAPS_API_PLACES.area_slug,
+            "area_name": OVERTURE_MAPS_API_PLACES.area_name,
+            "api_key_required": True,
         },
     )
 
     try:
-        client = FemaNriClient()
+        client = OvertureMapsApiClient()
         record_count = extract_dataset(
             client=client,
-            dataset=FEMA_NRI_COUNTY_RISK,
+            dataset=OVERTURE_MAPS_API_PLACES,
             pipeline_run_id=pipeline_run_id,
             load_date=load_date,
         )
 
-        _, source_period_end = _source_period_bounds()
+        _, source_period_end = _source_period_bounds(load_date)
 
         finish_pipeline_run(
             run_id=pipeline_run_id,
@@ -175,7 +178,7 @@ def main() -> None:
             record_count=record_count,
         )
 
-        print(f"FEMA NRI extraction complete. Records: {record_count}")
+        print(f"Overture Maps API extraction complete. Records: {record_count}")
 
     except Exception as exc:
         finish_pipeline_run(
