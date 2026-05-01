@@ -25,7 +25,4 @@ pyarrow
 pandas
 
 # Cloud-native geospatial data
-overturemaps
-duckdb
-pyarrow
-pandas
+xlrd>=2.0.1

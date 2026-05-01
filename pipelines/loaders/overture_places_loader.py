@@ -151,11 +151,10 @@ def load_overture_places(
         return 0
 
     with engine.begin() as connection:
-        if source_file_id:
-            connection.execute(
-                text("DELETE FROM raw.overture_places WHERE source_file_id = :source_file_id"),
-                {"source_file_id": source_file_id},
-            )
+        connection.execute(
+            text("DELETE FROM raw.overture_places WHERE area_slug = :area_slug"),
+            {"area_slug": dataset.area_slug},
+        )
 
         connection.execute(INSERT_SQL, params)
 
