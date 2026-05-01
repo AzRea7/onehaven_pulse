@@ -5,6 +5,7 @@ from pipelines.common.settings import settings
 from pipelines.common.time import today_iso
 from pipelines.extractors.census_acs.client import CensusAcsClient
 from pipelines.extractors.census_acs.config import CENSUS_ACS_DATASETS, CensusAcsDataset
+from pipelines.loaders.census_acs_loader import load_census_acs_profile
 from pipelines.loaders.audit_loader import (
     finish_pipeline_run,
     record_source_file,
@@ -80,7 +81,7 @@ def extract_dataset(
         },
     )
 
-    record_source_file(
+    source_file_id = record_source_file(
         pipeline_run_id=pipeline_run_id,
         source=SOURCE,
         dataset=DATASET,
@@ -106,12 +107,22 @@ def extract_dataset(
         },
     )
 
-    print(
-        f"Extracted Census ACS {dataset.geography_level}: "
-        f"{len(rows)} rows -> {raw_result['raw_file_path']}"
+    loaded_count = load_census_acs_profile(
+        payload=payload,
+        geography_level=dataset.geography_level,
+        year=dataset.year,
+        source_period_start=source_period_start,
+        source_period_end=source_period_end,
+        source_file_id=source_file_id,
+        load_date=date.fromisoformat(load_date),
     )
 
-    return len(rows)
+    print(
+        f"Extracted Census ACS {dataset.geography_level}: "
+        f"{len(rows)} source rows, {loaded_count} DB rows -> {raw_result['raw_file_path']}"
+    )
+
+    return loaded_count
 
 
 def main() -> None:

@@ -67,6 +67,15 @@ METRIC_COLUMN_MAP: dict[str, str] = {
     "population_yoy": "population_yoy",
     "median_household_income": "median_household_income",
     "households": "households",
+    "housing_units": "housing_units",
+    "occupied_housing_units": "occupied_housing_units",
+    "vacant_housing_units": "vacant_housing_units",
+    "owner_occupied_housing_units": "owner_occupied_housing_units",
+    "renter_occupied_housing_units": "renter_occupied_housing_units",
+    "owner_occupied_share": "owner_occupied_share",
+    "renter_occupied_share": "renter_occupied_share",
+    "median_gross_rent": "median_gross_rent",
+    "rent_burden_pct": "rent_burden_pct",
 
     # Rent fallback
     "median_rent": "median_rent",

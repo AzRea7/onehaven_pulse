@@ -12,6 +12,7 @@ ACS_PROFILE_VARIABLES = [
     "DP04_0046E",  # Owner-occupied housing units
     "DP04_0047E",  # Renter-occupied housing units
     "DP04_0089E",  # Median gross rent
+    "DP04_0142PE",  # Gross rent 35 percent or more of household income
 ]
 
 

@@ -6,6 +6,7 @@ from pipelines.transforms.fred.macro_transform import main as run_fred_macro_tra
 from pipelines.transforms.fhfa.hpi_transform import main as run_fhfa_hpi_transform
 from pipelines.transforms.zillow.value_rent_transform import main as run_zillow_value_rent_transform
 from pipelines.transforms.redfin.market_tracker_transform import main as run_redfin_market_tracker_transform
+from pipelines.transforms.census_acs.profile_transform import main as run_census_acs_profile_transform
 
 @dataclass(frozen=True)
 class TransformDefinition:
@@ -16,6 +17,12 @@ class TransformDefinition:
 
 
 TRANSFORMS: dict[str, TransformDefinition] = {
+    "census_acs_profile": TransformDefinition(
+        name="census_acs_profile",
+        description="Transform Census ACS profile into population, income, household, housing, rent burden, and tenure metrics.",
+        target_table="analytics.market_monthly_metrics",
+        runner=run_census_acs_profile_transform,
+    ),
     "redfin_market_tracker": TransformDefinition(
         name="redfin_market_tracker",
         description="Transform Redfin market tracker into inventory, price, sales, and velocity metrics.",
