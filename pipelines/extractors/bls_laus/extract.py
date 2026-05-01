@@ -10,6 +10,7 @@ from pipelines.loaders.audit_loader import (
     start_pipeline_run,
     update_source_freshness,
 )
+from pipelines.loaders.bls_laus_loader import load_bls_laus_observations
 from pipelines.storage.local_raw_store import write_raw_text
 from pipelines.storage.manifest import write_manifest
 
@@ -61,6 +62,9 @@ def main() -> None:
         },
     )
 
+    observation_count = 0
+    loaded_count = 0
+
     try:
         client = BlsLausClient()
         payload = client.get_dataset(BLS_LAUS_DATASET)
@@ -93,20 +97,22 @@ def main() -> None:
             checksum_sha256=raw_result["checksum_sha256"],
             file_size_bytes=raw_result["file_size_bytes"],
             source_period_start=date(BLS_LAUS_DATASET.start_year, 1, 1).isoformat(),
-            source_period_end=latest_source_period.isoformat() if latest_source_period else None,
+            source_period_end=latest_source_period.isoformat()
+            if latest_source_period
+            else None,
             metadata={
                 "description": BLS_LAUS_DATASET.description,
                 "expected_frequency": BLS_LAUS_DATASET.expected_frequency,
                 "start_year": BLS_LAUS_DATASET.start_year,
                 "end_year": BLS_LAUS_DATASET.end_year,
                 "series_count": len(BLS_LAUS_DATASET.series),
-                "series": payload["series_metadata"],
+                "series": payload.get("series_metadata", []),
                 "latest_year": latest_year,
                 "latest_period": latest_period,
             },
         )
 
-        record_source_file(
+        source_file_id = record_source_file(
             pipeline_run_id=pipeline_run_id,
             source=SOURCE,
             dataset=DATASET,
@@ -121,23 +127,27 @@ def main() -> None:
             load_date=date.fromisoformat(load_date),
             status="success",
             metadata={
-                "description": BLS_LAUS_DATASET.description,
-                "expected_frequency": BLS_LAUS_DATASET.expected_frequency,
                 "start_year": BLS_LAUS_DATASET.start_year,
                 "end_year": BLS_LAUS_DATASET.end_year,
                 "series_count": len(BLS_LAUS_DATASET.series),
-                "series": payload["series_metadata"],
-                "manifest_path": manifest_result["manifest_path"],
                 "latest_year": latest_year,
                 "latest_period": latest_period,
+                "manifest_path": manifest_result["manifest_path"],
             },
+        )
+
+        loaded_count = load_bls_laus_observations(
+            payload=payload,
+            dataset=BLS_LAUS_DATASET,
+            source_file_id=source_file_id,
+            load_date=date.fromisoformat(load_date),
         )
 
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="success",
             records_extracted=observation_count,
-            records_loaded=1,
+            records_loaded=loaded_count,
             records_failed=0,
         )
 
@@ -147,20 +157,21 @@ def main() -> None:
             latest_source_period=latest_source_period,
             last_successful_run_id=pipeline_run_id,
             last_status="success",
-            record_count=observation_count,
+            record_count=loaded_count,
         )
 
         print(
             f"BLS LAUS extraction complete. "
-            f"Observations: {observation_count} -> {raw_result['raw_file_path']}"
+            f"Source observations: {observation_count}. "
+            f"DB rows: {loaded_count}"
         )
 
     except Exception as exc:
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="failed",
-            records_extracted=None,
-            records_loaded=None,
+            records_extracted=observation_count,
+            records_loaded=loaded_count,
             records_failed=None,
             error_message=str(exc),
         )
@@ -171,7 +182,7 @@ def main() -> None:
             latest_source_period=None,
             last_successful_run_id=None,
             last_status="failed",
-            record_count=None,
+            record_count=loaded_count,
             error_message=str(exc),
         )
 

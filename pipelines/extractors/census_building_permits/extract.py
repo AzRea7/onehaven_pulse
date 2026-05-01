@@ -12,19 +12,28 @@ from pipelines.loaders.audit_loader import (
     start_pipeline_run,
     update_source_freshness,
 )
+from pipelines.loaders.census_bps_loader import load_census_bps_permits
 from pipelines.storage.local_raw_store import write_raw_bytes
 from pipelines.storage.manifest import write_manifest
 
-SOURCE = "census_building_permits"
-DATASET = "permits"
+SOURCE = "census"
+DATASET = "building_permits"
 
 
 def _source_period_bounds(dataset: CensusBpsDataset) -> tuple[date | None, date | None]:
-    if dataset.period_type == "monthly" and dataset.source_period_label == "2026-01":
-        return date(2026, 1, 1), date(2026, 1, 31)
+    if dataset.period_type == "monthly" and "-" in dataset.source_period_label:
+        year_raw, month_raw = dataset.source_period_label.split("-", maxsplit=1)
+        year = int(year_raw)
+        month = int(month_raw)
 
-    if dataset.period_type == "annual" and dataset.source_period_label == "2025":
-        return date(2025, 1, 1), date(2025, 12, 31)
+        if month == 12:
+            return date(year, 12, 1), date(year, 12, 31)
+
+        return date(year, month, 1), date(year, month + 1, 1)
+
+    if dataset.period_type == "annual":
+        year = int(dataset.source_period_label)
+        return date(year, 1, 1), date(year, 12, 31)
 
     return None, None
 
@@ -38,7 +47,13 @@ def extract_dataset(
     content = client.get_dataset_content(dataset)
 
     if content is None:
+        print(
+            f"Skipped optional Census BPS {dataset.geography_level}/{dataset.period_type}: "
+            "no content configured."
+        )
         return 0
+
+    source_period_start, source_period_end = _source_period_bounds(dataset)
 
     raw_result = write_raw_bytes(
         source=SOURCE,
@@ -50,10 +65,6 @@ def extract_dataset(
     )
 
     source_url_or_path = dataset.url if dataset.url else dataset.local_path
-    source_period_start, source_period_end = _source_period_bounds(dataset)
-
-    record_count = None
-    file_format = dataset.filename.split(".")[-1].lower()
 
     manifest_result = write_manifest(
         source=SOURCE,
@@ -62,8 +73,8 @@ def extract_dataset(
         status="success",
         load_date=load_date,
         source_url=source_url_or_path,
-        file_format=file_format,
-        record_count=record_count,
+        file_format=dataset.filename.split(".")[-1],
+        record_count=None,
         checksum_sha256=raw_result["checksum_sha256"],
         file_size_bytes=raw_result["file_size_bytes"],
         source_period_start=source_period_start.isoformat() if source_period_start else None,
@@ -78,16 +89,16 @@ def extract_dataset(
         },
     )
 
-    record_source_file(
+    source_file_id = record_source_file(
         pipeline_run_id=pipeline_run_id,
         source=SOURCE,
         dataset=DATASET,
         source_url=source_url_or_path,
         raw_file_path=raw_result["raw_file_path"],
-        file_format=file_format,
+        file_format=dataset.filename.split(".")[-1],
         checksum_sha256=raw_result["checksum_sha256"],
         file_size_bytes=raw_result["file_size_bytes"],
-        record_count=record_count,
+        record_count=None,
         source_period_start=source_period_start,
         source_period_end=source_period_end,
         load_date=date.fromisoformat(load_date),
@@ -103,12 +114,19 @@ def extract_dataset(
         },
     )
 
-    print(
-        f"Extracted Census BPS {dataset.geography_level}/{dataset.period_type}: "
-        f"{raw_result['file_size_bytes']} bytes -> {raw_result['raw_file_path']}"
+    loaded_count = load_census_bps_permits(
+        content=content,
+        dataset=dataset,
+        source_file_id=source_file_id,
+        load_date=date.fromisoformat(load_date),
     )
 
-    return 1
+    print(
+        f"Extracted Census BPS {dataset.geography_level}/{dataset.period_type}: "
+        f"{loaded_count} DB rows -> {raw_result['raw_file_path']}"
+    )
+
+    return loaded_count
 
 
 def main() -> None:
@@ -132,13 +150,13 @@ def main() -> None:
         },
     )
 
-    loaded_files = 0
+    total_loaded = 0
 
     try:
         client = CensusBpsClient()
 
         for dataset in CENSUS_BPS_DATASETS:
-            loaded_files += extract_dataset(
+            total_loaded += extract_dataset(
                 client=client,
                 dataset=dataset,
                 pipeline_run_id=pipeline_run_id,
@@ -148,28 +166,28 @@ def main() -> None:
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="success",
-            records_extracted=None,
-            records_loaded=loaded_files,
+            records_extracted=total_loaded,
+            records_loaded=total_loaded,
             records_failed=0,
         )
 
         update_source_freshness(
             source=SOURCE,
             dataset=DATASET,
-            latest_source_period=date(2026, 1, 31),
+            latest_source_period=None,
             last_successful_run_id=pipeline_run_id,
             last_status="success",
-            record_count=loaded_files,
+            record_count=total_loaded,
         )
 
-        print(f"Census BPS extraction complete. Files loaded: {loaded_files}")
+        print(f"Census BPS extraction complete. Total loaded rows: {total_loaded}")
 
     except Exception as exc:
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="failed",
-            records_extracted=None,
-            records_loaded=loaded_files,
+            records_extracted=total_loaded,
+            records_loaded=None,
             records_failed=None,
             error_message=str(exc),
         )
@@ -180,7 +198,7 @@ def main() -> None:
             latest_source_period=None,
             last_successful_run_id=None,
             last_status="failed",
-            record_count=loaded_files,
+            record_count=total_loaded,
             error_message=str(exc),
         )
 

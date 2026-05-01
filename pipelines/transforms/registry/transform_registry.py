@@ -7,6 +7,9 @@ from pipelines.transforms.fhfa.hpi_transform import main as run_fhfa_hpi_transfo
 from pipelines.transforms.zillow.value_rent_transform import main as run_zillow_value_rent_transform
 from pipelines.transforms.redfin.market_tracker_transform import main as run_redfin_market_tracker_transform
 from pipelines.transforms.census_acs.profile_transform import main as run_census_acs_profile_transform
+from pipelines.transforms.bls_laus.labor_market_transform import main as run_bls_laus_labor_market_transform
+from pipelines.transforms.census_building_permits.permits_transform import main as run_census_bps_permits_transform
+from pipelines.transforms.fema_nri.hazard_risk_transform import main as run_fema_nri_hazard_risk_transform
 
 @dataclass(frozen=True)
 class TransformDefinition:
@@ -17,6 +20,24 @@ class TransformDefinition:
 
 
 TRANSFORMS: dict[str, TransformDefinition] = {
+    "fema_nri_hazard_risk": TransformDefinition(
+        name="fema_nri_hazard_risk",
+        description="Transform FEMA NRI county risk into hazard, loss, vulnerability, and resilience metrics.",
+        target_table="analytics.market_monthly_metrics",
+        runner=run_fema_nri_hazard_risk_transform,
+    ),
+    "census_building_permits": TransformDefinition(
+        name="census_building_permits",
+        description="Transform Census Building Permits Survey data into monthly supply pipeline metrics.",
+        target_table="analytics.market_monthly_metrics",
+        runner=run_census_bps_permits_transform,
+    ),
+    "bls_laus_labor_market": TransformDefinition(
+        name="bls_laus_labor_market",
+        description="Transform BLS LAUS into unemployment rate, labor force, employment, and unemployment count metrics.",
+        target_table="analytics.market_monthly_metrics",
+        runner=run_bls_laus_labor_market_transform,
+    ),
     "census_acs_profile": TransformDefinition(
         name="census_acs_profile",
         description="Transform Census ACS profile into population, income, household, housing, rent burden, and tenure metrics.",

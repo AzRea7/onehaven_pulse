@@ -9,6 +9,10 @@ from pipelines.transforms.common.market_metric_record import MarketMetricRecord
 
 
 METRIC_COLUMN_MAP: dict[str, str] = {
+    "hazard_risk_score": "hazard_risk_score",
+    "expected_annual_loss": "expected_annual_loss",
+    "social_vulnerability_score": "social_vulnerability_score",
+    "community_resilience_score": "community_resilience_score",
     # FHFA / price index
     "home_price_index": "home_price_index",
     "home_price_index_yoy": "home_price_index_yoy",
@@ -44,6 +48,9 @@ METRIC_COLUMN_MAP: dict[str, str] = {
     "fed_funds_rate": "fed_funds_rate",
     "cpi": "cpi",
     "unemployment_rate": "unemployment_rate",
+    "labor_force": "labor_force",
+    "employment": "employment",
+    "unemployment_count": "unemployment_count",
 
         # FRED / Treasury curve
     "treasury_2yr_rate": "treasury_2yr_rate",
@@ -62,6 +69,9 @@ METRIC_COLUMN_MAP: dict[str, str] = {
 
     # Census / permits
     "building_permits": "building_permits",
+    "single_family_permits": "single_family_permits",
+    "multi_family_permits": "multi_family_permits",
+    "permit_units": "permit_units",
     "permits_per_1000_people": "permits_per_1000_people",
     "population": "population",
     "population_yoy": "population_yoy",

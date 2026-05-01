@@ -12,10 +12,8 @@ class BlsLausSeries:
     geo_reference: str
 
 
-# Starter set.
-# Keep this small for the raw extractor story.
-# We can expand after we confirm exact BLS LAUS series IDs for all target markets.
 BLS_LAUS_SERIES = [
+    # United States, national CPS labor force series.
     BlsLausSeries(
         series_id="LNS14000000",
         label="United States unemployment rate",
@@ -24,12 +22,58 @@ BLS_LAUS_SERIES = [
         geo_reference="US",
     ),
     BlsLausSeries(
+        series_id="LNS11000000",
+        label="United States labor force",
+        geography_level="national",
+        measure="labor_force",
+        geo_reference="US",
+    ),
+    BlsLausSeries(
+        series_id="LNS12000000",
+        label="United States employment",
+        geography_level="national",
+        measure="employment",
+        geo_reference="US",
+    ),
+    BlsLausSeries(
+        series_id="LNS13000000",
+        label="United States unemployment count",
+        geography_level="national",
+        measure="unemployment_count",
+        geo_reference="US",
+    ),
+
+    # Michigan.
+    BlsLausSeries(
         series_id="LASST260000000000003",
         label="Michigan unemployment rate",
         geography_level="state",
         measure="unemployment_rate",
         geo_reference="MI",
     ),
+    BlsLausSeries(
+        series_id="LASST260000000000006",
+        label="Michigan labor force",
+        geography_level="state",
+        measure="labor_force",
+        geo_reference="MI",
+    ),
+    BlsLausSeries(
+        series_id="LASST260000000000005",
+        label="Michigan employment",
+        geography_level="state",
+        measure="employment",
+        geo_reference="MI",
+    ),
+    BlsLausSeries(
+        series_id="LASST260000000000004",
+        label="Michigan unemployment count",
+        geography_level="state",
+        measure="unemployment_count",
+        geo_reference="MI",
+    ),
+
+    # Texas.
     BlsLausSeries(
         series_id="LASST480000000000003",
         label="Texas unemployment rate",
@@ -38,10 +82,54 @@ BLS_LAUS_SERIES = [
         geo_reference="TX",
     ),
     BlsLausSeries(
+        series_id="LASST480000000000006",
+        label="Texas labor force",
+        geography_level="state",
+        measure="labor_force",
+        geo_reference="TX",
+    ),
+    BlsLausSeries(
+        series_id="LASST480000000000005",
+        label="Texas employment",
+        geography_level="state",
+        measure="employment",
+        geo_reference="TX",
+    ),
+    BlsLausSeries(
+        series_id="LASST480000000000004",
+        label="Texas unemployment count",
+        geography_level="state",
+        measure="unemployment_count",
+        geo_reference="TX",
+    ),
+
+    # Florida.
+    BlsLausSeries(
         series_id="LASST120000000000003",
         label="Florida unemployment rate",
         geography_level="state",
         measure="unemployment_rate",
+        geo_reference="FL",
+    ),
+    BlsLausSeries(
+        series_id="LASST120000000000006",
+        label="Florida labor force",
+        geography_level="state",
+        measure="labor_force",
+        geo_reference="FL",
+    ),
+    BlsLausSeries(
+        series_id="LASST120000000000005",
+        label="Florida employment",
+        geography_level="state",
+        measure="employment",
+        geo_reference="FL",
+    ),
+    BlsLausSeries(
+        series_id="LASST120000000000004",
+        label="Florida unemployment count",
+        geography_level="state",
+        measure="unemployment_count",
         geo_reference="FL",
     ),
 ]

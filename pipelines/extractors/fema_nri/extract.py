@@ -4,6 +4,7 @@ from datetime import date
 from pipelines.common.time import today_iso
 from pipelines.extractors.fema_nri.client import FemaNriClient
 from pipelines.extractors.fema_nri.config import FEMA_NRI_COUNTY_RISK, FemaNriDataset
+from pipelines.loaders.fema_nri_loader import load_fema_nri_county_risk
 from pipelines.loaders.audit_loader import (
     finish_pipeline_run,
     record_source_file,
@@ -88,7 +89,7 @@ def extract_dataset(
         },
     )
 
-    record_source_file(
+    source_file_id = record_source_file(
         pipeline_run_id=pipeline_run_id,
         source=SOURCE,
         dataset=DATASET,
@@ -123,13 +124,20 @@ def extract_dataset(
         },
     )
 
-    print(
-        f"Extracted FEMA NRI county_risk: "
-        f"{record_count} records across {payload['page_count']} pages "
-        f"-> {raw_result['raw_file_path']}"
+    loaded_count = load_fema_nri_county_risk(
+        payload=payload,
+        dataset=dataset,
+        source_file_id=source_file_id,
+        load_date=date.fromisoformat(load_date),
     )
 
-    return record_count
+    print(
+        f"Extracted FEMA NRI county_risk: "
+        f"{record_count} source records, {loaded_count} DB rows "
+        f"across {payload['page_count']} pages -> {raw_result['raw_file_path']}"
+    )
+
+    return loaded_count
 
 
 def main() -> None:
@@ -162,7 +170,7 @@ def main() -> None:
             run_id=pipeline_run_id,
             status="success",
             records_extracted=record_count,
-            records_loaded=1,
+            records_loaded=record_count,
             records_failed=0,
         )
 
