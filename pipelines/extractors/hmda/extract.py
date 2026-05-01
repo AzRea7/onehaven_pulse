@@ -1,16 +1,16 @@
-import csv
 from datetime import date
-from io import StringIO
+from typing import Any
 
 from pipelines.common.time import today_iso
+from pipelines.extractors.hmda import config as hmda_config
 from pipelines.extractors.hmda.client import HmdaClient
-from pipelines.extractors.hmda.config import HMDA_MODIFIED_LAR, HmdaDataset
 from pipelines.loaders.audit_loader import (
     finish_pipeline_run,
     record_source_file,
     start_pipeline_run,
     update_source_freshness,
 )
+from pipelines.loaders.hmda_loader import load_hmda_modified_lar
 from pipelines.storage.local_raw_store import write_raw_bytes
 from pipelines.storage.manifest import write_manifest
 
@@ -18,77 +18,159 @@ SOURCE = "hmda"
 DATASET = "modified_lar"
 
 
-def _decode_text(content: bytes) -> str:
-    try:
-        return content.decode("utf-8-sig")
-    except UnicodeDecodeError:
-        return content.decode("latin-1")
+def _get_hmda_dataset() -> Any:
+    preferred_names = (
+        "HMDA_DATASET",
+        "HMDA_MODIFIED_LAR",
+        "HMDA_MODIFIED_LAR_DATASET",
+        "HMDA_MODIFIED_LAR_2024",
+    )
+
+    for name in preferred_names:
+        dataset = getattr(hmda_config, name, None)
+
+        if dataset is not None:
+            return dataset
+
+    candidates = []
+
+    for value in hmda_config.__dict__.values():
+        if hasattr(value, "dataset") and hasattr(value, "filename"):
+            candidates.append(value)
+
+    if len(candidates) == 1:
+        return candidates[0]
+
+    if candidates:
+        for candidate in candidates:
+            if getattr(candidate, "dataset", "") in {"modified_lar", "lar"}:
+                return candidate
+
+        return candidates[0]
+
+    raise RuntimeError(
+        "Could not find HMDA dataset object in pipelines.extractors.hmda.config. "
+        "Expected an object with at least dataset and filename attributes."
+    )
+
+
+def _dataset_year(dataset: Any) -> int:
+    year = getattr(dataset, "year", None) or getattr(dataset, "activity_year", None)
+
+    if year is None:
+        raise RuntimeError("HMDA dataset must expose year or activity_year.")
+
+    return int(year)
+
+
+def _dataset_filename(dataset: Any) -> str:
+    return str(getattr(dataset, "filename", f"hmda_modified_lar_{_dataset_year(dataset)}.csv"))
+
+
+def _dataset_description(dataset: Any) -> str:
+    return str(getattr(dataset, "description", "HMDA Modified Loan/Application Register"))
+
+
+def _dataset_frequency(dataset: Any) -> str:
+    return str(getattr(dataset, "expected_frequency", "annual"))
+
+
+def _dataset_filters(dataset: Any) -> Any:
+    return getattr(dataset, "filters", None)
+
+
+def _source_url(client: HmdaClient, dataset: Any) -> str:
+    if hasattr(client, "build_url"):
+        return str(client.build_url(dataset))
+
+    if hasattr(client, "base_url"):
+        return str(client.base_url)
+
+    return "https://ffiec.cfpb.gov/v2/data-browser-api"
+
+
+def _get_dataset_content(client: HmdaClient, dataset: Any) -> bytes:
+    method_names = (
+        "get_dataset_content",
+        "get_dataset",
+        "fetch_dataset",
+        "download_dataset",
+        "get_modified_lar_csv",
+        "get_modified_lar",
+    )
+
+    for method_name in method_names:
+        method = getattr(client, method_name, None)
+
+        if method is None:
+            continue
+
+        result = method(dataset)
+
+        if isinstance(result, bytes):
+            return result
+
+        if isinstance(result, str):
+            return result.encode("utf-8")
+
+        if isinstance(result, dict):
+            # Some clients return {"content": "..."} or {"data": "..."}.
+            for key in ("content", "csv", "data"):
+                value = result.get(key)
+
+                if isinstance(value, bytes):
+                    return value
+
+                if isinstance(value, str):
+                    return value.encode("utf-8")
+
+    available = [
+        name
+        for name in dir(client)
+        if not name.startswith("_") and callable(getattr(client, name))
+    ]
+
+    raise RuntimeError(
+        "Could not fetch HMDA CSV content. "
+        f"Available HmdaClient methods: {available}"
+    )
 
 
 def _inspect_csv(content: bytes) -> dict:
-    text = _decode_text(content)
-    reader = csv.reader(StringIO(text))
+    text = content.decode("utf-8-sig", errors="replace")
+    lines = [line for line in text.splitlines() if line.strip()]
 
-    row_count = 0
-    header: list[str] = []
+    if not lines:
+        return {"row_count": 0, "columns": []}
 
-    for row in reader:
-        if row_count == 0:
-            header = row
-        row_count += 1
-
-    normalized_header = [value.strip().lower() for value in header]
-    likely_has_header = any(
-        token in normalized_header
-        for token in [
-            "activity_year",
-            "lei",
-            "state_code",
-            "county_code",
-            "census_tract",
-            "loan_amount",
-            "action_taken",
-        ]
-    )
-
-    record_count = row_count - 1 if likely_has_header and row_count > 0 else row_count
+    columns = lines[0].split(",")
 
     return {
-        "row_count": record_count,
-        "columns": header if likely_has_header else [],
-        "likely_has_header": likely_has_header,
+        "row_count": max(len(lines) - 1, 0),
+        "columns": columns,
     }
-
-
-def _source_period_bounds(year: int) -> tuple[date, date]:
-    return date(year, 1, 1), date(year, 12, 31)
 
 
 def extract_dataset(
     client: HmdaClient,
-    dataset: HmdaDataset,
+    dataset: Any,
     pipeline_run_id: str,
     load_date: str,
 ) -> int:
-    content = client.get_modified_lar_csv(dataset)
+    content = _get_dataset_content(client, dataset)
     inspection = _inspect_csv(content)
+    year = _dataset_year(dataset)
 
     raw_result = write_raw_bytes(
         source=SOURCE,
         dataset=DATASET,
-        filename=dataset.filename,
+        filename=_dataset_filename(dataset),
         content=content,
         load_date=load_date,
         overwrite=True,
     )
 
-    source_period_start, source_period_end = _source_period_bounds(dataset.year)
-
-    source_params = client._build_csv_params(dataset)
-    source_url = (
-        f"{client.base_url.rstrip('/')}/csv?"
-        + "&".join(f"{key}={value}" for key, value in source_params.items())
-    )
+    source_url = _source_url(client, dataset)
 
     manifest_result = write_manifest(
         source=SOURCE,
@@ -101,26 +183,17 @@ def extract_dataset(
         record_count=inspection["row_count"],
         checksum_sha256=raw_result["checksum_sha256"],
         file_size_bytes=raw_result["file_size_bytes"],
-        source_period_start=source_period_start.isoformat(),
-        source_period_end=source_period_end.isoformat(),
+        source_period_start=date(year, 1, 1).isoformat(),
+        source_period_end=date(year, 12, 31).isoformat(),
         metadata={
-            "year": dataset.year,
-            "description": dataset.description,
-            "expected_frequency": dataset.expected_frequency,
-            "geography_type": dataset.geography_type,
-            "geography_values": dataset.geography_values,
-            "actions_taken": dataset.actions_taken,
-            "loan_purposes": dataset.loan_purposes,
-            "loan_types": dataset.loan_types,
-            "lien_statuses": dataset.lien_statuses,
+            "description": _dataset_description(dataset),
+            "expected_frequency": _dataset_frequency(dataset),
             "columns": inspection["columns"],
-            "likely_has_header": inspection["likely_has_header"],
-            "api_key_required": False,
-            "privacy_note": "HMDA public data are modified to protect applicant and borrower privacy.",
+            "filters": _dataset_filters(dataset),
         },
     )
 
-    record_source_file(
+    source_file_id = record_source_file(
         pipeline_run_id=pipeline_run_id,
         source=SOURCE,
         dataset=DATASET,
@@ -130,86 +203,85 @@ def extract_dataset(
         checksum_sha256=raw_result["checksum_sha256"],
         file_size_bytes=raw_result["file_size_bytes"],
         record_count=inspection["row_count"],
-        source_period_start=source_period_start,
-        source_period_end=source_period_end,
+        source_period_start=date(year, 1, 1),
+        source_period_end=date(year, 12, 31),
         load_date=date.fromisoformat(load_date),
         status="success",
         metadata={
-            "year": dataset.year,
-            "description": dataset.description,
-            "expected_frequency": dataset.expected_frequency,
-            "geography_type": dataset.geography_type,
-            "geography_values": dataset.geography_values,
-            "actions_taken": dataset.actions_taken,
-            "loan_purposes": dataset.loan_purposes,
-            "loan_types": dataset.loan_types,
-            "lien_statuses": dataset.lien_statuses,
+            "description": _dataset_description(dataset),
+            "expected_frequency": _dataset_frequency(dataset),
             "manifest_path": manifest_result["manifest_path"],
-            "columns": inspection["columns"],
-            "likely_has_header": inspection["likely_has_header"],
-            "api_key_required": False,
-            "privacy_note": "HMDA public data are modified to protect applicant and borrower privacy.",
+            "filters": _dataset_filters(dataset),
         },
     )
 
-    print(
-        f"Extracted HMDA modified_lar: "
-        f"{inspection['row_count']} rows -> {raw_result['raw_file_path']}"
+    loaded_count = load_hmda_modified_lar(
+        content=content,
+        source_file_id=source_file_id,
+        load_date=date.fromisoformat(load_date),
     )
 
-    return inspection["row_count"] or 1
+    print(
+        f"Extracted HMDA {DATASET}: "
+        f"{inspection['row_count']} source rows, "
+        f"{loaded_count} DB rows -> {raw_result['raw_file_path']}"
+    )
+
+    return loaded_count
 
 
 def main() -> None:
     load_date = today_iso()
+    dataset = _get_hmda_dataset()
+    year = _dataset_year(dataset)
 
     pipeline_run_id = start_pipeline_run(
         pipeline_name="hmda_modified_lar_extract",
         source=SOURCE,
         dataset=DATASET,
         metadata={
-            "year": HMDA_MODIFIED_LAR.year,
-            "geography_type": HMDA_MODIFIED_LAR.geography_type,
-            "geography_values": HMDA_MODIFIED_LAR.geography_values,
-            "api_key_required": False,
+            "year": year,
+            "filename": _dataset_filename(dataset),
+            "filters": _dataset_filters(dataset),
         },
     )
 
+    total_loaded = 0
+
     try:
         client = HmdaClient()
-        record_count = extract_dataset(
+
+        total_loaded = extract_dataset(
             client=client,
-            dataset=HMDA_MODIFIED_LAR,
+            dataset=dataset,
             pipeline_run_id=pipeline_run_id,
             load_date=load_date,
         )
 
-        _, source_period_end = _source_period_bounds(HMDA_MODIFIED_LAR.year)
-
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="success",
-            records_extracted=record_count,
-            records_loaded=1,
+            records_extracted=total_loaded,
+            records_loaded=total_loaded,
             records_failed=0,
         )
 
         update_source_freshness(
             source=SOURCE,
             dataset=DATASET,
-            latest_source_period=source_period_end,
+            latest_source_period=date(year, 12, 31),
             last_successful_run_id=pipeline_run_id,
             last_status="success",
-            record_count=record_count,
+            record_count=total_loaded,
         )
 
-        print(f"HMDA Modified LAR extraction complete. Records: {record_count}")
+        print(f"HMDA extraction complete. Total loaded rows: {total_loaded}")
 
     except Exception as exc:
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="failed",
-            records_extracted=None,
+            records_extracted=total_loaded,
             records_loaded=None,
             records_failed=None,
             error_message=str(exc),
@@ -221,7 +293,7 @@ def main() -> None:
             latest_source_period=None,
             last_successful_run_id=None,
             last_status="failed",
-            record_count=None,
+            record_count=total_loaded,
             error_message=str(exc),
         )
 

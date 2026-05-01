@@ -1,191 +1,221 @@
 import json
 from datetime import date
+from typing import Any
 
 from pipelines.common.time import today_iso
 from pipelines.extractors.overture_maps_api.client import OvertureMapsApiClient
-from pipelines.extractors.overture_maps_api.config import (
-    OVERTURE_MAPS_API_PLACES,
-    OvertureMapsApiDataset,
-)
+from pipelines.extractors.overture_maps_api.config import OVERTURE_MAPS_API_PLACES
 from pipelines.loaders.audit_loader import (
     finish_pipeline_run,
     record_source_file,
     start_pipeline_run,
     update_source_freshness,
 )
+from pipelines.loaders.overture_places_loader import load_overture_places
 from pipelines.storage.local_raw_store import write_raw_text
 from pipelines.storage.manifest import write_manifest
 
-SOURCE = "overture_maps"
+SOURCE = "overture_maps_api"
 DATASET = "places"
 
 
-def _source_period_bounds(load_date: str) -> tuple[date, date]:
-    parsed = date.fromisoformat(load_date)
-    return parsed, parsed
+def _dataset_attr(dataset: Any, name: str, default: Any = None) -> Any:
+    return getattr(dataset, name, default)
 
 
-def _infer_columns(records: list[dict]) -> list[str]:
-    columns: set[str] = set()
-
-    for record in records[:25]:
-        if isinstance(record, dict):
-            columns.update(record.keys())
-
-    return sorted(columns)
-
-
-def extract_dataset(
-    client: OvertureMapsApiClient,
-    dataset: OvertureMapsApiDataset,
-    pipeline_run_id: str,
-    load_date: str,
-) -> int:
-    payload = client.get_places(dataset)
-    records = payload["records"]
-    record_count = payload["record_count"]
-    columns = _infer_columns(records)
-
-    raw_content = json.dumps(payload, indent=2, sort_keys=False, default=str)
-
-    raw_result = write_raw_text(
-        source=SOURCE,
-        dataset=DATASET,
-        filename=dataset.filename,
-        content=raw_content,
-        load_date=load_date,
-        overwrite=True,
+def _dataset_filename(dataset: Any) -> str:
+    return str(
+        _dataset_attr(
+            dataset,
+            "filename",
+            f"overture_places_{_dataset_attr(dataset, 'area_slug', 'area')}.json",
+        )
     )
 
-    source_period_start, source_period_end = _source_period_bounds(load_date)
 
-    source_url = f"{dataset.base_url.rstrip('/')}/{dataset.endpoint}"
+def _dataset_area_slug(dataset: Any) -> str:
+    return str(_dataset_attr(dataset, "area_slug", "default_area"))
 
-    manifest_result = write_manifest(
-        source=SOURCE,
-        dataset=DATASET,
-        raw_file_path=raw_result["raw_file_path"],
-        status="success",
-        load_date=load_date,
-        source_url=source_url,
-        file_format="json",
-        record_count=record_count,
-        checksum_sha256=raw_result["checksum_sha256"],
-        file_size_bytes=raw_result["file_size_bytes"],
-        source_period_start=source_period_start.isoformat(),
-        source_period_end=source_period_end.isoformat(),
-        metadata={
-            "endpoint": dataset.endpoint,
-            "area_slug": dataset.area_slug,
-            "area_name": dataset.area_name,
-            "country": dataset.country,
-            "lat": dataset.lat,
-            "lng": dataset.lng,
-            "radius": dataset.radius,
-            "categories": dataset.categories,
-            "brand_name": dataset.brand_name,
-            "limit": dataset.limit,
-            "description": dataset.description,
-            "expected_frequency": dataset.expected_frequency,
-            "api_key_required": True,
-            "columns": columns,
-            "note": "Raw Overture Maps API response is stored only. Feature engineering happens in Epic 4.",
-        },
+
+def _dataset_area_name(dataset: Any) -> str:
+    return str(_dataset_attr(dataset, "area_name", _dataset_area_slug(dataset)))
+
+
+def _source_url(client: OvertureMapsApiClient, dataset: Any) -> str:
+    if hasattr(client, "build_url"):
+        return str(client.build_url(dataset))
+
+    if hasattr(client, "base_url"):
+        return str(client.base_url)
+
+    return "overture_maps_api"
+
+
+def _get_payload(client: OvertureMapsApiClient, dataset: Any) -> dict:
+    method_names = (
+        "get_dataset",
+        "get_places",
+        "search_places",
+        "fetch_dataset",
+        "get_dataset_payload",
     )
 
-    record_source_file(
-        pipeline_run_id=pipeline_run_id,
-        source=SOURCE,
-        dataset=DATASET,
-        source_url=source_url,
-        raw_file_path=raw_result["raw_file_path"],
-        file_format="json",
-        checksum_sha256=raw_result["checksum_sha256"],
-        file_size_bytes=raw_result["file_size_bytes"],
-        record_count=record_count,
-        source_period_start=source_period_start,
-        source_period_end=source_period_end,
-        load_date=date.fromisoformat(load_date),
-        status="success",
-        metadata={
-            "endpoint": dataset.endpoint,
-            "area_slug": dataset.area_slug,
-            "area_name": dataset.area_name,
-            "country": dataset.country,
-            "lat": dataset.lat,
-            "lng": dataset.lng,
-            "radius": dataset.radius,
-            "categories": dataset.categories,
-            "brand_name": dataset.brand_name,
-            "limit": dataset.limit,
-            "description": dataset.description,
-            "expected_frequency": dataset.expected_frequency,
-            "manifest_path": manifest_result["manifest_path"],
-            "api_key_required": True,
-            "columns": columns,
-            "note": "Raw Overture Maps API response is stored only. Feature engineering happens in Epic 4.",
-        },
+    for method_name in method_names:
+        method = getattr(client, method_name, None)
+
+        if method is None:
+            continue
+
+        result = method(dataset)
+
+        if isinstance(result, dict):
+            return result
+
+        if isinstance(result, bytes):
+            return json.loads(result.decode("utf-8"))
+
+        if isinstance(result, str):
+            return json.loads(result)
+
+    available = [
+        name
+        for name in dir(client)
+        if not name.startswith("_") and callable(getattr(client, name))
+    ]
+
+    raise RuntimeError(
+        "Could not fetch Overture places payload. "
+        f"Available OvertureMapsApiClient methods: {available}"
     )
 
-    print(
-        f"Extracted Overture Maps API places: "
-        f"{record_count} records -> {raw_result['raw_file_path']}"
+
+def _record_count(payload: dict) -> int:
+    records = (
+        payload.get("records")
+        or payload.get("places")
+        or payload.get("features")
+        or payload.get("data")
+        or []
     )
 
-    return record_count
+    if isinstance(records, dict):
+        records = records.get("records") or records.get("places") or records.get("features") or []
+
+    if isinstance(records, list):
+        return len(records)
+
+    return 0
 
 
 def main() -> None:
     load_date = today_iso()
+    dataset = OVERTURE_MAPS_API_PLACES
 
     pipeline_run_id = start_pipeline_run(
-        pipeline_name="overture_maps_api_places_extract",
+        pipeline_name="overture_places_extract",
         source=SOURCE,
         dataset=DATASET,
         metadata={
-            "endpoint": OVERTURE_MAPS_API_PLACES.endpoint,
-            "area_slug": OVERTURE_MAPS_API_PLACES.area_slug,
-            "area_name": OVERTURE_MAPS_API_PLACES.area_name,
-            "api_key_required": True,
+            "area_slug": _dataset_area_slug(dataset),
+            "area_name": _dataset_area_name(dataset),
         },
     )
 
+    loaded_count = 0
+
     try:
         client = OvertureMapsApiClient()
-        record_count = extract_dataset(
-            client=client,
-            dataset=OVERTURE_MAPS_API_PLACES,
-            pipeline_run_id=pipeline_run_id,
+        payload = _get_payload(client, dataset)
+        record_count = _record_count(payload)
+
+        raw_content = json.dumps(payload, indent=2, sort_keys=False, default=str)
+
+        raw_result = write_raw_text(
+            source=SOURCE,
+            dataset=DATASET,
+            filename=_dataset_filename(dataset),
+            content=raw_content,
             load_date=load_date,
+            overwrite=True,
         )
 
-        _, source_period_end = _source_period_bounds(load_date)
+        source_url = _source_url(client, dataset)
+
+        manifest_result = write_manifest(
+            source=SOURCE,
+            dataset=DATASET,
+            raw_file_path=raw_result["raw_file_path"],
+            status="success",
+            load_date=load_date,
+            source_url=source_url,
+            file_format="json",
+            record_count=record_count,
+            checksum_sha256=raw_result["checksum_sha256"],
+            file_size_bytes=raw_result["file_size_bytes"],
+            source_period_start=None,
+            source_period_end=None,
+            metadata={
+                "area_slug": _dataset_area_slug(dataset),
+                "area_name": _dataset_area_name(dataset),
+            },
+        )
+
+        source_file_id = record_source_file(
+            pipeline_run_id=pipeline_run_id,
+            source=SOURCE,
+            dataset=DATASET,
+            source_url=source_url,
+            raw_file_path=raw_result["raw_file_path"],
+            file_format="json",
+            checksum_sha256=raw_result["checksum_sha256"],
+            file_size_bytes=raw_result["file_size_bytes"],
+            record_count=record_count,
+            source_period_start=None,
+            source_period_end=None,
+            load_date=date.fromisoformat(load_date),
+            status="success",
+            metadata={
+                "area_slug": _dataset_area_slug(dataset),
+                "area_name": _dataset_area_name(dataset),
+                "manifest_path": manifest_result["manifest_path"],
+            },
+        )
+
+        loaded_count = load_overture_places(
+            payload=payload,
+            dataset=dataset,
+            source_file_id=source_file_id,
+            load_date=date.fromisoformat(load_date),
+        )
 
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="success",
             records_extracted=record_count,
-            records_loaded=1,
+            records_loaded=loaded_count,
             records_failed=0,
         )
 
         update_source_freshness(
             source=SOURCE,
             dataset=DATASET,
-            latest_source_period=source_period_end,
+            latest_source_period=None,
             last_successful_run_id=pipeline_run_id,
             last_status="success",
-            record_count=record_count,
+            record_count=loaded_count,
         )
 
-        print(f"Overture Maps API extraction complete. Records: {record_count}")
+        print(
+            f"Overture places extraction complete. "
+            f"Source records: {record_count}. DB rows: {loaded_count}"
+        )
 
     except Exception as exc:
         finish_pipeline_run(
             run_id=pipeline_run_id,
             status="failed",
             records_extracted=None,
-            records_loaded=None,
+            records_loaded=loaded_count,
             records_failed=None,
             error_message=str(exc),
         )
@@ -196,7 +226,7 @@ def main() -> None:
             latest_source_period=None,
             last_successful_run_id=None,
             last_status="failed",
-            record_count=None,
+            record_count=loaded_count,
             error_message=str(exc),
         )
 

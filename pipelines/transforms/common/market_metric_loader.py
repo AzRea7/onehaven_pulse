@@ -9,6 +9,17 @@ from pipelines.transforms.common.market_metric_record import MarketMetricRecord
 
 
 METRIC_COLUMN_MAP: dict[str, str] = {
+    "amenity_place_count": "amenity_place_count",
+    "amenity_school_count": "amenity_school_count",
+    "amenity_healthcare_count": "amenity_healthcare_count",
+    "amenity_grocery_count": "amenity_grocery_count",
+    "amenity_food_service_count": "amenity_food_service_count",
+    "amenity_bank_count": "amenity_bank_count",
+    "hmda_applications": "hmda_applications",
+    "hmda_originations": "hmda_originations",
+    "hmda_denials": "hmda_denials",
+    "hmda_denial_rate": "hmda_denial_rate",
+    "hmda_median_loan_amount": "hmda_median_loan_amount",
     "hazard_risk_score": "hazard_risk_score",
     "expected_annual_loss": "expected_annual_loss",
     "social_vulnerability_score": "social_vulnerability_score",

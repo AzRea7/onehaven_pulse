@@ -4,6 +4,7 @@ from datetime import date
 from pipelines.common.time import today_iso
 from pipelines.extractors.hud_usps.client import HudUspsClient
 from pipelines.extractors.hud_usps.config import HUD_USPS_DATASETS, HudUspsDataset
+from pipelines.loaders.hud_usps_loader import load_hud_usps_crosswalk
 from pipelines.loaders.audit_loader import (
     finish_pipeline_run,
     record_source_file,
@@ -92,7 +93,7 @@ def extract_dataset(
         },
     )
 
-    record_source_file(
+    source_file_id = record_source_file(
         pipeline_run_id=pipeline_run_id,
         source=SOURCE,
         dataset=DATASET,
@@ -119,12 +120,19 @@ def extract_dataset(
         },
     )
 
-    print(
-        f"Extracted HUD-USPS {dataset.crosswalk_type}: "
-        f"{result_count} rows -> {raw_result['raw_file_path']}"
+    loaded_count = load_hud_usps_crosswalk(
+        payload=payload,
+        dataset=dataset,
+        source_file_id=source_file_id,
+        load_date=date.fromisoformat(load_date),
     )
 
-    return result_count
+    print(
+        f"Extracted HUD-USPS {dataset.crosswalk_type}: "
+        f"{result_count} source rows, {loaded_count} DB rows -> {raw_result['raw_file_path']}"
+    )
+
+    return loaded_count
 
 
 def main() -> None:

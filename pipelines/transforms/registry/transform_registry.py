@@ -10,6 +10,9 @@ from pipelines.transforms.census_acs.profile_transform import main as run_census
 from pipelines.transforms.bls_laus.labor_market_transform import main as run_bls_laus_labor_market_transform
 from pipelines.transforms.census_building_permits.permits_transform import main as run_census_bps_permits_transform
 from pipelines.transforms.fema_nri.hazard_risk_transform import main as run_fema_nri_hazard_risk_transform
+from pipelines.transforms.derived.market_ratios_transform import main as run_derived_market_ratios_transform
+from pipelines.transforms.hmda.mortgage_credit_transform import main as run_hmda_mortgage_credit_transform
+from pipelines.transforms.overture_maps_api.amenity_transform import main as run_overture_places_amenity_transform
 
 @dataclass(frozen=True)
 class TransformDefinition:
@@ -20,6 +23,24 @@ class TransformDefinition:
 
 
 TRANSFORMS: dict[str, TransformDefinition] = {
+    "overture_places_amenities": TransformDefinition(
+        name="overture_places_amenities",
+        description="Transform Overture Places into area amenity count metrics.",
+        target_table="analytics.market_monthly_metrics",
+        runner=run_overture_places_amenity_transform,
+    ),
+    "hmda_mortgage_credit": TransformDefinition(
+        name="hmda_mortgage_credit",
+        description="Transform HMDA Modified LAR into mortgage credit availability metrics.",
+        target_table="analytics.market_monthly_metrics",
+        runner=run_hmda_mortgage_credit_transform,
+    ),
+    "derived_market_ratios": TransformDefinition(
+        name="derived_market_ratios",
+        description="Derive affordability, rent-to-price, real price, and permit-per-capita metrics from canonical market metrics.",
+        target_table="analytics.market_monthly_metrics",
+        runner=run_derived_market_ratios_transform,
+    ),
     "fema_nri_hazard_risk": TransformDefinition(
         name="fema_nri_hazard_risk",
         description="Transform FEMA NRI county risk into hazard, loss, vulnerability, and resilience metrics.",
