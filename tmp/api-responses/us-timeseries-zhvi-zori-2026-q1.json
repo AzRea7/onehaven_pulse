@@ -1,0 +1,48 @@
+{
+  "market": {
+    "geo_id": "us",
+    "geo_type": "national",
+    "name": "United States",
+    "display_name": "United States",
+    "state_code": null,
+    "state_name": null,
+    "county_fips": null,
+    "cbsa_code": null,
+    "zcta": null,
+    "country_code": "US",
+    "latitude": 39.8283,
+    "longitude": -98.5795
+  },
+  "metrics": [
+    "zhvi",
+    "zori"
+  ],
+  "start_date": "2026-01-01",
+  "end_date": "2026-03-01",
+  "items": [
+    {
+      "period_month": "2026-01-01",
+      "values": {
+        "zhvi": 364810.5,
+        "zori": 1892.44
+      },
+      "missing_metrics": []
+    },
+    {
+      "period_month": "2026-02-01",
+      "values": {
+        "zhvi": 365526.78,
+        "zori": 1899.58
+      },
+      "missing_metrics": []
+    },
+    {
+      "period_month": "2026-03-01",
+      "values": {
+        "zhvi": 366018.82,
+        "zori": 1910.42
+      },
+      "missing_metrics": []
+    }
+  ]
+}

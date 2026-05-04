@@ -162,6 +162,40 @@ def _lookup_geo_id(record: RawZillowRecord) -> tuple[str, str, Decimal] | None:
     region_type = _normalize_text(record.region_type)
     region_name = _normalize_text(record.region_name)
 
+    crosswalk_sql = text(
+        """
+        SELECT
+            canonical_geo_id,
+            match_method,
+            confidence_score
+        FROM geo.geo_crosswalk
+        WHERE source = :source
+          AND source_geo_id = :source_geo_id
+          AND (
+                source_geo_type IS NULL
+             OR lower(source_geo_type) = :source_geo_type
+          )
+        ORDER BY confidence_score DESC, canonical_geo_id
+        LIMIT 1
+        """
+    )
+
+    with engine.begin() as connection:
+        crosswalk_row = connection.execute(
+            crosswalk_sql,
+            {
+                "source": SOURCE,
+                "source_geo_id": record.source_region_id,
+                "source_geo_type": region_type,
+            },
+        ).mappings().one_or_none()
+
+    if crosswalk_row:
+        return (
+            str(crosswalk_row["canonical_geo_id"]),
+            f"crosswalk_{crosswalk_row['match_method']}",
+            Decimal(str(crosswalk_row["confidence_score"])),
+        )
     if region_type in {"country", "nation", "national"} or region_name in {
         "united states",
         "usa",

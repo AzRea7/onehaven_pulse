@@ -115,32 +115,89 @@ def _monthly_payment(
 def fetch_canonical_snapshots() -> list[CanonicalMarketSnapshot]:
     sql = text(
         """
+        WITH base_snapshots AS (
+            SELECT
+                geo_id,
+                period_month,
+                median_sale_price,
+                zhvi,
+                home_price_index,
+                cpi,
+                median_household_income,
+                median_rent,
+                zori,
+                mortgage_rate_30y,
+                permit_units,
+                building_permits,
+                population
+            FROM analytics.market_monthly_metrics
+            WHERE median_sale_price IS NOT NULL
+               OR zhvi IS NOT NULL
+               OR home_price_index IS NOT NULL
+               OR median_household_income IS NOT NULL
+               OR median_rent IS NOT NULL
+               OR zori IS NOT NULL
+               OR mortgage_rate_30y IS NOT NULL
+               OR permit_units IS NOT NULL
+               OR building_permits IS NOT NULL
+               OR population IS NOT NULL
+        )
         SELECT
-            geo_id,
-            period_month,
-            median_sale_price,
-            zhvi,
-            home_price_index,
-            cpi,
-            median_household_income,
-            median_rent,
-            zori,
-            mortgage_rate_30y,
-            permit_units,
-            building_permits,
-            population
-        FROM analytics.market_monthly_metrics
-        WHERE median_sale_price IS NOT NULL
-           OR zhvi IS NOT NULL
-           OR home_price_index IS NOT NULL
-           OR median_household_income IS NOT NULL
-           OR median_rent IS NOT NULL
-           OR zori IS NOT NULL
-           OR mortgage_rate_30y IS NOT NULL
-           OR permit_units IS NOT NULL
-           OR building_permits IS NOT NULL
-           OR population IS NOT NULL
-        ORDER BY geo_id, period_month
+            b.geo_id,
+            b.period_month,
+            b.median_sale_price,
+            b.zhvi,
+            b.home_price_index,
+            b.cpi,
+
+            COALESCE(
+                b.median_household_income,
+                income_asof.median_household_income
+            ) AS median_household_income,
+
+            b.median_rent,
+            b.zori,
+
+            COALESCE(
+                b.mortgage_rate_30y,
+                national_rate.mortgage_rate_30y
+            ) AS mortgage_rate_30y,
+
+            b.permit_units,
+            b.building_permits,
+
+            COALESCE(
+                b.population,
+                population_asof.population
+            ) AS population
+        FROM base_snapshots b
+
+        LEFT JOIN LATERAL (
+            SELECT m2.median_household_income
+            FROM analytics.market_monthly_metrics m2
+            WHERE m2.geo_id = b.geo_id
+              AND m2.period_month <= b.period_month
+              AND m2.median_household_income IS NOT NULL
+            ORDER BY m2.period_month DESC
+            LIMIT 1
+        ) income_asof ON true
+
+        LEFT JOIN LATERAL (
+            SELECT m3.population
+            FROM analytics.market_monthly_metrics m3
+            WHERE m3.geo_id = b.geo_id
+              AND m3.period_month <= b.period_month
+              AND m3.population IS NOT NULL
+            ORDER BY m3.period_month DESC
+            LIMIT 1
+        ) population_asof ON true
+
+        LEFT JOIN analytics.market_monthly_metrics national_rate
+            ON national_rate.geo_id = 'us'
+           AND national_rate.period_month = b.period_month
+           AND national_rate.mortgage_rate_30y IS NOT NULL
+
+        ORDER BY b.geo_id, b.period_month
         """
     )
 
@@ -190,6 +247,7 @@ def derive_snapshot_metrics(snapshot: CanonicalMarketSnapshot) -> list[DerivedMe
                 ),
                 quality_flags={
                     "home_price_source": home_price_source,
+                    "income_source": "latest_available_same_geo_income",
                     "requires_income": True,
                 },
             )
@@ -215,6 +273,7 @@ def derive_snapshot_metrics(snapshot: CanonicalMarketSnapshot) -> list[DerivedMe
                     ),
                     quality_flags={
                         "home_price_source": home_price_source,
+                        "mortgage_rate_source": "same_month_national_or_same_geo",
                         "loan_to_value": str(LOAN_TO_VALUE),
                         "term_months": int(MORTGAGE_TERM_MONTHS),
                     },
@@ -241,7 +300,10 @@ def derive_snapshot_metrics(snapshot: CanonicalMarketSnapshot) -> list[DerivedMe
                     ),
                     quality_flags={
                         "home_price_source": home_price_source,
+                        "income_source": "latest_available_same_geo_income",
+                        "mortgage_rate_source": "same_month_national_or_same_geo",
                         "requires_mortgage_rate": True,
+                        "requires_income": True,
                     },
                 )
             )

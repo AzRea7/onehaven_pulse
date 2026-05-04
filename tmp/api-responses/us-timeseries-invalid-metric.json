@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "http_error",
+    "message": "{'message': 'Unsupported timeseries metrics requested.', 'unsupported_metrics': ['bad_metric'], 'supported_metrics': ['active_listings', 'active_listings_yoy', 'building_permits', 'composite_cycle_score', 'cpi', 'estimated_monthly_payment', 'fed_funds_rate', 'home_price_index', 'home_price_index_mom', 'home_price_index_yoy', 'home_price_yoy', 'homes_sold', 'homes_sold_yoy', 'households', 'median_days_on_market', 'median_household_income', 'median_rent', 'median_rent_yoy', 'median_sale_price', 'median_sale_price_mom', 'median_sale_price_yoy', 'months_supply', 'mortgage_rate_30y', 'new_listings', 'new_listings_yoy', 'payment_to_income_ratio', 'permits_per_1000_people', 'population', 'population_yoy', 'price_drops_pct', 'price_to_income_ratio', 'rent_to_price_ratio', 'rent_yoy', 'sale_to_list_ratio', 'unemployment_rate', 'zhvi', 'zhvi_mom', 'zhvi_yoy', 'zori', 'zori_mom', 'zori_yoy']}",
+    "details": null,
+    "request_id": "c9ccb57b-7781-4808-adc8-aaea5e156488"
+  }
+}

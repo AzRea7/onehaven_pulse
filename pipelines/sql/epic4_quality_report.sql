@@ -133,3 +133,21 @@ SELECT
 FROM geo.dim_geo
 GROUP BY geo_type
 ORDER BY geo_type;
+
+\echo '== known non-blocking gaps =='
+
+SELECT
+    'redfin_trend_metrics_not_emitted' AS gap,
+    'Redfin raw file contains MoM/YoY columns, but current transform only emits base market metrics. Catalog treats Redfin trend metrics as optional.' AS note
+UNION ALL
+SELECT
+    'acs_median_rent_alias_not_emitted' AS gap,
+    'ACS transform emits median_gross_rent. median_rent is currently treated as optional alias/future normalized metric.' AS note
+UNION ALL
+SELECT
+    'derived_income_ratios_need_temporal_alignment' AS gap,
+    'payment_to_income_ratio and price_to_income_ratio require annual ACS income to align or carry-forward into monthly price periods.' AS note
+UNION ALL
+SELECT
+    'hmda_denials_missing_from_raw_extract' AS gap,
+    'HMDA denial metrics load, but raw HMDA currently has zero action_taken=3 rows. Check HMDA actions_taken filter before using denial-rate analytically.' AS note;

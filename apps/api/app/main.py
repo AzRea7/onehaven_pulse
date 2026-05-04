@@ -1,61 +1,95 @@
-from fastapi import FastAPI
+import time
+import uuid
+from collections.abc import Callable
+
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import text
-from sqlalchemy.exc import SQLAlchemyError
+from fastapi.middleware.gzip import GZipMiddleware
+from structlog.contextvars import bind_contextvars, clear_contextvars
 
 from app.core.config import settings
-from app.db.session import engine
+from app.core.errors import register_exception_handlers
+from app.core.logging import configure_logging, get_logger
 from app.routers.audit import router as audit_router
+from app.routers.compare import router as compare_router
 from app.routers.geo import router as geo_router
+from app.routers.health import router as health_router
+from app.routers.map import router as map_router
+from app.routers.metrics import router as metrics_router
 from app.routers.markets import router as markets_router
 
-app = FastAPI(
-    title="OneHaven Market Engine API",
-    version="0.1.0",
-    description="API for real estate market-cycle intelligence.",
-)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        settings.frontend_origin,
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-app.include_router(geo_router)
-app.include_router(audit_router)
-app.include_router(markets_router)
+configure_logging()
+logger = get_logger(__name__)
 
 
-@app.get("/health")
-def health():
-    return {
-        "status": "ok",
-        "service": "onehaven-market-api",
-    }
+def create_app() -> FastAPI:
+    app = FastAPI(
+        title=settings.app_name,
+        version=settings.app_version,
+        description="API for real estate market-cycle intelligence.",
+    )
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.allowed_origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    app.add_middleware(
+        GZipMiddleware,
+        minimum_size=1000,
+    )
+
+    register_exception_handlers(app)
+
+    @app.middleware("http")
+    async def request_context_middleware(
+        request: Request,
+        call_next: Callable[[Request], Response],
+    ) -> Response:
+        clear_contextvars()
+
+        request_id = request.headers.get("x-request-id", str(uuid.uuid4()))
+        request.state.request_id = request_id
+
+        bind_contextvars(
+            request_id=request_id,
+            method=request.method,
+            path=request.url.path,
+        )
+
+        start_time = time.perf_counter()
+
+        try:
+            response = await call_next(request)
+        except Exception:
+            logger.exception("request_failed")
+            raise
+
+        duration_ms = round((time.perf_counter() - start_time) * 1000, 2)
+
+        response.headers["x-request-id"] = request_id
+
+        logger.info(
+            "request_completed",
+            status_code=response.status_code,
+            duration_ms=duration_ms,
+        )
+
+        clear_contextvars()
+        return response
+
+    app.include_router(health_router)
+    app.include_router(geo_router)
+    app.include_router(audit_router)
+    app.include_router(compare_router)
+    app.include_router(markets_router)
+    app.include_router(map_router)
+    app.include_router(metrics_router)
+
+    return app
 
 
-@app.get("/health/db")
-def database_health():
-    try:
-        with engine.connect() as connection:
-            result = connection.execute(text("SELECT PostGIS_Version();"))
-            postgis_version = result.scalar()
-
-        return {
-            "status": "ok",
-            "database": "connected",
-            "postgis_version": postgis_version,
-        }
-
-    except SQLAlchemyError as exc:
-        return {
-            "status": "error",
-            "database": "unavailable",
-            "detail": str(exc),
-        }
+app = create_app()

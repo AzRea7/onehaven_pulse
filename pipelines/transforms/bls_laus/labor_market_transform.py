@@ -148,6 +148,8 @@ def _lookup_geo_id(record: RawBlsLausObservation) -> tuple[str, str, Decimal] | 
             FROM geo.dim_geo
             WHERE geo_type = 'state'
               AND lower(state_code) = :state_code
+              AND is_active = true
+            ORDER BY geo_id
             LIMIT 1
             """
         )
@@ -160,6 +162,52 @@ def _lookup_geo_id(record: RawBlsLausObservation) -> tuple[str, str, Decimal] | 
 
         if geo_id:
             return str(geo_id), "state_code_exact", Decimal("1.0000")
+
+    if geography_level in {"metro", "msa", "cbsa"}:
+        if geo_reference.startswith("metro_"):
+            sql = text(
+                """
+                SELECT geo_id
+                FROM geo.dim_geo
+                WHERE geo_id = :geo_id
+                  AND geo_type = 'metro'
+                  AND is_active = true
+                ORDER BY geo_id
+                LIMIT 1
+                """
+            )
+
+            with engine.begin() as connection:
+                geo_id = connection.execute(
+                    sql,
+                    {"geo_id": geo_reference},
+                ).scalar_one_or_none()
+
+            if geo_id:
+                return str(geo_id), "metro_geo_reference_exact", Decimal("1.0000")
+
+        sql = text(
+            """
+            SELECT canonical_geo_id
+            FROM geo.geo_crosswalk
+            WHERE source = :source
+              AND source_geo_id = :source_geo_id
+            ORDER BY confidence_score DESC, canonical_geo_id
+            LIMIT 1
+            """
+        )
+
+        with engine.begin() as connection:
+            geo_id = connection.execute(
+                sql,
+                {
+                    "source": SOURCE,
+                    "source_geo_id": geo_reference,
+                },
+            ).scalar_one_or_none()
+
+        if geo_id:
+            return str(geo_id), "metro_crosswalk", Decimal("1.0000")
 
     return None
 

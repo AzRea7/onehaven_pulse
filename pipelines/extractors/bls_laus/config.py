@@ -73,6 +73,36 @@ BLS_LAUS_SERIES = [
         geo_reference="MI",
     ),
 
+    # Detroit-Warren-Dearborn, MI Metropolitan Statistical Area.
+    BlsLausSeries(
+        series_id="LAUMT261982000000003",
+        label="Detroit-Warren-Dearborn, MI unemployment rate",
+        geography_level="metro",
+        measure="unemployment_rate",
+        geo_reference="metro_19820",
+    ),
+    BlsLausSeries(
+        series_id="LAUMT261982000000006",
+        label="Detroit-Warren-Dearborn, MI labor force",
+        geography_level="metro",
+        measure="labor_force",
+        geo_reference="metro_19820",
+    ),
+    BlsLausSeries(
+        series_id="LAUMT261982000000005",
+        label="Detroit-Warren-Dearborn, MI employment",
+        geography_level="metro",
+        measure="employment",
+        geo_reference="metro_19820",
+    ),
+    BlsLausSeries(
+        series_id="LAUMT261982000000004",
+        label="Detroit-Warren-Dearborn, MI unemployment count",
+        geography_level="metro",
+        measure="unemployment_count",
+        geo_reference="metro_19820",
+    ),
+
     # Texas.
     BlsLausSeries(
         series_id="LASST480000000000003",

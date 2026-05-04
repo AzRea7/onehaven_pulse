@@ -26,3 +26,4 @@ pandas
 
 # Cloud-native geospatial data
 xlrd>=2.0.1
+structlog==25.1.0
