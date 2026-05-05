@@ -1,44 +1,150 @@
+from __future__ import annotations
+
 import argparse
+import inspect
 
-from pipelines.transforms.registry.transform_registry import (
-    get_transform_definition,
-    list_transform_names,
-    resolve_transform_names,
-)
+from pipelines.common.transform_options import build_transform_options
+from pipelines.transforms.registry import transform_registry
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run OneHaven market transforms.")
-    parser.add_argument(
-        "transforms",
-        nargs="*",
-        default=["all"],
-        help="Transform names to run. Use 'all' to run every registered transform.",
+def _get_transform_registry():
+    for name in (
+        "TRANSFORM_REGISTRY",
+        "TRANSFORMS",
+        "TRANSFORM_DEFINITIONS",
+        "REGISTRY",
+    ):
+        value = getattr(transform_registry, name, None)
+
+        if isinstance(value, dict):
+            return value
+
+    candidates = [
+        name
+        for name in dir(transform_registry)
+        if name.isupper() and isinstance(getattr(transform_registry, name), dict)
+    ]
+
+    raise RuntimeError(
+        "Could not find transform registry dict in "
+        "pipelines.transforms.registry.transform_registry. "
+        f"Uppercase dict candidates: {candidates}"
     )
-    parser.add_argument(
-        "--list",
-        action="store_true",
-        help="List registered transforms and exit.",
+
+
+def _definition_name(definition, fallback: str) -> str:
+    return getattr(definition, "name", fallback)
+
+
+def _definition_target_table(definition) -> str:
+    return getattr(definition, "target_table", "")
+
+
+def _definition_description(definition) -> str:
+    return getattr(definition, "description", "")
+
+
+def _definition_runner(definition):
+    runner = getattr(definition, "runner", None)
+
+    if runner is None:
+        raise RuntimeError(f"Transform definition has no runner: {definition!r}")
+
+    return runner
+
+
+def list_transforms() -> None:
+    registry = _get_transform_registry()
+
+    for name, definition in sorted(registry.items()):
+        print(
+            f"{name}\t{_definition_target_table(definition)}\t{_definition_description(definition)}"
+        )
+
+
+def _run_transform(
+    name: str,
+    *,
+    mode: str,
+    start_date: str | None,
+    recent_months: int | None,
+) -> None:
+    registry = _get_transform_registry()
+
+    try:
+        definition = registry[name]
+    except KeyError as exc:
+        allowed = ", ".join(sorted(registry))
+        raise ValueError(f"Unknown transform '{name}'. Allowed transforms: {allowed}") from exc
+
+    transform_name = _definition_name(definition, name)
+    runner = _definition_runner(definition)
+
+    print(f"Running transform: {transform_name}")
+
+    options = build_transform_options(
+        mode=mode,
+        start_date=start_date,
+        recent_months=recent_months,
     )
-    return parser.parse_args()
+
+    runner_signature = inspect.signature(runner)
+
+    if "options" in runner_signature.parameters:
+        runner(options=options)
+    else:
+        if options.is_incremental:
+            raise ValueError(
+                f"Transform {transform_name} does not support incremental options yet."
+            )
+
+        runner()
+
+    print(f"Finished transform: {transform_name}")
 
 
 def main() -> None:
-    args = parse_args()
+    parser = argparse.ArgumentParser(description="Run OneHaven market transforms.")
+    parser.add_argument("--list", action="store_true", help="List available transforms.")
+    parser.add_argument(
+        "--mode",
+        choices=["full", "recent", "since"],
+        default="full",
+        help="Transform run mode. Defaults to full for backward compatibility.",
+    )
+    parser.add_argument(
+        "--start-date",
+        default=None,
+        help="Inclusive YYYY-MM-DD period filter for --mode since.",
+    )
+    parser.add_argument(
+        "--recent-months",
+        type=int,
+        default=None,
+        help="Number of recent months to transform for --mode recent.",
+    )
+    parser.add_argument(
+        "transforms",
+        nargs="*",
+        help="Transform names to run. If omitted, all transforms run.",
+    )
+
+    args = parser.parse_args()
 
     if args.list:
-        for name in list_transform_names():
-            definition = get_transform_definition(name)
-            print(f"{definition.name}\t{definition.target_table}\t{definition.description}")
+        list_transforms()
         return
 
-    transform_names = resolve_transform_names(args.transforms)
+    registry = _get_transform_registry()
+    transform_names = args.transforms or sorted(registry)
 
     for name in transform_names:
-        definition = get_transform_definition(name)
-        print(f"Running transform: {definition.name}")
-        definition.runner()
-        print(f"Finished transform: {definition.name}")
+        _run_transform(
+            name,
+            mode=args.mode,
+            start_date=args.start_date,
+            recent_months=args.recent_months,
+        )
 
 
 if __name__ == "__main__":

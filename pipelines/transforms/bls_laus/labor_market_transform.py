@@ -2,12 +2,16 @@ from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 
-from sqlalchemy import text
+from sqlalchemy import create_engine, text
 
 from pipelines.common.db import engine
 from pipelines.transforms.common.market_metric_loader import upsert_market_metrics
 from pipelines.transforms.common.market_metric_record import MarketMetricRecord
 from pipelines.transforms.common.transform_audit import finish_transform_run, start_transform_run
+from pipelines.common.geography.resolver import GeographyResolver
+from pipelines.common.settings import settings
+from pipelines.common.periods import recent_month_cutoff
+from pipelines.common.transform_options import TransformOptions, TransformRunMode
 
 
 SOURCE = "bls_laus"
@@ -134,82 +138,58 @@ def fetch_raw_bls_laus_observations() -> list[RawBlsLausObservation]:
     return records
 
 
-def _lookup_geo_id(record: RawBlsLausObservation) -> tuple[str, str, Decimal] | None:
-    geography_level = _normalize_text(record.geography_level)
-    geo_reference = record.geo_reference.strip()
+_GEOGRAPHY_RESOLVER_ENGINE = None
+_GEOGRAPHY_RESOLVER_CONNECTION = None
+_GEOGRAPHY_RESOLVER = None
+
+
+def _get_geography_resolver():
+    global _GEOGRAPHY_RESOLVER_ENGINE
+    global _GEOGRAPHY_RESOLVER_CONNECTION
+    global _GEOGRAPHY_RESOLVER
+
+    if _GEOGRAPHY_RESOLVER is None:
+        _GEOGRAPHY_RESOLVER_ENGINE = create_engine(settings.database_url)
+        _GEOGRAPHY_RESOLVER_CONNECTION = _GEOGRAPHY_RESOLVER_ENGINE.connect()
+        _GEOGRAPHY_RESOLVER = GeographyResolver(_GEOGRAPHY_RESOLVER_CONNECTION)
+
+    return _GEOGRAPHY_RESOLVER
+
+def _lookup_geo_id(record):
+    resolver = _get_geography_resolver()
+
+    geography_level = (record.geography_level or "").strip().lower()
+    geo_reference = (record.geo_reference or "").strip()
+
+    canonical_geo_id = None
+    state_code = None
 
     if geography_level == "national" or geo_reference.upper() in {"US", "USA"}:
-        return "us", "national_exact", Decimal("1.0000")
+        canonical_geo_id = "us"
 
-    if geography_level == "state":
-        sql = text(
-            """
-            SELECT geo_id
-            FROM geo.dim_geo
-            WHERE geo_type = 'state'
-              AND lower(state_code) = :state_code
-              AND is_active = true
-            ORDER BY geo_id
-            LIMIT 1
-            """
-        )
+    elif geography_level == "state":
+        state_code = geo_reference
 
-        with engine.begin() as connection:
-            geo_id = connection.execute(
-                sql,
-                {"state_code": geo_reference.lower()},
-            ).scalar_one_or_none()
+    elif geo_reference.startswith(("metro_", "state_", "county_", "place_", "zcta_")):
+        canonical_geo_id = geo_reference
 
-        if geo_id:
-            return str(geo_id), "state_code_exact", Decimal("1.0000")
+    resolved = resolver.resolve(
+        source="bls_laus",
+        source_geo_id=record.series_id,
+        source_geo_name=geo_reference,
+        source_geo_type=geography_level,
+        canonical_geo_id=canonical_geo_id,
+        state_code=state_code,
+    )
 
-    if geography_level in {"metro", "msa", "cbsa"}:
-        if geo_reference.startswith("metro_"):
-            sql = text(
-                """
-                SELECT geo_id
-                FROM geo.dim_geo
-                WHERE geo_id = :geo_id
-                  AND geo_type = 'metro'
-                  AND is_active = true
-                ORDER BY geo_id
-                LIMIT 1
-                """
-            )
+    if resolved is None:
+        return None
 
-            with engine.begin() as connection:
-                geo_id = connection.execute(
-                    sql,
-                    {"geo_id": geo_reference},
-                ).scalar_one_or_none()
-
-            if geo_id:
-                return str(geo_id), "metro_geo_reference_exact", Decimal("1.0000")
-
-        sql = text(
-            """
-            SELECT canonical_geo_id
-            FROM geo.geo_crosswalk
-            WHERE source = :source
-              AND source_geo_id = :source_geo_id
-            ORDER BY confidence_score DESC, canonical_geo_id
-            LIMIT 1
-            """
-        )
-
-        with engine.begin() as connection:
-            geo_id = connection.execute(
-                sql,
-                {
-                    "source": SOURCE,
-                    "source_geo_id": geo_reference,
-                },
-            ).scalar_one_or_none()
-
-        if geo_id:
-            return str(geo_id), "metro_crosswalk", Decimal("1.0000")
-
-    return None
+    return (
+        resolved.canonical_geo_id,
+        resolved.match_method,
+        resolved.confidence_score,
+    )
 
 
 def map_records(
@@ -291,7 +271,9 @@ def build_records(
     return metric_records, unmatched_records
 
 
-def main() -> None:
+def main(options: TransformOptions | None = None) -> None:
+    options = options or TransformOptions()
+
     transform_run_id = start_transform_run(
         transform_name=TRANSFORM_NAME,
         source=SOURCE,
@@ -306,6 +288,20 @@ def main() -> None:
 
     try:
         raw_records = fetch_raw_bls_laus_observations()
+
+        if options.mode == TransformRunMode.SINCE:
+            raw_records = [
+                record for record in raw_records
+                if record.period_month >= options.start_date
+            ]
+
+        elif options.mode == TransformRunMode.RECENT and raw_records:
+            latest_period = max(record.period_month for record in raw_records)
+            cutoff = recent_month_cutoff(latest_period, options.recent_months)
+            raw_records = [
+                record for record in raw_records
+                if record.period_month >= cutoff
+            ]
         metric_records, unmatched_records = build_records(raw_records, transform_run_id)
         loaded_count = upsert_market_metrics(metric_records)
 

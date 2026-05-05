@@ -1,0 +1,6 @@
+source,source_geo_id,source_geo_name,source_geo_type,canonical_geo_id,match_method,confidence_score,notes
+zillow,394532,"Detroit, MI",msa,metro_19820,manual,1.0000,"Manual Zillow MSA RegionID to Census CBSA 19820 Detroit-Warren-Dearborn, MI"
+bls_laus,LAUMT261982000000003,"Detroit-Warren-Dearborn, MI unemployment rate",metro_series,metro_19820,manual,1.0000,BLS LAUS Detroit-Warren-Dearborn metro unemployment rate series to CBSA 19820
+bls_laus,LAUMT261982000000004,"Detroit-Warren-Dearborn, MI unemployment count",metro_series,metro_19820,manual,1.0000,BLS LAUS Detroit-Warren-Dearborn metro unemployment count series to CBSA 19820
+bls_laus,LAUMT261982000000005,"Detroit-Warren-Dearborn, MI employment",metro_series,metro_19820,manual,1.0000,BLS LAUS Detroit-Warren-Dearborn metro employment series to CBSA 19820
+bls_laus,LAUMT261982000000006,"Detroit-Warren-Dearborn, MI labor force",metro_series,metro_19820,manual,1.0000,BLS LAUS Detroit-Warren-Dearborn metro labor force series to CBSA 19820

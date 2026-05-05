@@ -3,12 +3,16 @@ from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 
-from sqlalchemy import text
+from sqlalchemy import create_engine, text
 
 from pipelines.common.db import engine
 from pipelines.transforms.common.market_metric_loader import upsert_market_metrics
 from pipelines.transforms.common.market_metric_record import MarketMetricRecord
 from pipelines.transforms.common.transform_audit import finish_transform_run, start_transform_run
+from pipelines.common.geography.resolver import GeographyResolver
+from pipelines.common.settings import settings
+from pipelines.common.periods import recent_month_cutoff
+from pipelines.common.transform_options import TransformOptions, TransformRunMode
 
 
 SOURCE = "zillow"
@@ -158,113 +162,42 @@ def fetch_raw_zillow_records(dataset: str) -> list[RawZillowRecord]:
     return records
 
 
-def _lookup_geo_id(record: RawZillowRecord) -> tuple[str, str, Decimal] | None:
-    region_type = _normalize_text(record.region_type)
-    region_name = _normalize_text(record.region_name)
+_GEOGRAPHY_RESOLVER_ENGINE = None
+_GEOGRAPHY_RESOLVER_CONNECTION = None
+_GEOGRAPHY_RESOLVER = None
 
-    crosswalk_sql = text(
-        """
-        SELECT
-            canonical_geo_id,
-            match_method,
-            confidence_score
-        FROM geo.geo_crosswalk
-        WHERE source = :source
-          AND source_geo_id = :source_geo_id
-          AND (
-                source_geo_type IS NULL
-             OR lower(source_geo_type) = :source_geo_type
-          )
-        ORDER BY confidence_score DESC, canonical_geo_id
-        LIMIT 1
-        """
+
+def _get_geography_resolver():
+    global _GEOGRAPHY_RESOLVER_ENGINE
+    global _GEOGRAPHY_RESOLVER_CONNECTION
+    global _GEOGRAPHY_RESOLVER
+
+    if _GEOGRAPHY_RESOLVER is None:
+        _GEOGRAPHY_RESOLVER_ENGINE = create_engine(settings.database_url)
+        _GEOGRAPHY_RESOLVER_CONNECTION = _GEOGRAPHY_RESOLVER_ENGINE.connect()
+        _GEOGRAPHY_RESOLVER = GeographyResolver(_GEOGRAPHY_RESOLVER_CONNECTION)
+
+    return _GEOGRAPHY_RESOLVER
+
+def _lookup_geo_id(record):
+    resolver = _get_geography_resolver()
+
+    resolved = resolver.resolve(
+        source="zillow",
+        source_geo_id=record.source_region_id,
+        source_geo_name=record.region_name,
+        source_geo_type=record.region_type,
+        state_code=record.state_name,
     )
 
-    with engine.begin() as connection:
-        crosswalk_row = connection.execute(
-            crosswalk_sql,
-            {
-                "source": SOURCE,
-                "source_geo_id": record.source_region_id,
-                "source_geo_type": region_type,
-            },
-        ).mappings().one_or_none()
+    if resolved is None:
+        return None
 
-    if crosswalk_row:
-        return (
-            str(crosswalk_row["canonical_geo_id"]),
-            f"crosswalk_{crosswalk_row['match_method']}",
-            Decimal(str(crosswalk_row["confidence_score"])),
-        )
-    if region_type in {"country", "nation", "national"} or region_name in {
-        "united states",
-        "usa",
-        "us",
-    }:
-        return "us", "zillow_country", Decimal("1.0000")
-
-    if region_type in {"state"}:
-        sql = text(
-            """
-            SELECT geo_id
-            FROM geo.dim_geo
-            WHERE geo_type = 'state'
-              AND (
-                    lower(name) = :name
-                 OR lower(display_name) = :name
-                 OR lower(state_name) = :name
-                 OR lower(state_code) = :name
-              )
-            ORDER BY geo_id
-            LIMIT 1
-            """
-        )
-
-        with engine.begin() as connection:
-            geo_id = connection.execute(sql, {"name": region_name}).scalar_one_or_none()
-
-        if geo_id:
-            return str(geo_id), "state_name_exact", Decimal("0.9800")
-
-    if region_type in {"msa", "metro"}:
-        metro_name = _normalize_text(record.region_name)
-        like_name = f"%{metro_name.split(' metro')[0]}%"
-
-        sql = text(
-            """
-            SELECT geo_id
-            FROM geo.dim_geo
-            WHERE geo_type IN ('metro', 'cbsa')
-              AND (
-                    lower(name) = :name
-                 OR lower(display_name) = :name
-                 OR lower(name) LIKE :like_name
-                 OR lower(display_name) LIKE :like_name
-              )
-            ORDER BY
-                CASE
-                    WHEN lower(name) = :name THEN 1
-                    WHEN lower(display_name) = :name THEN 2
-                    ELSE 3
-                END,
-                geo_id
-            LIMIT 1
-            """
-        )
-
-        with engine.begin() as connection:
-            geo_id = connection.execute(
-                sql,
-                {
-                    "name": metro_name,
-                    "like_name": like_name,
-                },
-            ).scalar_one_or_none()
-
-        if geo_id:
-            return str(geo_id), "metro_name_match", Decimal("0.8500")
-
-    return None
+    return (
+        resolved.canonical_geo_id,
+        resolved.match_method,
+        resolved.confidence_score,
+    )
 
 
 def map_records(
@@ -456,7 +389,9 @@ def build_records(
     return metric_records, unmatched_records
 
 
-def main() -> None:
+def main(options: TransformOptions | None = None) -> None:
+    options = options or TransformOptions()
+
     transform_run_id = start_transform_run(
         transform_name=TRANSFORM_NAME,
         source=SOURCE,
@@ -479,6 +414,21 @@ def main() -> None:
             *fetch_raw_zillow_records("zhvi"),
             *fetch_raw_zillow_records("zori"),
         ]
+
+        if options.mode == TransformRunMode.SINCE:
+            raw_records = [
+                record for record in raw_records
+                if record.period_month >= options.start_date
+            ]
+
+        elif options.mode == TransformRunMode.RECENT and raw_records:
+            latest_period = max(record.period_month for record in raw_records)
+            cutoff = recent_month_cutoff(latest_period, options.recent_months)
+            raw_records = [
+                record for record in raw_records
+                if record.period_month >= cutoff
+            ]
+
         metric_records, unmatched_records = build_records(raw_records, transform_run_id)
         loaded_count = upsert_market_metrics(metric_records)
 

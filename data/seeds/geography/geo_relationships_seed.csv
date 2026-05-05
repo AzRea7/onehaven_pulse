@@ -1,0 +1,9 @@
+parent_geo_id,child_geo_id,relationship_type,source,confidence_score,overlap_ratio,is_active,notes
+state_26,place_2622000,contains,manual_seed,1.0000,,true,Detroit place belongs to Michigan state.
+metro_19820,place_2622000,contains,manual_seed,1.0000,,true,Detroit place belongs to Detroit-Warren-Dearborn metro.
+place_2622000,zcta_48201,contains,manual_seed,0.8000,,true,Starter ZCTA-place relationship; replace with authoritative overlap later.
+place_2622000,zcta_48202,contains,manual_seed,0.8000,,true,Starter ZCTA-place relationship; replace with authoritative overlap later.
+place_2622000,zcta_48226,contains,manual_seed,0.8000,,true,Starter ZCTA-place relationship; replace with authoritative overlap later.
+metro_19820,zcta_48201,contains,manual_seed,0.8000,,true,Starter ZCTA-metro relationship; replace with authoritative overlap later.
+metro_19820,zcta_48202,contains,manual_seed,0.8000,,true,Starter ZCTA-metro relationship; replace with authoritative overlap later.
+metro_19820,zcta_48226,contains,manual_seed,0.8000,,true,Starter ZCTA-metro relationship; replace with authoritative overlap later.

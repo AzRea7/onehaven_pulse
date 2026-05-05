@@ -17,6 +17,7 @@ from app.routers.health import router as health_router
 from app.routers.map import router as map_router
 from app.routers.metrics import router as metrics_router
 from app.routers.markets import router as markets_router
+from app.routers import geographies
 
 configure_logging()
 logger = get_logger(__name__)
@@ -80,7 +81,6 @@ def create_app() -> FastAPI:
 
         clear_contextvars()
         return response
-
     app.include_router(health_router)
     app.include_router(geo_router)
     app.include_router(audit_router)
@@ -89,7 +89,8 @@ def create_app() -> FastAPI:
     app.include_router(map_router)
     app.include_router(metrics_router)
 
+    app.include_router(geographies.router)
+
+
     return app
-
-
 app = create_app()

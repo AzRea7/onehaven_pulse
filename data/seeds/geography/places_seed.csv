@@ -1,0 +1,2 @@
+geo_id,geo_type,name,display_name,canonical_slug,parent_geo_id,state_code,state_name,place_fips,country_code,latitude,longitude,hierarchy_level,is_active
+place_2622000,place,Detroit,"Detroit, MI",detroit-mi,state_26,MI,Michigan,2622000,US,42.3314,-83.0458,3,true

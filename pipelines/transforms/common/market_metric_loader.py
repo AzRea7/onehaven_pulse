@@ -1,11 +1,14 @@
 import json
+from collections import defaultdict
 from collections.abc import Sequence
 from datetime import UTC, datetime
 
 from sqlalchemy import text
+from psycopg2.extras import execute_values
 
 from pipelines.common.db import engine
 from pipelines.transforms.common.market_metric_record import MarketMetricRecord
+from functools import lru_cache
 
 
 METRIC_COLUMN_MAP: dict[str, str] = {
@@ -115,6 +118,7 @@ def _metric_column(metric_name: str) -> str:
         ) from exc
 
 
+@lru_cache(maxsize=None)
 def _upsert_metric_sql(metric_column: str):
     return text(
         f"""
@@ -154,13 +158,6 @@ def _upsert_metric_sql(metric_column: str):
 
 UPSERT_SOURCE_TRACE_SQL = text(
     """
-    DELETE FROM analytics.market_metric_sources
-    WHERE geo_id = :geo_id
-      AND period_month = :period_month
-      AND metric_name = :metric_name
-      AND source = :source
-      AND dataset = :dataset;
-
     INSERT INTO analytics.market_metric_sources (
         geo_id,
         period_month,
@@ -189,8 +186,24 @@ UPSERT_SOURCE_TRACE_SQL = text(
         :transformation_notes,
         :created_at
     )
+    ON CONFLICT (
+        geo_id,
+        period_month,
+        metric_name,
+        source,
+        dataset
+    )
+    DO UPDATE SET
+        source_file_id = EXCLUDED.source_file_id,
+        pipeline_run_id = EXCLUDED.pipeline_run_id,
+        source_value = EXCLUDED.source_value,
+        normalized_value = EXCLUDED.normalized_value,
+        source_period = EXCLUDED.source_period,
+        transformation_notes = EXCLUDED.transformation_notes,
+        created_at = EXCLUDED.created_at
     """
 )
+
 
 
 def _mart_metric_value(record: MarketMetricRecord):
@@ -239,23 +252,185 @@ def _record_to_params(record: MarketMetricRecord) -> dict:
     }
 
 
+
+def _bulk_upsert_source_traces(connection, params: list[dict], *, page_size: int = 10000) -> None:
+    if not params:
+        return
+
+    sql = """
+        INSERT INTO analytics.market_metric_sources (
+            geo_id,
+            period_month,
+            metric_name,
+            source,
+            dataset,
+            source_file_id,
+            pipeline_run_id,
+            source_value,
+            normalized_value,
+            source_period,
+            transformation_notes,
+            created_at
+        )
+        VALUES %s
+        ON CONFLICT (
+            geo_id,
+            period_month,
+            metric_name,
+            source,
+            dataset
+        )
+        DO UPDATE SET
+            source_file_id = EXCLUDED.source_file_id,
+            pipeline_run_id = EXCLUDED.pipeline_run_id,
+            source_value = EXCLUDED.source_value,
+            normalized_value = EXCLUDED.normalized_value,
+            source_period = EXCLUDED.source_period,
+            transformation_notes = EXCLUDED.transformation_notes,
+            created_at = EXCLUDED.created_at
+    """
+
+    # Postgres cannot update the same ON CONFLICT target row twice
+    # in one INSERT statement. Deduplicate each source trace batch
+    # by the unique index key.
+    deduped: dict[tuple, dict] = {}
+
+    for item in params:
+        key = (
+            item["geo_id"],
+            item["period_month"],
+            item["metric_name"],
+            item["source"],
+            item["dataset"],
+        )
+        deduped[key] = item
+
+    rows = [
+        (
+            item["geo_id"],
+            item["period_month"],
+            item["metric_name"],
+            item["source"],
+            item["dataset"],
+            item["source_file_id"],
+            item["pipeline_run_id"],
+            item["source_value"],
+            item["normalized_value"],
+            item["source_period"],
+            item["transformation_notes"],
+            item["created_at"],
+        )
+        for item in deduped.values()
+    ]
+
+    with _raw_psycopg_connection(connection).cursor() as cursor:
+        execute_values(
+            cursor,
+            sql,
+            rows,
+            page_size=page_size,
+        )
+
+
+
+def _raw_psycopg_connection(connection):
+    raw_connection = getattr(connection.connection, "driver_connection", None)
+
+    if raw_connection is None:
+        raw_connection = connection.connection.connection
+
+    return raw_connection
+
+
+def _bulk_upsert_metric_values(
+    connection,
+    metric_column: str,
+    params: list[dict],
+    *,
+    page_size: int = 10000,
+) -> None:
+    if not params:
+        return
+
+    sql = f"""
+        INSERT INTO analytics.market_monthly_metrics (
+            geo_id,
+            period_month,
+            {metric_column},
+            source_flags,
+            quality_flags,
+            created_at,
+            updated_at
+        )
+        VALUES %s
+        ON CONFLICT (geo_id, period_month)
+        DO UPDATE SET
+            {metric_column} = EXCLUDED.{metric_column},
+            source_flags = (
+                COALESCE(analytics.market_monthly_metrics.source_flags, '{{}}'::json)::jsonb
+                || COALESCE(EXCLUDED.source_flags, '{{}}'::json)::jsonb
+            )::json,
+            quality_flags = (
+                COALESCE(analytics.market_monthly_metrics.quality_flags, '{{}}'::json)::jsonb
+                || COALESCE(EXCLUDED.quality_flags, '{{}}'::json)::jsonb
+            )::json,
+            updated_at = EXCLUDED.updated_at
+    """
+
+    # Postgres cannot update the same ON CONFLICT target row twice
+    # in one INSERT statement. Deduplicate each metric batch by the
+    # market_monthly_metrics conflict key.
+    deduped: dict[tuple, dict] = {}
+
+    for item in params:
+        key = (item["geo_id"], item["period_month"])
+        deduped[key] = item
+
+    rows = [
+        (
+            item["geo_id"],
+            item["period_month"],
+            item["metric_value"],
+            item["source_flags"],
+            item["quality_flags"],
+            item["created_at"],
+            item["updated_at"],
+        )
+        for item in deduped.values()
+    ]
+
+    with _raw_psycopg_connection(connection).cursor() as cursor:
+        execute_values(
+            cursor,
+            sql,
+            rows,
+            template="(%s, %s, %s, CAST(%s AS JSON), CAST(%s AS JSON), %s, %s)",
+            page_size=page_size,
+        )
+
+
 def upsert_market_metrics(records: Sequence[MarketMetricRecord]) -> int:
     if not records:
         return 0
 
-    loaded = 0
+    metric_batches: dict[str, list[dict]] = defaultdict(list)
+    source_trace_params: list[dict] = []
+
+    for record in records:
+        metric_column = _metric_column(record.metric_name)
+        params = _record_to_params(record)
+
+        metric_batches[metric_column].append(params)
+        source_trace_params.append(params)
 
     with engine.begin() as connection:
-        for record in records:
-            metric_column = _metric_column(record.metric_name)
-            params = _record_to_params(record)
+        for metric_column, batch_params in metric_batches.items():
+            _bulk_upsert_metric_values(connection, metric_column, batch_params)
 
-            connection.execute(_upsert_metric_sql(metric_column), params)
-            connection.execute(UPSERT_SOURCE_TRACE_SQL, params)
+        if source_trace_params:
+            _bulk_upsert_source_traces(connection, source_trace_params)
 
-            loaded += 1
-
-    return loaded
+    return len(records)
 
 
 def count_market_metric_sources(

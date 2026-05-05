@@ -1,0 +1,4 @@
+geo_id,geo_type,name,display_name,canonical_slug,parent_geo_id,state_code,state_name,zcta,country_code,latitude,longitude,hierarchy_level,is_active
+zcta_48201,zcta,48201,ZCTA 48201,zcta-48201,place_2622000,MI,Michigan,48201,US,42.3487,-83.0603,4,true
+zcta_48202,zcta,48202,ZCTA 48202,zcta-48202,place_2622000,MI,Michigan,48202,US,42.3786,-83.0795,4,true
+zcta_48226,zcta,48226,ZCTA 48226,zcta-48226,place_2622000,MI,Michigan,48226,US,42.3314,-83.0458,4,true

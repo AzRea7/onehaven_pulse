@@ -8,6 +8,8 @@ from pipelines.common.db import engine
 from pipelines.transforms.common.market_metric_loader import upsert_market_metrics
 from pipelines.transforms.common.market_metric_record import MarketMetricRecord
 from pipelines.transforms.common.transform_audit import finish_transform_run, start_transform_run
+from pipelines.common.periods import recent_month_cutoff
+from pipelines.common.transform_options import TransformOptions, TransformRunMode
 
 
 SOURCE = "derived"
@@ -399,7 +401,9 @@ def build_records(
     return records
 
 
-def main() -> None:
+def main(options: TransformOptions | None = None) -> None:
+    options = options or TransformOptions()
+
     transform_run_id = start_transform_run(
         transform_name=TRANSFORM_NAME,
         source=SOURCE,
@@ -421,6 +425,20 @@ def main() -> None:
 
     try:
         snapshots = fetch_canonical_snapshots()
+
+        if options.mode == TransformRunMode.SINCE:
+            snapshots = [
+                snapshot for snapshot in snapshots
+                if snapshot.period_month >= options.start_date
+            ]
+
+        elif options.mode == TransformRunMode.RECENT and snapshots:
+            latest_period = max(snapshot.period_month for snapshot in snapshots)
+            cutoff = recent_month_cutoff(latest_period, options.recent_months)
+            snapshots = [
+                snapshot for snapshot in snapshots
+                if snapshot.period_month >= cutoff
+            ]
         metric_records = build_records(snapshots, transform_run_id)
         loaded_count = upsert_market_metrics(metric_records)
 
