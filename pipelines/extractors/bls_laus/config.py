@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import os
 
 from pipelines.common.settings import settings
 
@@ -11,6 +12,19 @@ class BlsLausSeries:
     measure: str
     geo_reference: str
 
+
+
+
+def _configured_series_ids() -> list[str]:
+    raw = os.getenv("BLS_LAUS_SERIES_IDS", "").strip()
+    if not raw:
+        return []
+
+    return [
+        value.strip()
+        for value in raw.split(",")
+        if value.strip()
+    ]
 
 BLS_LAUS_SERIES = [
     # United States, national CPS labor force series.
@@ -185,3 +199,20 @@ BLS_LAUS_DATASET = BlsLausDataset(
     end_year=settings.bls_laus_end_year,
     series=BLS_LAUS_SERIES,
 )
+
+_env_series_ids = _configured_series_ids()
+_existing_series_ids = {series.series_id for series in BLS_LAUS_SERIES}
+
+for _series_id in _env_series_ids:
+    if _series_id not in _existing_series_ids:
+        BLS_LAUS_SERIES.append(
+            BlsLausSeries(
+                series_id=_series_id,
+                label=f"{_series_id} unemployment rate",
+                geography_level="metro",
+                measure="unemployment_rate",
+                geo_reference=_series_id,
+            )
+        )
+        _existing_series_ids.add(_series_id)
+

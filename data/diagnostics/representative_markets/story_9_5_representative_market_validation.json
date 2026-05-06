@@ -1,0 +1,520 @@
+{
+  "api_base_url": "http://localhost:8000",
+  "confidence_ge_0_8_count": 11,
+  "confidence_threshold_required": 8,
+  "context_endpoint_ok_count": 12,
+  "coverage_endpoint_ok_count": 12,
+  "failures": [],
+  "market_count": 12,
+  "passes_story_9_5": true,
+  "results": [
+    {
+      "available_metrics": [
+        "unemployment_rate"
+      ],
+      "confidence_ge_0_8": false,
+      "confidence_score": 0.2,
+      "context_latency_ms": 35.93,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": false,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": false,
+        "rent": false
+      },
+      "coverage_latency_ms": 32.22,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "us",
+      "latest_data_period": "2026-04-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "price=false; available_metrics=['unemployment_rate']; missing_score_inputs=['home_price_index_yoy', 'median_sale_price_yoy', 'price_to_income_ratio']",
+        "rent=false; available_metrics=['unemployment_rate']; missing_score_inputs=['median_rent_yoy']",
+        "inventory=false; available_metrics=['unemployment_rate']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "affordability=false; available_metrics=['unemployment_rate']; missing_score_inputs=['payment_to_income_ratio', 'price_to_income_ratio']",
+        "permits=false; available_metrics=['unemployment_rate']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply', 'payment_to_income_ratio', 'price_to_income_ratio', 'zhvi_yoy', 'zori_yoy']",
+        "context_risk={'code': 'missing_price_metrics', 'severity': 'high', 'message': 'Price growth metrics are missing for this market.'}",
+        "context_risk={'code': 'missing_rent_metrics', 'severity': 'high', 'message': 'Rent growth metrics are missing for this market.'}",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}",
+        "context_risk={'code': 'missing_affordability_metrics', 'severity': 'medium', 'message': 'Affordability metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply",
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "name": "United States"
+    },
+    {
+      "available_metrics": [
+        "median_days_on_market",
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 31.99,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": true,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 28.04,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_19820",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "permits=false; available_metrics=['median_days_on_market', 'payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Detroit-Warren-Dearborn, MI"
+    },
+    {
+      "available_metrics": [
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 34.04,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 29.12,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_16980",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "inventory=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "permits=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Chicago-Naperville-Elgin, IL-IN-WI"
+    },
+    {
+      "available_metrics": [
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 15.52,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 9.81,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_19100",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "inventory=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "permits=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Dallas-Fort Worth-Arlington, TX"
+    },
+    {
+      "available_metrics": [
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 24.37,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 24.6,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_12420",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "inventory=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "permits=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Austin-Round Rock-Georgetown, TX"
+    },
+    {
+      "available_metrics": [
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 37.19,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 24.92,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_45300",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "inventory=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "permits=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Tampa-St. Petersburg-Clearwater, FL"
+    },
+    {
+      "available_metrics": [
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 36.21,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 27.26,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_38060",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "inventory=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "permits=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Phoenix-Mesa-Chandler, AZ"
+    },
+    {
+      "available_metrics": [
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 36.27,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 24.79,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_12060",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "inventory=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "permits=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Atlanta-Sandy Springs-Alpharetta, GA"
+    },
+    {
+      "available_metrics": [
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 11.74,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 8.05,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_42660",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "inventory=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "permits=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Seattle-Tacoma-Bellevue, WA"
+    },
+    {
+      "available_metrics": [
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 31.17,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 25.82,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_14460",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "inventory=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "permits=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Boston-Cambridge-Newton, MA-NH"
+    },
+    {
+      "available_metrics": [
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 14.15,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 7.01,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_31080",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "inventory=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "permits=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Los Angeles-Long Beach-Anaheim, CA"
+    },
+    {
+      "available_metrics": [
+        "payment_to_income_ratio",
+        "price_to_income_ratio",
+        "unemployment_rate",
+        "zhvi_yoy",
+        "zori_yoy"
+      ],
+      "confidence_ge_0_8": true,
+      "confidence_score": 0.8,
+      "context_latency_ms": 29.54,
+      "context_ok": true,
+      "context_status": 200,
+      "coverage": {
+        "affordability": true,
+        "inventory": false,
+        "labor": true,
+        "permits": false,
+        "price": true,
+        "rent": true
+      },
+      "coverage_latency_ms": 24.61,
+      "coverage_ok": true,
+      "coverage_status": 200,
+      "geo_id": "metro_37980",
+      "latest_data_period": "2026-03-01",
+      "latest_scoreable_period": "2026-03-01",
+      "missing_data_explanations": [
+        "inventory=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'median_days_on_market', 'months_supply']",
+        "permits=false; available_metrics=['payment_to_income_ratio', 'price_to_income_ratio', 'unemployment_rate', 'zhvi_yoy', 'zori_yoy']; missing_score_inputs=['active_listings_yoy', 'home_price_index_yoy', 'median_days_on_market', 'median_rent_yoy', 'median_sale_price_yoy', 'months_supply']",
+        "context_risk={'code': 'missing_inventory_metrics', 'severity': 'medium', 'message': 'Inventory metrics are missing for this market.'}"
+      ],
+      "missing_score_inputs": [
+        "active_listings_yoy",
+        "home_price_index_yoy",
+        "median_days_on_market",
+        "median_rent_yoy",
+        "median_sale_price_yoy",
+        "months_supply"
+      ],
+      "name": "Philadelphia-Camden-Wilmington, PA-NJ-DE-MD"
+    }
+  ]
+}

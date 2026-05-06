@@ -8,6 +8,8 @@ from fastapi.middleware.gzip import GZipMiddleware
 from structlog.contextvars import bind_contextvars, clear_contextvars
 
 from app.core.config import settings
+from app.ai.router import router as ai_router
+from app.mcp.router import router as mcp_router
 from app.core.errors import register_exception_handlers
 from app.core.logging import configure_logging, get_logger, sanitize_log_payload
 from app.routers import geographies
@@ -118,6 +120,9 @@ def create_app() -> FastAPI:
 
     if screener_router is not None:
         app.include_router(screener_router)
+
+    app.include_router(mcp_router)
+    app.include_router(ai_router)
 
     return app
 

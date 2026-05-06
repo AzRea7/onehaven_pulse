@@ -46,3 +46,7 @@ data/import/fema_nri/**
 
 # Local smoke-test artifacts
 .smoke/
+
+# Story 11.3 generated feature exports
+data/exports/features/**/*.csv
+data/exports/features/**/*.parquet

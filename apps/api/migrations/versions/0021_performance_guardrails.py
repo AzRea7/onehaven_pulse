@@ -58,11 +58,14 @@ def upgrade() -> None:
                 )
             );
 
-        CREATE INDEX IF NOT EXISTS ix_geo_source_geo_crosswalk_geo_id
-            ON geo.source_geo_crosswalk (geo_id);
+        CREATE INDEX IF NOT EXISTS ix_geo_geo_crosswalk_canonical_geo_id
+            ON geo.geo_crosswalk (canonical_geo_id);
 
-        CREATE INDEX IF NOT EXISTS ix_geo_source_geo_crosswalk_source_dataset_region
-            ON geo.source_geo_crosswalk (source, dataset, source_region_id);
+        CREATE INDEX IF NOT EXISTS ix_geo_geo_crosswalk_source_source_geo_id
+            ON geo.geo_crosswalk (source, source_geo_id);
+
+        CREATE INDEX IF NOT EXISTS ix_geo_geo_crosswalk_source_geo_name
+            ON geo.geo_crosswalk (source, source_geo_name);
 
         CREATE INDEX IF NOT EXISTS ix_audit_source_freshness_source_dataset
             ON audit.source_freshness (source, dataset);

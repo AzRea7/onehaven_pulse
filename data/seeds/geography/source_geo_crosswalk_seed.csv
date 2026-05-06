@@ -689,3 +689,13 @@ zillow,394974,"Philadelphia, PA",msa,metro_37980,manual,1.0000,"Story 9.2 priori
 zillow,394976,"Phoenix, AZ",msa,metro_38060,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Phoenix, AZ to Phoenix-Mesa-Chandler, AZ"
 zillow,395078,"Seattle, WA",msa,metro_42660,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Seattle, WA to Seattle-Tacoma-Bellevue, WA"
 zillow,395148,"Tampa, FL",msa,metro_45300,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Tampa, FL to Tampa-St. Petersburg-Clearwater, FL"
+bls_laus,LAUMT131206000000003,"Atlanta-Sandy Springs-Alpharetta, GA unemployment rate",metro_series,metro_12060,manual,1.0000,Story 9.3 priority metro LAUS unemployment-rate series
+bls_laus,LAUMT481242000000003,"Austin-Round Rock-Georgetown, TX unemployment rate",metro_series,metro_12420,manual,1.0000,Story 9.3 priority metro LAUS unemployment-rate series
+bls_laus,LAUMT251446000000003,"Boston-Cambridge-Newton, MA-NH unemployment rate",metro_series,metro_14460,manual,1.0000,Story 9.3 priority metro LAUS unemployment-rate series
+bls_laus,LAUMT171698000000003,"Chicago-Naperville-Elgin, IL-IN-WI unemployment rate",metro_series,metro_16980,manual,1.0000,Story 9.3 priority metro LAUS unemployment-rate series
+bls_laus,LAUMT481910000000003,"Dallas-Fort Worth-Arlington, TX unemployment rate",metro_series,metro_19100,manual,1.0000,Story 9.3 priority metro LAUS unemployment-rate series
+bls_laus,LAUMT043806000000003,"Phoenix-Mesa-Chandler, AZ unemployment rate",metro_series,metro_38060,manual,1.0000,Story 9.3 priority metro LAUS unemployment-rate series
+bls_laus,LAUMT124530000000003,"Tampa-St. Petersburg-Clearwater, FL unemployment rate",metro_series,metro_45300,manual,1.0000,Story 9.3 priority metro LAUS unemployment-rate series
+bls_laus,LAUMT534266000000003,"Seattle-Tacoma-Bellevue, WA unemployment rate",metro_series,metro_42660,manual,1.0000,Story 9.3 priority metro LAUS unemployment-rate series
+bls_laus,LAUMT063108000000003,"Los Angeles-Long Beach-Anaheim, CA unemployment rate",metro_series,metro_31080,manual,1.0000,Story 9.3 priority metro LAUS unemployment-rate series
+bls_laus,LAUMT423798000000003,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD unemployment rate",metro_series,metro_37980,manual,1.0000,Story 9.3 priority metro LAUS unemployment-rate series
