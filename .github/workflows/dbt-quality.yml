@@ -1,0 +1,61 @@
+name: dbt-quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  dbt-quality:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: onehaven
+          POSTGRES_PASSWORD: onehaven_dev_password
+          POSTGRES_DB: onehaven_market
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U onehaven -d onehaven_market"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      DATABASE_URL: postgresql+psycopg2://onehaven:onehaven_dev_password@localhost:5432/onehaven_market
+      DBT_PROFILES_DIR: dbt
+      DBT_TARGET: local
+      DBT_POSTGRES_HOST: localhost
+      DBT_POSTGRES_PORT: "5432"
+      DBT_POSTGRES_USER: onehaven
+      DBT_POSTGRES_PASSWORD: onehaven_dev_password
+      DBT_POSTGRES_DB: onehaven_market
+      PYTHONPATH: .
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install API and dbt dependencies
+        run: |
+          pip install -r apps/api/requirements.txt
+          pip install -r requirements-dbt.txt
+
+      - name: Run migrations
+        working-directory: apps/api
+        run: alembic upgrade head
+
+      - name: Run dbt quality gate
+        run: |
+          cd dbt
+          dbt debug
+          dbt seed --full-refresh
+          dbt build --fail-fast

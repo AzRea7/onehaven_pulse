@@ -77,6 +77,7 @@ def finish_pipeline_run(
     records_extracted: int | None = None,
     records_loaded: int | None = None,
     records_failed: int | None = None,
+    unmatched_count: int | None = None,
     error_message: str | None = None,
 ) -> None:
     engine = get_engine()
@@ -107,6 +108,7 @@ def finish_pipeline_run(
                     records_extracted = :records_extracted,
                     records_loaded = :records_loaded,
                     records_failed = :records_failed,
+                    unmatched_count = :unmatched_count,
                     error_message = :error_message
                 WHERE id = :run_id
                 """
@@ -119,6 +121,7 @@ def finish_pipeline_run(
                 "records_extracted": records_extracted,
                 "records_loaded": records_loaded,
                 "records_failed": records_failed,
+                "unmatched_count": unmatched_count,
                 "error_message": error_message,
             },
         )

@@ -43,3 +43,6 @@ data/import/hmda/**
 # Local manually imported FEMA National Risk Index files
 data/import/fema_nri/**
 !data/import/fema_nri/.gitkeep
+
+# Local smoke-test artifacts
+.smoke/

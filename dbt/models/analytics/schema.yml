@@ -1,0 +1,102 @@
+version: 2
+
+models:
+  - name: market_monthly_metrics_contract
+    description: Analytics layer data quality contract for market monthly metrics.
+    tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - geo_id
+              - period_month
+    columns:
+      - name: geo_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_dim_geo')
+                field: geo_id
+
+      - name: period_month
+        tests:
+          - not_null
+
+      - name: home_price_index
+        tests:
+          - no_negative
+
+      - name: zhvi
+        tests:
+          - no_negative
+
+      - name: median_sale_price
+        tests:
+          - no_negative
+
+      - name: zori
+        tests:
+          - no_negative
+
+      - name: median_rent
+        tests:
+          - no_negative
+
+      - name: mortgage_rate_30y
+        tests:
+          - accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 25
+
+      - name: unemployment_rate
+        tests:
+          - accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 40
+
+      - name: payment_to_income_ratio
+        tests:
+          - accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 3
+
+      - name: price_to_income_ratio
+        tests:
+          - accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 50
+
+  - name: market_metric_sources_contract
+    description: Analytics layer data quality contract for metric lineage records.
+    columns:
+      - name: geo_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_dim_geo')
+                field: geo_id
+
+      - name: period_month
+        tests:
+          - not_null
+
+      - name: metric_name
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('valid_metric_names')
+                field: metric_name
+
+      - name: source
+        tests:
+          - not_null
+
+      - name: dataset
+        tests:
+          - not_null

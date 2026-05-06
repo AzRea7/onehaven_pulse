@@ -25,8 +25,17 @@ services:
     container_name: onehaven-api
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql+psycopg2://onehaven:onehaven_dev_password@postgres:5432/onehaven_market
+      ENVIRONMENT: ${ENVIRONMENT:-local}
+      DATABASE_URL: ${DOCKER_DATABASE_URL:-postgresql+psycopg2://onehaven:onehaven_dev_password@postgres:5432/onehaven_market}
       FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:3000}
+      CORS_ALLOW_ORIGINS: ${CORS_ALLOW_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      CORS_ALLOW_CREDENTIALS: ${CORS_ALLOW_CREDENTIALS:-true}
+      GZIP_MINIMUM_SIZE: ${GZIP_MINIMUM_SIZE:-1000}
+      API_REQUEST_TIMEOUT_SECONDS: ${API_REQUEST_TIMEOUT_SECONDS:-30}
+      DB_POOL_SIZE: ${DB_POOL_SIZE:-5}
+      DB_MAX_OVERFLOW: ${DB_MAX_OVERFLOW:-10}
+      DB_POOL_TIMEOUT: ${DB_POOL_TIMEOUT:-30}
+      DB_POOL_RECYCLE: ${DB_POOL_RECYCLE:-1800}
     ports:
       - "8000:8000"
     volumes:
@@ -35,7 +44,7 @@ services:
       postgres:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/ready || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 10

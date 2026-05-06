@@ -1,0 +1,12 @@
+
+    
+    
+    truncate table "onehaven_market"."dbt_dbt_reference"."valid_metric_names";
+    -- dbt seed --
+    
+          insert into "onehaven_market"."dbt_dbt_reference"."valid_metric_names" ("metric_name") values
+          (%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s)
+      
+
+;
+  

@@ -1,11 +1,13 @@
 #!/usr/bin/env sh
+set -eu
 
-set -e
+HOST="${API_HOST:-0.0.0.0}"
+PORT="${API_PORT:-8000}"
+WORKERS="${API_WORKERS:-1}"
+KEEP_ALIVE="${API_TIMEOUT_KEEP_ALIVE:-5}"
 
-echo "Starting OneHaven Market API container..."
-
-echo "Running Alembic migrations..."
-alembic upgrade head
-
-echo "Starting FastAPI server..."
-exec uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+exec uvicorn app.main:app \
+  --host "${HOST}" \
+  --port "${PORT}" \
+  --workers "${WORKERS}" \
+  --timeout-keep-alive "${KEEP_ALIVE}"

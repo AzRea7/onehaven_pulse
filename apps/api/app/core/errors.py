@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
 from starlette import status
 
-from app.core.logging import get_logger
+from app.core.logging import get_logger, sanitize_log_payload
 
 logger = get_logger(__name__)
 
@@ -40,16 +40,39 @@ def error_response(
             "error": {
                 "code": code,
                 "message": message,
-                "details": details,
+                "details": sanitize_log_payload({"details": details})["details"]
+                if isinstance(details, dict)
+                else details,
                 "request_id": getattr(request.state, "request_id", None),
             }
         },
     )
 
 
+def _request_context(request: Request) -> dict[str, Any]:
+    return sanitize_log_payload(
+        {
+            "request_id": getattr(request.state, "request_id", None),
+            "method": request.method,
+            "path": request.url.path,
+            "query_params": dict(request.query_params),
+            "client_host": request.client.host if request.client else None,
+        }
+    )
+
+
 def register_exception_handlers(app: FastAPI) -> None:
     @app.exception_handler(ApiError)
     async def api_error_handler(request: Request, exc: ApiError) -> JSONResponse:
+        logger.warning(
+            "api_error",
+            **_request_context(request),
+            status_code=exc.status_code,
+            error_code=exc.code,
+            error_message=exc.message,
+            details=exc.details,
+        )
+
         return error_response(
             status_code=exc.status_code,
             code=exc.code,
@@ -69,6 +92,15 @@ def register_exception_handlers(app: FastAPI) -> None:
             message = str(exc.detail.get("message", message))
             details = exc.detail.get("details")
 
+        logger.warning(
+            "http_error",
+            **_request_context(request),
+            status_code=exc.status_code,
+            error_code=code,
+            error_message=message,
+            details=details,
+        )
+
         return error_response(
             status_code=exc.status_code,
             code=code,
@@ -82,6 +114,14 @@ def register_exception_handlers(app: FastAPI) -> None:
         request: Request,
         exc: RequestValidationError,
     ) -> JSONResponse:
+        logger.warning(
+            "request_validation_error",
+            **_request_context(request),
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            error_code="validation_error",
+            details=exc.errors(),
+        )
+
         return error_response(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             code="validation_error",
@@ -94,9 +134,10 @@ def register_exception_handlers(app: FastAPI) -> None:
     async def sqlalchemy_exception_handler(request: Request, exc: SQLAlchemyError) -> JSONResponse:
         logger.exception(
             "database_error",
-            path=request.url.path,
-            method=request.method,
-            error=str(exc),
+            **_request_context(request),
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            error_type=exc.__class__.__name__,
+            error_message=str(exc),
         )
 
         return error_response(
@@ -110,9 +151,10 @@ def register_exception_handlers(app: FastAPI) -> None:
     async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
         logger.exception(
             "unhandled_error",
-            path=request.url.path,
-            method=request.method,
-            error=str(exc),
+            **_request_context(request),
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            error_type=exc.__class__.__name__,
+            error_message=str(exc),
         )
 
         return error_response(

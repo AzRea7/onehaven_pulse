@@ -5,7 +5,10 @@ from uuid import uuid4
 from sqlalchemy import text
 
 from pipelines.common.db import engine
+from pipelines.common.logging import get_pipeline_logger, sanitize_log_payload
 
+
+logger = get_pipeline_logger(__name__)
 
 def start_transform_run(
     transform_name: str,
@@ -58,6 +61,17 @@ def start_transform_run(
             },
         )
 
+    logger.info(
+        "transform_run_started",
+        transform_run_id=run_id,
+        pipeline_run_id=run_id,
+        transform_name=transform_name,
+        source=source,
+        dataset=dataset,
+        target_table=target_table,
+        metadata=sanitize_log_payload(metadata_payload),
+    )
+
     return run_id
 
 
@@ -67,6 +81,7 @@ def finish_transform_run(
     records_extracted: int | None = None,
     records_loaded: int | None = None,
     records_failed: int | None = None,
+    unmatched_count: int | None = None,
     error_message: str | None = None,
 ) -> None:
     sql = text(
@@ -93,6 +108,20 @@ def finish_transform_run(
                 "records_extracted": records_extracted,
                 "records_loaded": records_loaded,
                 "records_failed": records_failed,
+                "unmatched_count": unmatched_count,
                 "error_message": error_message,
             },
         )
+
+    log_method = logger.error if status == "failed" else logger.info
+    log_method(
+        "transform_run_finished",
+        transform_run_id=run_id,
+        pipeline_run_id=run_id,
+        status=status,
+        records_extracted=records_extracted,
+        records_loaded=records_loaded,
+        records_failed=records_failed,
+        unmatched_count=unmatched_count,
+        error_message=error_message,
+    )

@@ -1,0 +1,24 @@
+onehaven_pulse:
+  target: "{{ env_var('DBT_TARGET', 'local') }}"
+  outputs:
+    local:
+      type: postgres
+      host: "{{ env_var('DBT_POSTGRES_HOST', 'localhost') }}"
+      port: "{{ env_var('DBT_POSTGRES_PORT', '5432') | int }}"
+      user: "{{ env_var('DBT_POSTGRES_USER', 'onehaven') }}"
+      password: "{{ env_var('DBT_POSTGRES_PASSWORD', 'onehaven_dev_password') }}"
+      dbname: "{{ env_var('DBT_POSTGRES_DB', 'onehaven_market') }}"
+      schema: dbt
+      threads: 4
+      keepalives_idle: 0
+
+    docker:
+      type: postgres
+      host: "{{ env_var('DBT_POSTGRES_HOST', 'postgres') }}"
+      port: "{{ env_var('DBT_POSTGRES_PORT', '5432') | int }}"
+      user: "{{ env_var('DBT_POSTGRES_USER', 'onehaven') }}"
+      password: "{{ env_var('DBT_POSTGRES_PASSWORD', 'onehaven_dev_password') }}"
+      dbname: "{{ env_var('DBT_POSTGRES_DB', 'onehaven_market') }}"
+      schema: dbt
+      threads: 4
+      keepalives_idle: 0

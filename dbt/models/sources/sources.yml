@@ -1,0 +1,157 @@
+version: 2
+
+sources:
+  - name: geo
+    schema: geo
+    tables:
+      - name: dim_geo
+        columns:
+          - name: geo_id
+            tests:
+              - not_null
+              - unique
+          - name: geo_type
+            tests:
+              - not_null
+
+  - name: analytics
+    schema: analytics
+    tables:
+      - name: market_monthly_metrics
+        columns:
+          - name: geo_id
+            tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('geo', 'dim_geo')
+                    field: geo_id
+
+          - name: period_month
+            tests:
+              - not_null
+
+          - name: home_price_index
+            tests:
+              - no_negative
+
+          - name: zhvi
+            tests:
+              - no_negative
+
+          - name: median_sale_price
+            tests:
+              - no_negative
+
+          - name: zori
+            tests:
+              - no_negative
+
+          - name: median_rent
+            tests:
+              - no_negative
+
+          - name: mortgage_rate_30y
+            tests:
+              - accepted_range:
+                  arguments:
+                    min_value: 0
+                    max_value: 25
+
+          - name: unemployment_rate
+            tests:
+              - accepted_range:
+                  arguments:
+                    min_value: 0
+                    max_value: 40
+
+          - name: payment_to_income_ratio
+            tests:
+              - accepted_range:
+                  arguments:
+                    min_value: 0
+                    max_value: 3
+
+          - name: price_to_income_ratio
+            tests:
+              - accepted_range:
+                  arguments:
+                    min_value: 0
+                    max_value: 50
+
+      - name: market_metric_sources
+        columns:
+          - name: geo_id
+            tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('geo', 'dim_geo')
+                    field: geo_id
+
+          - name: period_month
+            tests:
+              - not_null
+
+          - name: metric_name
+            tests:
+              - not_null
+
+          - name: source
+            tests:
+              - not_null
+
+          - name: dataset
+            tests:
+              - not_null
+
+  - name: raw
+    schema: raw
+    tables:
+      - name: zillow_zhvi
+        columns:
+          - name: source_region_id
+            tests:
+              - not_null
+          - name: period_month
+            tests:
+              - not_null
+          - name: value
+            tests:
+              - no_negative
+
+      - name: zillow_zori
+        columns:
+          - name: source_region_id
+            tests:
+              - not_null
+          - name: period_month
+            tests:
+              - not_null
+          - name: value
+            tests:
+              - no_negative
+
+      - name: redfin_market_tracker
+        columns:
+          - name: period_month
+            tests:
+              - not_null
+
+      - name: fred_observations
+        columns:
+          - name: series_id
+            tests:
+              - not_null
+          - name: observation_date
+            tests:
+              - not_null
+
+      - name: fhfa_hpi
+        columns:
+          - name: period
+            tests:
+              - not_null
+          - name: hpi
+            tests:
+              - no_negative
