@@ -4,3 +4,688 @@ bls_laus,LAUMT261982000000003,"Detroit-Warren-Dearborn, MI unemployment rate",me
 bls_laus,LAUMT261982000000004,"Detroit-Warren-Dearborn, MI unemployment count",metro_series,metro_19820,manual,1.0000,BLS LAUS Detroit-Warren-Dearborn metro unemployment count series to CBSA 19820
 bls_laus,LAUMT261982000000005,"Detroit-Warren-Dearborn, MI employment",metro_series,metro_19820,manual,1.0000,BLS LAUS Detroit-Warren-Dearborn metro employment series to CBSA 19820
 bls_laus,LAUMT261982000000006,"Detroit-Warren-Dearborn, MI labor force",metro_series,metro_19820,manual,1.0000,BLS LAUS Detroit-Warren-Dearborn metro labor force series to CBSA 19820
+redfin,"Detroit, MI","Detroit, MI",metro,metro_19820,manual,1.0000,Story 9.1 Redfin full market tracker Detroit metro mapping
+redfin,metro_redfin_detroit_mi_mi,"Detroit, MI",metro,metro_19820,manual,1.0000,Story 9.1 Redfin full market tracker Detroit metro mapping
+zillow,395106,"Somerset, PA",msa,metro_43740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394728,"Jonesboro, AR",msa,metro_27860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,395248,"Zanesville, OH",msa,metro_49780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394986,"Plattsburgh, NY",msa,metro_38460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394981,"Pittsburg, KS",msa,metro_38260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,395146,"Tallahassee, FL",msa,metro_45220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,394419,"Brookings, SD",msa,metro_15100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SD
+zillow,394508,"Crescent City, CA",msa,metro_18860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,395201,"Wapakoneta, OH",msa,metro_47540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394455,"Charleston, WV",msa,metro_16620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WV
+zillow,394948,"Owatonna, MN",msa,metro_36940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394305,"Alamogordo, NM",msa,metro_10460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,394725,"Jesup, GA",msa,metro_27700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,395240,"Yakima, WA",msa,metro_49420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,395142,"Sweetwater, TX",msa,metro_45020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395141,"Susanville, CA",msa,metro_45000,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,395037,"Rolla, MO",msa,metro_40620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394992,"Pontiac, IL",msa,metro_38700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,395219,"West Plains, MO",msa,metro_48460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394659,"Guymon, OK",msa,metro_25100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,395019,"Reno, NV",msa,metro_39900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NV
+zillow,395022,"Richmond, VA",msa,metro_40060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA
+zillow,395155,"Thomasville, GA",msa,metro_45620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394377,"Bellefontaine, OH",msa,metro_13340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394734,"Kankakee, IL",msa,metro_28100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394791,"Lexington, NE",msa,metro_30420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,394751,"Kirksville, MO",msa,metro_28860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,395139,"Sumter, SC",msa,metro_44940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SC
+zillow,394523,"Decatur, AL",msa,metro_19460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394868,"Mitchell, SD",msa,metro_33580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SD
+zillow,394605,"Fort Madison, IA",msa,metro_22800,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,395092,"Shelton, WA",msa,metro_43220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,395083,"Selma, AL",msa,metro_42820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394618,"Fremont, OH",msa,metro_23380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394482,"Coldwater, MI",msa,metro_17740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,395020,"Rexburg, ID",msa,metro_39940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,394612,"Fort Wayne, IN",msa,metro_23060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,395206,"Washington Court House, OH",msa,metro_47920,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394709,"Ithaca, NY",msa,metro_27060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394356,"Bainbridge, GA",msa,metro_12460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394824,"Mansfield, OH",msa,metro_31900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394447,"Cedar Rapids, IA",msa,metro_16300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,394908,"New Haven, CT",msa,metro_35300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CT
+zillow,395026,"Riverton, WY",msa,metro_40180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WY
+zillow,394643,"Great Bend, KS",msa,metro_24460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,395054,"San Angelo, TX",msa,metro_41660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394864,"Mineral Wells, TX",msa,metro_33420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395032,"Rock Springs, WY",msa,metro_40540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WY
+zillow,395174,"Tyler, TX",msa,metro_46340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395062,"Sandusky, OH",msa,metro_41780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,395197,"Waco, TX",msa,metro_47380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394506,"Coshocton, OH",msa,metro_18740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394745,"Kill Devil Hills, NC",msa,metro_28620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,753893,"Jefferson, GA",msa,metro_27600,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,395187,"Vernal, UT",msa,metro_46860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=UT
+zillow,394411,"Branson, MO",msa,metro_14700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394764,"Lake City, FL",msa,metro_29380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,395009,"Punta Gorda, FL",msa,metro_39460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,102001,United States,country,us,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=
+zillow,395149,"Taos, NM",msa,metro_45340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,394491,"Columbus, NE",msa,metro_18100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,394845,"McMinnville, TN",msa,metro_32660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394789,"Lewistown, PA",msa,metro_30380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394815,"Madison, IN",msa,metro_31500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394478,"Clovis, NM",msa,metro_17580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,394613,"Frankfort, IN",msa,metro_23140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,395208,"Washington, NC",msa,metro_47820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394398,"Bogalusa, LA",msa,metro_14220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394968,"Pecos, TX",msa,county:00371,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394435,"Camden, AR",msa,metro_15780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,395085,"Seneca, SC",msa,metro_42860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SC
+zillow,394297,"Aberdeen, SD",msa,metro_10100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SD
+zillow,394484,"Colorado Springs, CO",msa,metro_17820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394661,"Hammond, LA",msa,metro_25220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,753890,"Holland, MI",msa,metro_26090,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394406,"Bowling Green, KY",msa,metro_14540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,394452,"Centralia, WA",msa,metro_16500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,394567,"Ellensburg, WA",msa,metro_21260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,395100,"Silver City, NM",msa,metro_43500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,395014,"Raymondville, TX",msa,metro_39700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394321,"Altoona, PA",msa,metro_11020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,395125,"State College, PA",msa,metro_44300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394505,"Corvallis, OR",msa,metro_18700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,753871,"Breckenridge, CO",msa,metro_14720,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394726,"Johnson City, TN",msa,metro_27740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394654,"Greenwood, MS",msa,metro_24900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394436,"Campbellsville, KY",msa,metro_15820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,395193,"Vineland, NJ",msa,metro_47220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NJ
+zillow,394917,"Niles, MI",msa,metro_35660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394558,"El Campo, TX",msa,metro_20900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395215,"Wausau, WI",msa,metro_48140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,395192,"Vincennes, IN",msa,metro_47180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394763,"Lake Charles, LA",msa,metro_29340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394685,"Homosassa Springs, FL",msa,metro_26140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,394945,"Oskaloosa, IA",msa,metro_36820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,395043,"Ruston, LA",msa,metro_40820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394715,"Jacksonville, IL",msa,metro_27300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394563,"Elizabethtown, KY",msa,metro_21060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,394934,"Okeechobee, FL",msa,metro_36380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,394781,"Lebanon, MO",msa,metro_30060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394652,"Greenville, OH",msa,metro_24820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394733,"Kalispell, MT",msa,metro_28060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MT
+zillow,394961,"Paragould, AR",msa,metro_37500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,394306,"Albany, GA",msa,metro_10500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394426,"Burley, ID",msa,metro_15420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,394674,"Heber, UT",msa,metro_25720,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=UT
+zillow,394810,"Lumberton, NC",msa,metro_31300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,395021,"Richmond, IN",msa,metro_39980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394500,"Cornelia, GA",msa,metro_18460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394927,"Ocala, FL",msa,metro_36100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,394518,"Danville, VA",msa,metro_19260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA
+zillow,394761,"Lafayette, LA",msa,metro_29180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394877,"Morehead City, NC",msa,metro_33980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394626,"Gallup, NM",msa,metro_23700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,395191,"Vidalia, GA",msa,metro_47080,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,395036,"Rocky Mount, NC",msa,metro_40580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394617,"Fremont, NE",msa,metro_23340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,394595,"Flagstaff, AZ",msa,metro_22380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AZ
+zillow,753884,"Hailey, ID",msa,metro_25200,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,395136,"Sturgis, MI",msa,metro_44780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,395186,"Vermillion, SD",msa,metro_46820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SD
+zillow,394299,"Abilene, TX",msa,metro_10180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394623,"Gainesville, GA",msa,metro_23580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394511,"Cullman, AL",msa,metro_18980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394556,"Edwards, CO",msa,metro_20780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394550,"Dyersburg, TN",msa,metro_20540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,395126,"Statesboro, GA",msa,metro_44340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394796,"Lincoln, NE",msa,metro_30700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,394935,"Oklahoma City, OK",msa,metro_36420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,395080,"Sebring, FL",msa,metro_42700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,394507,"Crawfordsville, IN",msa,metro_18820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394498,"Cordele, GA",msa,metro_18380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394522,"DeRidder, LA",msa,metro_19760,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394591,"Fergus Falls, MN",msa,metro_22260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394988,"Pocatello, ID",msa,metro_38540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,753889,"Hillsdale, MI",msa,metro_25880,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394805,"Los Alamos, NM",msa,metro_31060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,394424,"Bucyrus, OH",msa,metro_15340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394634,"Gloversville, NY",msa,metro_24100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,395029,"Rochelle, IL",msa,metro_40300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394374,"Beckley, WV",msa,metro_13220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WV
+zillow,395216,"Waycross, GA",msa,metro_48180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394473,"Cleveland, MS",msa,metro_17380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394343,"Athens, OH",msa,metro_11900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,753904,"Marion, NC",msa,metro_32000,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,395238,"Worcester, MA",msa,metro_49340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MA
+zillow,394384,"Big Rapids, MI",msa,metro_13660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,395143,"Syracuse, NY",msa,metro_45060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394403,"Borger, TX",msa,metro_14420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394371,"Beatrice, NE",msa,metro_13100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,394544,"Dumas, TX",msa,metro_20300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394869,"Moberly, MO",msa,metro_33620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,395015,"Reading, PA",msa,metro_39740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394651,"Greenville, NC",msa,metro_24780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394656,"Grenada, MS",msa,metro_24980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394723,"Jefferson City, MO",msa,metro_27620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394486,"Columbia, SC",msa,metro_17900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SC
+zillow,394330,"Andrews, TX",msa,metro_11380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394795,"Lincoln, IL",msa,metro_30660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,395182,"Valdosta, GA",msa,metro_46660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,753902,"Malvern, AR",msa,metro_31680,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,394540,"Dublin, GA",msa,metro_20140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394951,"Oxford, MS",msa,metro_37060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,395095,"Show Low, AZ",msa,metro_43320,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AZ
+zillow,394537,"Dothan, AL",msa,metro_20020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,753927,"Winnemucca, NV",msa,metro_49080,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NV
+zillow,394336,"Ardmore, OK",msa,metro_11620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394973,"Peru, IN",msa,metro_37940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394750,"Kinston, NC",msa,metro_28820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,395070,"Savannah, GA",msa,metro_42340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394942,"Orangeburg, SC",msa,metro_36700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SC
+zillow,394893,"Muncie, IN",msa,metro_34620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394899,"Nacogdoches, TX",msa,metro_34860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394309,"Albemarle, NC",msa,metro_10620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394778,"Lawrence, KS",msa,metro_29940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394382,"Bennington, VT",msa,metro_13540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VT
+zillow,394369,"Bay City, MI",msa,metro_13020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394405,"Boulder, CO",msa,metro_14500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394588,"Farmington, NM",msa,metro_22140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,394344,"Athens, TN",msa,metro_11940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394854,"Mexico, MO",msa,metro_33020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394413,"Brenham, TX",msa,metro_14780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394906,"New Castle, IN",msa,metro_35220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394915,"Newport, TN",msa,metro_35460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,395073,"Scottsboro, AL",msa,metro_42460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,395084,"Seneca Falls, NY",msa,metro_42900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394322,"Altus, OK",msa,metro_11060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394331,"Angola, IN",msa,metro_11420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394743,"Ketchikan, AK",msa,metro_28540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AK
+zillow,394897,"Muskogee, OK",msa,metro_34780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394738,"Keene, NH",msa,metro_28300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NH
+zillow,394748,"Kingston, NY",msa,metro_28740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394494,"Connersville, IN",msa,metro_18220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394378,"Bellingham, WA",msa,metro_13380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,394692,"Houston, TX",msa,county:00225,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394624,"Gainesville, TX",msa,metro_23620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394772,"Laredo, TX",msa,metro_29700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394316,"Alice, TX",msa,metro_10860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394337,"Arkadelphia, AR",msa,metro_11660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,394572,"Erie, PA",msa,metro_21500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394826,"Marion, IN",msa,metro_31980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394881,"Moscow, ID",msa,metro_34140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,394980,"Pine Bluff, AR",msa,metro_38220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,394464,"Chico, CA",msa,metro_17020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,394922,"North Wilkesboro, NC",msa,metro_35900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,395066,"Santa Fe, NM",msa,metro_42140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,395227,"Williston, ND",msa,metro_48780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ND
+zillow,394999,"Portsmouth, OH",msa,metro_39020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394836,"Martinsville, VA",msa,metro_32300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA
+zillow,394559,"El Centro, CA",msa,metro_20940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,394568,"Elmira, NY",msa,metro_21300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,395159,"Toccoa, GA",msa,metro_45740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394703,"Idaho Falls, ID",msa,metro_26820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,394616,"Freeport, IL",msa,metro_23300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394871,"Modesto, CA",msa,metro_33700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,395117,"Springfield, OH",msa,metro_44220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394300,"Ada, OK",msa,metro_10220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394562,"Elizabeth City, NC",msa,metro_21020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394502,"Corpus Christi, TX",msa,metro_18580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394693,"Hudson, NY",msa,metro_26460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394582,"Fairmont, WV",msa,metro_21900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WV
+zillow,394972,"Peoria, IL",msa,metro_37900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394536,"Dodge City, KS",msa,metro_19980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394885,"Mount Pleasant, MI",msa,metro_34380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394923,"Norwalk, OH",msa,metro_35940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394323,"Amarillo, TX",msa,metro_11100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394701,"Hutchinson, KS",msa,metro_26740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394579,"Evansville, IN",msa,metro_21780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394462,"Cheyenne, WY",msa,metro_16940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WY
+zillow,394397,"Blytheville, AR",msa,metro_14180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,395087,"Seymour, IN",msa,metro_42980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394954,"Pahrump, NV",msa,metro_37220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NV
+zillow,394821,"Manhattan, KS",msa,metro_31740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394453,"Chambersburg, PA",msa,metro_16540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394376,"Beeville, TX",msa,metro_13300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394574,"Espa-¦ola, NM",msa,metro_21580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,395195,"Visalia, CA",msa,metro_47300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,394675,"Helena, MT",msa,metro_25740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MT
+zillow,395027,"Roanoke Rapids, NC",msa,metro_40260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394758,"La Grande, OR",msa,metro_29260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,394941,"Opelousas, LA",msa,metro_36660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394699,"Huntsville, TX",msa,metro_26660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394829,"Marquette, MI",msa,metro_32100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394315,"Alexandria, MN",msa,metro_10820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394939,"Oneonta, NY",msa,metro_36580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394601,"Forrest City, AR",msa,metro_22620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,394509,"Crossville, TN",msa,metro_18900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394773,"Las Cruces, NM",msa,metro_29740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,753920,"Sonora, CA",msa,metro_43760,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,394499,"Corinth, MS",msa,metro_18420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,395151,"Terre Haute, IN",msa,metro_45460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394515,"Dalton, GA",msa,metro_19140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,395173,"Twin Falls, ID",msa,metro_46300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,753923,"The Dalles, OR",msa,metro_45520,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,394428,"Burlington, NC",msa,metro_15500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394995,"Port St. Lucie, FL",msa,metro_38940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,394812,"Macomb, IL",msa,metro_31380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394388,"Birmingham, AL",msa,metro_13820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394867,"Missoula, MT",msa,metro_33540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MT
+zillow,394373,"Beaver Dam, WI",msa,metro_13180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,394883,"Moultrie, GA",msa,metro_34220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,395154,"Thomaston, GA",msa,metro_45580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394649,"Greensburg, IN",msa,metro_24700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394391,"Blackfoot, ID",msa,metro_13940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,395171,"Tuscaloosa, AL",msa,metro_46220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394368,"Battle Creek, MI",msa,metro_12980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394967,"Payson, AZ",msa,metro_37740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AZ
+zillow,753911,"Ozark, AL",msa,metro_37120,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394470,"Clarksdale, MS",msa,metro_17260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,753929,"Zapata, TX",msa,metro_49820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394477,"Clinton, IA",msa,metro_17540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,394547,"Durango, CO",msa,metro_20420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,395199,"Walla Walla, WA",msa,metro_47460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,394876,"Montrose, CO",msa,metro_33940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394827,"Marion, OH",msa,metro_32020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394548,"Durant, OK",msa,metro_20460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,395114,"Springfield, IL",msa,metro_44100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394822,"Manitowoc, WI",msa,metro_31820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,394879,"Morgantown, WV",msa,metro_34060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WV
+zillow,394739,"Kendallville, IN",msa,metro_28340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394434,"Cambridge, OH",msa,metro_15740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,395034,"Rockingham, NC",msa,metro_40460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,395178,"Urbana, OH",msa,metro_46500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394925,"Oak Harbor, WA",msa,metro_36020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,394359,"Bangor, ME",msa,metro_12620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ME
+zillow,394840,"Mayfield, KY",msa,metro_32460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,394469,"Clarksburg, WV",msa,metro_17220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WV
+zillow,394589,"Fayetteville, NC",msa,metro_22180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,395007,"Pueblo, CO",msa,metro_39380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394414,"Brevard, NC",msa,metro_14820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394687,"Hood River, OR",msa,metro_26220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,394933,"Oil City, PA",msa,metro_36340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,395008,"Pullman, WA",msa,metro_39420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,394431,"Cadillac, MI",msa,metro_15620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,395229,"Wilmington, NC",msa,metro_48900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394848,"Medford, OR",msa,metro_32780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,394410,"Brainerd, MN",msa,metro_14660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394606,"Fort Morgan, CO",msa,metro_22820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394517,"Danville, KY",msa,metro_19220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,394671,"Hattiesburg, MS",msa,metro_25620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,395176,"Union City, TN",msa,metro_46460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394884,"Mount Airy, NC",msa,metro_34340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394786,"Lewisburg, TN",msa,metro_30280,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394527,"Del Rio, TX",msa,metro_19620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394630,"Gettysburg, PA",msa,metro_23900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394476,"Clewiston, FL",msa,metro_17500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,395050,"Salinas, CA",msa,metro_41500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,395119,"St. George, UT",msa,metro_41100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=UT
+zillow,395097,"Sidney, OH",msa,metro_43380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,395051,"Salisbury, MD",msa,metro_41540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=DE
+zillow,753924,"Urban Honolulu, HI",msa,metro_46520,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=HI
+zillow,394823,"Mankato, MN",msa,metro_31860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394325,"Ames, IA",msa,metro_11180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,394446,"Cedar City, UT",msa,metro_16260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=UT
+zillow,395099,"Sikeston, MO",msa,metro_43460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,753908,"Othello, WA",msa,metro_36830,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,394345,"Athens, TX",msa,metro_11980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,753901,"Ludington, MI",msa,metro_31220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394872,"Monroe, LA",msa,metro_33740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394635,"Goldsboro, NC",msa,metro_24140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,395203,"Warren, PA",msa,metro_47620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,395047,"Saginaw, MI",msa,metro_40980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,395241,"Yankton, SD",msa,metro_49460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SD
+zillow,394949,"Owensboro, KY",msa,metro_36980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,394560,"El Dorado, AR",msa,metro_20980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,394459,"Charlottesville, VA",msa,metro_16820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA
+zillow,394919,"Norfolk, NE",msa,metro_35740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,394816,"Madison, WI",msa,metro_31540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,394931,"Ogden, UT",msa,metro_36260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=UT
+zillow,394690,"Houghton, MI",msa,metro_26340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394493,"Concord, NH",msa,metro_18180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NH
+zillow,395160,"Toledo, OH",msa,metro_45780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394614,"Frankfort, KY",msa,metro_23180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,394390,"Bismarck, ND",msa,metro_13900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ND
+zillow,395031,"Rochester, NY",msa,metro_40380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,395165,"Troy, AL",msa,metro_45980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394314,"Alexandria, LA",msa,metro_10780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394418,"Brookings, OR",msa,metro_15060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,394551,"Eagle Pass, TX",msa,metro_20580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394339,"Ashland, OH",msa,metro_11740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,395157,"Tiffin, OH",msa,metro_45660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394702,"Hutchinson, MN",msa,metro_26780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,395129,"Stephenville, TX",msa,metro_44500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394982,"Pittsburgh, PA",msa,metro_38300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394710,"Jackson, MI",msa,metro_27100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,395161,"Topeka, KS",msa,metro_45820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394570,"Enid, OK",msa,metro_21420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,395046,"Safford, AZ",msa,metro_40940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AZ
+zillow,394341,"Astoria, OR",msa,metro_11820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,395131,"Sterling, IL",msa,metro_44580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394962,"Paris, TN",msa,metro_37540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,395150,"Taylorville, IL",msa,metro_45380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394977,"Picayune, MS",msa,metro_38100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394597,"Florence, SC",msa,metro_22500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SC
+zillow,394644,"Great Falls, MT",msa,metro_24500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MT
+zillow,394779,"Lawrenceburg, TN",msa,metro_29980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394504,"Cortland, NY",msa,metro_18660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394594,"Fitzgerald, GA",msa,metro_22340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394880,"Morristown, TN",msa,metro_34100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,395116,"Springfield, MO",msa,metro_44180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394771,"Laramie, WY",msa,metro_29660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WY
+zillow,395003,"Price, UT",msa,metro_39220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=UT
+zillow,394894,"Murray, KY",msa,metro_34660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,395167,"Tucson, AZ",msa,metro_46060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AZ
+zillow,394663,"Hannibal, MO",msa,metro_25300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394783,"Lebanon, PA",msa,metro_30140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394870,"Mobile, AL",msa,metro_33660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394994,"Port Angeles, WA",msa,metro_38820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,394892,"Mountain Home, ID",msa,metro_34300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,394712,"Jackson, TN",msa,metro_27180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394842,"McAlester, OK",msa,metro_32540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,395094,"Sherman, TX",msa,county:00421,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394393,"Bloomington, IN",msa,metro_14020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,395071,"Sayre, PA",msa,metro_42380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394334,"Appleton, WI",msa,metro_11540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,394541,"DuBois, PA",msa,metro_20180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,395063,"Sanford, NC",msa,metro_41820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394930,"Odessa, TX",msa,metro_36220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394385,"Big Spring, TX",msa,metro_13700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394639,"Grand Junction, CO",msa,metro_24300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394677,"Henderson, NC",msa,metro_25780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394776,"Laurel, MS",msa,metro_29860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394557,"Effingham, IL",msa,metro_20820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394485,"Columbia, MO",msa,metro_17860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394667,"Harrison, AR",msa,metro_25460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,395236,"Woodward, OK",msa,metro_49260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394573,"Escanaba, MI",msa,metro_21540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394553,"East Stroudsburg, PA",msa,metro_20700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394633,"Glens Falls, NY",msa,metro_24020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394753,"Knoxville, TN",msa,metro_28940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394311,"Albertville, AL",msa,metro_10700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394837,"Maryville, MO",msa,metro_32340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,753905,"Newport, OR",msa,metro_35440,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,395163,"Traverse City, MI",msa,metro_45900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394367,"Baton Rouge, LA",msa,metro_12940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394307,"Albany, OR",msa,metro_10540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,394564,"Elk City, OK",msa,metro_21120,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394650,"Greenville, MS",msa,metro_24740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394855,"Miami, OK",msa,metro_33060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394646,"Green Bay, WI",msa,metro_24580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,394599,"Fond du Lac, WI",msa,metro_22540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,394887,"Mount Sterling, KY",msa,metro_34460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,394860,"Midland, TX",msa,metro_33260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394683,"Hobbs, NM",msa,metro_26020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,394850,"Menomonie, WI",msa,metro_32860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,394632,"Glasgow, KY",msa,metro_23980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,394555,"Eau Claire, WI",msa,metro_20740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,394451,"Centralia, IL",msa,metro_16460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394678,"Hereford, TX",msa,metro_25820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394449,"Celina, OH",msa,metro_16380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394475,"Cleveland, OH",msa,metro_17410,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,395204,"Warrensburg, MO",msa,metro_47660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394918,"Nogales, AZ",msa,metro_35700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AZ
+zillow,395039,"Roseburg, OR",msa,metro_40700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,394817,"Madisonville, KY",msa,metro_31580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,394956,"Palestine, TX",msa,metro_37300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394492,"Columbus, OH",msa,metro_18140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394655,"Greenwood, SC",msa,metro_24940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SC
+zillow,394740,"Kennett, MO",msa,metro_28380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394545,"Duncan, OK",msa,metro_20340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394641,"Grants Pass, OR",msa,metro_24420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,394448,"Cedartown, GA",msa,metro_16340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394302,"Adrian, MI",msa,metro_10300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,753918,"Shawano, WI",msa,metro_43020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,394888,"Mount Vernon, IL",msa,metro_34500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394947,"Ottumwa, IA",msa,metro_36900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,394363,"Bartlesville, OK",msa,metro_12780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394721,"Jasper, IN",msa,metro_27540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394774,"Las Vegas, NM",msa,metro_29780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,394490,"Columbus, MS",msa,metro_18060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394900,"Napa, CA",msa,metro_34900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,395169,"Tulsa, OK",msa,metro_46140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,395138,"Summerville, GA",msa,metro_44900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,395030,"Rochester, MN",msa,metro_40340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,753921,"Steamboat Springs, CO",msa,metro_44460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394979,"Pierre, SD",msa,metro_38180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SD
+zillow,394326,"Amsterdam, NY",msa,metro_11220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394501,"Corning, NY",msa,metro_18500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394889,"Mount Vernon, OH",msa,metro_34540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394647,"Greeneville, TN",msa,metro_24620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394366,"Batesville, AR",msa,metro_12900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,394668,"Harrisonburg, VA",msa,metro_25500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA
+zillow,394752,"Klamath Falls, OR",msa,metro_28900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,394600,"Forest City, NC",msa,metro_22580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394714,"Jacksonville, FL",msa,metro_27260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,395118,"St. Cloud, MN",msa,metro_41060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394539,"Dover, DE",msa,metro_20100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=DE
+zillow,395111,"Spencer, IA",msa,metro_43980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,394638,"Grand Island, NE",msa,metro_24260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,394604,"Fort Leonard Wood, MO",msa,metro_22780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,395104,"Snyder, TX",msa,metro_43660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394809,"Lufkin, TX",msa,metro_31260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395223,"Wichita Falls, TX",msa,metro_48660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395115,"Springfield, MA",msa,metro_44140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MA
+zillow,394620,"Gadsden, AL",msa,metro_23460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394304,"Akron, OH",msa,metro_10420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394882,"Moses Lake, WA",msa,metro_34180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,394338,"Asheville, NC",msa,metro_11700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,753916,"Sandpoint, ID",msa,metro_41760,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,395224,"Wichita, KS",msa,metro_48620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,395017,"Red Wing, MN",msa,metro_39860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,395133,"Stillwater, OK",msa,metro_44660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394319,"Alma, MI",msa,metro_10940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,395228,"Willmar, MN",msa,metro_48820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394379,"Bemidji, MN",msa,metro_13420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394445,"Casper, WY",msa,metro_16220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WY
+zillow,394615,"Fredericksburg, TX",msa,metro_23240,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394480,"Coeur d'Alene, ID",msa,metro_17660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,395190,"Victoria, TX",msa,metro_47020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,753903,"Marietta, OH",msa,metro_31930,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394465,"Chillicothe, OH",msa,metro_17060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,395230,"Wilmington, OH",msa,metro_48940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,395185,"Van Wert, OH",msa,metro_46780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,395086,"Sevierville, TN",msa,metro_42940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394793,"Liberal, KS",msa,metro_30580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394422,"Brownwood, TX",msa,metro_15220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394350,"Auburn, NY",msa,metro_12180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,753925,"Vineyard Haven, MA",msa,metro_47240,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MA
+zillow,394437,"Ca-¦on City, CO",msa,metro_15860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,395049,"Salina, KS",msa,metro_41460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,395135,"Storm Lake, IA",msa,metro_44740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,395091,"Shelbyville, TN",msa,metro_43180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,395189,"Vicksburg, MS",msa,metro_46980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,395183,"Vallejo, CA",msa,metro_46700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,394803,"Longview, TX",msa,metro_30980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395162,"Torrington, CT",msa,metro_45860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CT
+zillow,394682,"Hinesville, GA",msa,metro_25980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394755,"Kokomo, IN",msa,metro_29020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,395188,"Vernon, TX",msa,metro_46900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394596,"Flint, MI",msa,metro_22420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394310,"Albert Lea, MN",msa,metro_10660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394785,"Lewisburg, PA",msa,metro_30260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394503,"Corsicana, TX",msa,metro_18620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395093,"Sheridan, WY",msa,metro_43260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WY
+zillow,394838,"Mason City, IA",msa,metro_32380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,394354,"Austin, MN",msa,metro_12380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394936,"Olean, NY",msa,metro_36460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394584,"Fallon, NV",msa,metro_21980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NV
+zillow,395040,"Roswell, NM",msa,metro_40740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,394847,"Meadville, PA",msa,metro_32740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394525,"Decatur, IN",msa,metro_19540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,395018,"Redding, CA",msa,metro_39820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,394361,"Barnstable Town, MA",msa,metro_12700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MA
+zillow,753915,"Salem, OH",msa,metro_41400,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394474,"Cleveland, TN",msa,metro_17420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394990,"Ponca City, OK",msa,metro_38620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394904,"Natchitoches, LA",msa,metro_35060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394526,"Defiance, OH",msa,metro_19580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394571,"Enterprise, AL",msa,metro_21460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394360,"Baraboo, WI",msa,metro_12660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,395048,"Salem, OR",msa,metro_41420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,753926,"Weatherford, OK",msa,metro_48220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394619,"Fresno, CA",msa,metro_23420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,394535,"Dixon, IL",msa,metro_19940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394442,"Carbondale, IL",msa,metro_16060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394866,"Minot, ND",msa,metro_33500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ND
+zillow,394777,"Laurinburg, NC",msa,metro_29900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394851,"Merced, CA",msa,metro_32900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,395130,"Sterling, CO",msa,metro_44540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394886,"Mount Pleasant, TX",msa,metro_34420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394566,"Elko, NV",msa,metro_21220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NV
+zillow,394985,"Platteville, WI",msa,metro_38420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,395016,"Red Bluff, CA",msa,metro_39780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,395170,"Tupelo, MS",msa,metro_46180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394955,"Palatka, FL",msa,metro_37260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,394830,"Marshall, MN",msa,metro_32140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394433,"Cambridge, MD",msa,metro_15700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MD
+zillow,395205,"Warsaw, IN",msa,metro_47700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,753909,"Ottawa, KS",msa,metro_36840,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394831,"Marshall, MO",msa,metro_32180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394472,"Clearlake, CA",msa,metro_17340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,394625,"Galesburg, IL",msa,metro_23660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394622,"Gainesville, FL",msa,metro_23540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,394861,"Milledgeville, GA",msa,metro_33300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394380,"Bend, OR",msa,metro_13460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OR
+zillow,394852,"Meridian, MS",msa,metro_32940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394444,"Carson City, NV",msa,metro_16180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NV
+zillow,395140,"Sunbury, PA",msa,metro_44980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,395110,"Spearfish, SD",msa,metro_43940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SD
+zillow,394569,"Emporia, KS",msa,metro_21380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394704,"Indiana, PA",msa,metro_26860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394696,"Huntington, IN",msa,metro_26540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394700,"Huron, SD",msa,metro_26700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SD
+zillow,394324,"Americus, GA",msa,metro_11140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,395033,"Rockford, IL",msa,metro_40420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,395088,"Shawnee, OK",msa,metro_43060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,395109,"Spartanburg, SC",msa,metro_43900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SC
+zillow,394835,"Martin, TN",msa,metro_32280,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,394808,"Lubbock, TX",msa,metro_31180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394542,"Dubuque, IA",msa,metro_20220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,395234,"Winona, MN",msa,metro_49100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394342,"Atchison, KS",msa,metro_11860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394987,"Plymouth, IN",msa,metro_38500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394759,"Laconia, NH",msa,metro_29060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NH
+zillow,395196,"Wabash, IN",msa,metro_47340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394799,"Lock Haven, PA",msa,metro_30820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394538,"Douglas, GA",msa,metro_20060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,395072,"Scottsbluff, NE",msa,metro_42420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,394561,"El Paso, TX",msa,metro_21340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395124,"Starkville, MS",msa,metro_44260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394905,"New Bern, NC",msa,metro_35100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,395181,"Uvalde, TX",msa,metro_46620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394621,"Gaffney, SC",msa,metro_23500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SC
+zillow,394959,"Pampa, TX",msa,metro_37420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395246,"Yuba City, CA",msa,metro_49700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,395089,"Sheboygan, WI",msa,metro_43100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WI
+zillow,395105,"Somerset, KY",msa,metro_43700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,395069,"Sault Ste. Marie, MI",msa,metro_42300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394587,"Farmington, MO",msa,metro_22100,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394631,"Gillette, WY",msa,metro_23940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WY
+zillow,395112,"Spirit Lake, IA",msa,metro_44020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,394399,"Boise City, ID",msa,metro_14260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ID
+zillow,395128,"Staunton, VA",msa,county:00790,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA
+zillow,753869,"Bloomington, IL",msa,metro_14010,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,394859,"Midland, MI",msa,metro_33220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,395044,"Rutland, VT",msa,metro_40860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VT
+zillow,394312,"Albuquerque, NM",msa,metro_10740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,394670,"Hastings, NE",msa,metro_25580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,394891,"Mountain Home, AR",msa,metro_34260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,394730,"Juneau, AK",msa,metro_27940,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AK
+zillow,395144,"Tahlequah, OK",msa,metro_45140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394349,"Auburn, IN",msa,metro_12140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394298,"Aberdeen, WA",msa,metro_10140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WA
+zillow,394912,"New Ulm, MN",msa,metro_35580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394409,"Bradford, PA",msa,metro_14620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394737,"Kearney, NE",msa,metro_28260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,394716,"Jacksonville, NC",msa,metro_27340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394742,"Kerrville, TX",msa,metro_28500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394878,"Morgan City, LA",msa,metro_34020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=LA
+zillow,394554,"Easton, MD",msa,metro_20660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MD
+zillow,394749,"Kingsville, TX",msa,metro_28780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394327,"Anchorage, AK",msa,metro_11260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AK
+zillow,395082,"Selinsgrove, PA",msa,metro_42780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,395175,"Ukiah, CA",msa,metro_46380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CA
+zillow,394533,"Dickinson, ND",msa,metro_19860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ND
+zillow,394695,"Huntingdon, PA",msa,metro_26500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,395028,"Roanoke, VA",msa,metro_40220,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA
+zillow,394768,"Lancaster, PA",msa,metro_29540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394335,"Arcadia, FL",msa,metro_11580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=FL
+zillow,394920,"North Platte, NE",msa,metro_35820,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NE
+zillow,753879,"Elkins, WV",msa,metro_21180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=WV
+zillow,395013,"Rapid City, SD",msa,metro_39660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SD
+zillow,395137,"Sulphur Springs, TX",msa,metro_44860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395000,"Pottsville, PA",msa,metro_39060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,753914,"Port Lavaca, TX",msa,metro_38920,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394320,"Alpena, MI",msa,metro_10980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394895,"Muscatine, IA",msa,metro_34700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,394811,"Lynchburg, VA",msa,metro_31340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA
+zillow,394516,"Danville, IL",msa,metro_19180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,395239,"Worthington, MN",msa,metro_49380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MN
+zillow,394375,"Bedford, IN",msa,metro_13260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394736,"Kapaa, HI",msa,metro_28180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=HI
+zillow,394698,"Huntsville, AL",msa,metro_26620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394529,"Deming, NM",msa,metro_19700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NM
+zillow,394983,"Pittsfield, MA",msa,metro_38340,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MA
+zillow,394780,"Lawton, OK",msa,metro_30020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OK
+zillow,394801,"Logansport, IN",msa,metro_30900,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394844,"McComb, MS",msa,metro_32620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394645,"Greeley, CO",msa,metro_24540,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=CO
+zillow,394489,"Columbus, IN",msa,metro_18020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394673,"Hays, KS",msa,metro_25700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394524,"Decatur, IL",msa,metro_19500,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IL
+zillow,395042,"Russellville, AR",msa,metro_40780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,395207,"Washington, IN",msa,metro_47780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IN
+zillow,394365,"Batavia, NY",msa,metro_12860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,395202,"Warner Robins, GA",msa,metro_47580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394858,"Middlesborough, KY",msa,metro_33180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KY
+zillow,394818,"Magnolia, AR",msa,metro_31620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,394873,"Monroe, MI",msa,metro_33780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,394984,"Plainview, TX",msa,metro_38380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394387,"Binghamton, NY",msa,metro_13780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,394707,"Iowa City, IA",msa,metro_26980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,394718,"Jamestown, ND",msa,metro_27420,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=ND
+zillow,394370,"Bay City, TX",msa,metro_13060,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394495,"Cookeville, TN",msa,metro_18260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TN
+zillow,395211,"Watertown, SD",msa,metro_47980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SD
+zillow,394727,"Johnstown, PA",msa,metro_27780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394362,"Barre, VT",msa,metro_12740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VT
+zillow,394711,"Jackson, MS",msa,metro_27140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394593,"Findlay, OH",msa,metro_22300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,394407,"Bozeman, MT",msa,metro_14580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MT
+zillow,395077,"Searcy, AR",msa,metro_42620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,394833,"Marshalltown, IA",msa,metro_32260,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=IA
+zillow,394386,"Billings, MT",msa,metro_13740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MT
+zillow,394875,"Montgomery, AL",msa,metro_33860,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AL
+zillow,394402,"Boone, NC",msa,metro_14380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394717,"Jacksonville, TX",msa,metro_27380,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,394993,"Poplar Bluff, MO",msa,metro_38740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394963,"Paris, TX",msa,metro_37580,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=TX
+zillow,395231,"Wilson, NC",msa,metro_48980,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NC
+zillow,394432,"Calhoun, GA",msa,metro_15660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,395225,"Williamsport, PA",msa,metro_48700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=PA
+zillow,394689,"Hot Springs, AR",msa,metro_26300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AR
+zillow,395081,"Sedalia, MO",msa,metro_42740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MO
+zillow,394417,"Brookhaven, MS",msa,metro_15020,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MS
+zillow,394332,"Ann Arbor, MI",msa,metro_11460,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=MI
+zillow,395158,"Tifton, GA",msa,metro_45700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394914,"Newberry, SC",msa,metro_35140,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=SC
+zillow,394627,"Garden City, KS",msa,metro_23780,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,394846,"McPherson, KS",msa,metro_32700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=KS
+zillow,395237,"Wooster, OH",msa,metro_49300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=OH
+zillow,786263,"Ruidoso, NM",msa,metro_40760,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=NM
+zillow,394603,"Fort Dodge, IA",msa,metro_22700,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=IA
+zillow,845162,"Granbury, TX",msa,metro_24180,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=TX
+zillow,845167,"Ottawa, IL",msa,metro_36837,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=IL
+zillow,786252,"Bonham, TX",msa,metro_14300,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=TX
+zillow,786262,"Pella, IA",msa,metro_37800,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=IA
+zillow,395232,"Winchester, VA",msa,county:00840,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA
+zillow,394913,"New York, NY",msa,state_36,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY
+zillow,395038,"Rome, GA",msa,metro_40660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA
+zillow,394794,"Lima, OH",msa,metro_30620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH
+zillow,395194,"Virginia Beach, VA",msa,county:00810,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA
+zillow,395247,"Yuma, AZ",msa,metro_49740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AZ
+zillow,394347,"Atlanta, GA",msa,metro_12060,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Atlanta, GA to Atlanta-Sandy Springs-Alpharetta, GA"
+zillow,394355,"Austin, TX",msa,metro_12420,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Austin, TX to Austin-Round Rock-Georgetown, TX"
+zillow,394404,"Boston, MA",msa,metro_14460,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Boston, MA to Boston-Cambridge-Newton, MA-NH"
+zillow,394463,"Chicago, IL",msa,metro_16980,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Chicago, IL to Chicago-Naperville-Elgin, IL-IN-WI"
+zillow,394514,"Dallas, TX",msa,metro_19100,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Dallas, TX to Dallas-Fort Worth-Arlington, TX"
+zillow,753899,"Los Angeles, CA",msa,metro_31080,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Los Angeles, CA to Los Angeles-Long Beach-Anaheim, CA"
+zillow,394974,"Philadelphia, PA",msa,metro_37980,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Philadelphia, PA to Philadelphia-Camden-Wilmington, PA-NJ-DE-MD"
+zillow,394976,"Phoenix, AZ",msa,metro_38060,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Phoenix, AZ to Phoenix-Mesa-Chandler, AZ"
+zillow,395078,"Seattle, WA",msa,metro_42660,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Seattle, WA to Seattle-Tacoma-Bellevue, WA"
+zillow,395148,"Tampa, FL",msa,metro_45300,manual,1.0000,"Story 9.2 priority metro mapping: Zillow Tampa, FL to Tampa-St. Petersburg-Clearwater, FL"

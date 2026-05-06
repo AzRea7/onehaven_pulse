@@ -1,0 +1,441 @@
+dataset,source_geo_id,source_geo_name,source_geo_type,state_code,row_count,normalized_source_name
+zhvi,394456,"Charleston, IL",msa,IL,315,charleston il
+zhvi,394807,"Louisville, KY",msa,KY,315,louisville ky
+zhvi,394427,"Burlington, IA",msa,IA,315,burlington ia
+zhvi,395098,"Sierra Vista, AZ",msa,AZ,315,sierra vista az
+zhvi,394953,"Paducah, KY",msa,KY,315,paducah ky
+zhvi,395053,"Salt Lake City, UT",msa,UT,315,salt lake ut
+zhvi,395068,"Santa Rosa, CA",msa,CA,315,santa rosa ca
+zhvi,394849,"Memphis, TN",msa,TN,315,memphis tn
+zhvi,394628,"Gardnerville Ranchos, NV",msa,NV,315,gardnerville ranchos nv
+zhvi,394471,"Clarksville, TN",msa,TN,315,clarksville tn
+zhvi,395168,"Tullahoma, TN",msa,TN,315,tullahoma tn
+zhvi,395113,"Spokane, WA",msa,WA,315,spokane wa
+zhvi,394481,"Coffeyville, KS",msa,KS,315,coffeyville ks
+zhvi,394352,"Augusta, GA",msa,GA,315,augusta ga
+zhvi,394653,"Greenville, SC",msa,SC,315,greenville sc
+zhvi,395153,"The Villages, FL",msa,FL,315,the villages fl
+zhvi,394766,"Lakeland, FL",msa,FL,315,lakeland fl
+zhvi,395096,"Shreveport, LA",msa,LA,315,shreveport la
+zhvi,394756,"La Crosse, WI",msa,WI,315,la crosse wi
+zhvi,394732,"Kalamazoo, MI",msa,MI,315,kalamazoo mi
+zhvi,394762,"LaGrange, GA",msa,GA,315,lagrange ga
+zhvi,394642,"Grants, NM",msa,NM,315,grants nm
+zhvi,394577,"Eureka, CA",msa,CA,315,eureka ca
+zhvi,394989,"Point Pleasant, WV",msa,OH,315,point pleasant wv
+zhvi,395090,"Shelby, NC",msa,NC,315,shelby nc
+zhvi,394351,"Auburn, AL",msa,AL,315,auburn al
+zhvi,394747,"Kingsport, TN",msa,TN,315,kingsport tn
+zhvi,394957,"Palm Bay, FL",msa,FL,315,palm bay fl
+zhvi,394943,"Orlando, FL",msa,FL,315,orlando fl
+zhvi,394735,"Kansas City, MO",msa,MO,315,kansas mo
+zhvi,394648,"Greensboro, NC",msa,NC,315,greensboro nc
+zhvi,394862,"Milwaukee, WI",msa,WI,315,milwaukee wi
+zhvi,394578,"Evanston, WY",msa,WY,315,evanston wy
+zhvi,394666,"Harrisburg, PA",msa,PA,315,harrisburg pa
+zhvi,394660,"Hagerstown, MD",msa,MD,315,hagerstown md
+zhvi,394903,"Natchez, MS",msa,LA,315,natchez ms
+zhvi,394705,"Indianapolis, IN",msa,IN,315,indianapolis in
+zhvi,394932,"Ogdensburg, NY",msa,NY,315,ogdensburg ny
+zhvi,394770,"Lansing, MI",msa,MI,315,lansing mi
+zhvi,395107,"South Bend, IN",msa,IN,315,south bend in
+zhvi,394576,"Eugene, OR",msa,OR,315,eugene or
+zhvi,753899,"Los Angeles, CA",msa,CA,315,los angeles ca
+zhvi,394800,"Logan, UT",msa,UT,315,logan ut
+zhvi,394629,"Georgetown, SC",msa,SC,315,georgetown sc
+zhvi,394412,"Bremerton, WA",msa,WA,315,bremerton wa
+zhvi,753874,"Craig, CO",msa,CO,315,craig co
+zhvi,394423,"Brunswick, GA",msa,GA,315,brunswick ga
+zhvi,394944,"Oshkosh, WI",msa,WI,315,oshkosh wi
+zhvi,394965,"Parsons, KS",msa,KS,315,parsons ks
+zhvi,394609,"Fort Smith, AR",msa,AR,315,fort smith ar
+zhvi,753887,"Hermiston, OR",msa,OR,315,hermiston or
+zhvi,394496,"Coos Bay, OR",msa,OR,315,coos bay or
+zhvi,394998,"Portland, OR",msa,OR,315,portland or
+zhvi,394691,"Houma, LA",msa,LA,315,houma la
+zhvi,395057,"San Francisco, CA",msa,CA,315,san francisco ca
+zhvi,394441,"Cape Girardeau, MO",msa,MO,315,cape girardeau mo
+zhvi,394713,"Jackson, WY",msa,WY,315,jackson wy
+zhvi,395134,"Stockton, CA",msa,CA,315,stockton ca
+zhvi,753872,"California, MD",msa,MD,315,california md
+zhvi,394357,"Bakersfield, CA",msa,CA,315,bakersfield ca
+zhvi,394814,"Madera, CA",msa,CA,315,madera ca
+zhvi,394680,"Hilo, HI",msa,HI,315,hilo hi
+zhvi,395179,"Utica, NY",msa,NY,315,utica ny
+zhvi,394788,"Lewiston, ME",msa,ME,315,lewiston me
+zhvi,395121,"St. Louis, MO",msa,MO,315,st louis mo
+zhvi,394592,"Fernley, NV",msa,NV,315,fernley nv
+zhvi,394347,"Atlanta, GA",msa,GA,315,atlanta ga
+zhvi,395055,"San Antonio, TX",msa,TX,315,san antonio tx
+zhvi,753895,"Lafayette, IN",msa,IN,315,lafayette in
+zhvi,395132,"Stevens Point, WI",msa,WI,315,stevens point wi
+zhvi,395102,"Sioux City, IA",msa,IA,315,sioux ia
+zhvi,394549,"Durham, NC",msa,NC,315,durham nc
+zhvi,395079,"Sebastian, FL",msa,FL,315,sebastian fl
+zhvi,394741,"Kennewick, WA",msa,WA,315,kennewick wa
+zhvi,394731,"Kahului, HI",msa,HI,315,kahului hi
+zhvi,395218,"Wenatchee, WA",msa,WA,315,wenatchee wa
+zhvi,753912,"Pinehurst, NC",msa,NC,315,pinehurst nc
+zhvi,394697,"Huntington, WV",msa,OH,315,huntington wv
+zhvi,394348,"Atlantic City, NJ",msa,NJ,315,atlantic nj
+zhvi,394676,"Helena, AR",msa,AR,315,helena ar
+zhvi,394528,"Deltona, FL",msa,FL,315,deltona fl
+zhvi,394767,"Lamesa, TX",msa,TX,315,lamesa tx
+zhvi,394580,"Fairbanks, AK",msa,AK,315,fairbanks ak
+zhvi,395065,"Santa Cruz, CA",msa,CA,315,santa cruz ca
+zhvi,395212,"Watertown, WI",msa,WI,315,watertown wi
+zhvi,394608,"Fort Polk South, LA",msa,LA,315,fort polk south la
+zhvi,395059,"San Jose, CA",msa,CA,315,san jose ca
+zhvi,753877,"Cullowhee, NC",msa,NC,315,cullowhee nc
+zhvi,395024,"Rio Grande City, TX",msa,TX,315,rio grande tx
+zhvi,394440,"Cape Coral, FL",msa,FL,315,cape coral fl
+zhvi,395045,"Sacramento, CA",msa,CA,315,sacramento ca
+zhvi,753866,"Big Stone Gap, VA",msa,VA,315,big stone gap va
+zhvi,394681,"Hilton Head Island, SC",msa,SC,315,hilton head island sc
+zhvi,395005,"Providence, RI",msa,RI,315,providence ri
+zhvi,394907,"New Castle, PA",msa,PA,315,new castle pa
+zhvi,394585,"Fargo, ND",msa,ND,315,fargo nd
+zhvi,394813,"Macon, GA",msa,GA,315,macon ga
+zhvi,394404,"Boston, MA",msa,MA,315,boston ma
+zhvi,395056,"San Diego, CA",msa,CA,315,san diego ca
+zhvi,394458,"Charlotte, NC",msa,NC,315,charlotte nc
+zhvi,395004,"Prineville, OR",msa,OR,315,prineville or
+zhvi,394466,"Cincinnati, OH",msa,OH,315,cincinnati oh
+zhvi,394971,"Pensacola, FL",msa,FL,315,pensacola fl
+zhvi,395209,"Washington, DC",msa,VA,315,washington dc
+zhvi,394890,"Mount Vernon, WA",msa,WA,315,mount vernon wa
+zhvi,395061,"San Luis Obispo, CA",msa,CA,315,san luis obispo ca
+zhvi,394565,"Elkhart, IN",msa,IN,315,elkhart in
+zhvi,394421,"Brownsville, TX",msa,TX,315,brownsville tx
+zhvi,394787,"Lewiston, ID",msa,ID,315,lewiston id
+zhvi,394415,"Bridgeport, CT",msa,CT,315,bridgeport ct
+zhvi,753875,"Crestview, FL",msa,FL,315,crestview fl
+zhvi,394586,"Faribault, MN",msa,MN,315,faribault mn
+zhvi,394463,"Chicago, IL",msa,IL,315,chicago il
+zhvi,394333,"Anniston, AL",msa,AL,315,anniston al
+zhvi,394865,"Minneapolis, MN",msa,MN,315,minneapolis mn
+zhvi,753928,"Wisconsin Rapids, WI",msa,WI,315,wisconsin rapids wi
+zhvi,395244,"York, PA",msa,PA,315,york pa
+zhvi,394902,"Nashville, TN",msa,TN,315,nashville tn
+zhvi,394996,"Portales, NM",msa,NM,315,portales nm
+zhvi,394937,"Olympia, WA",msa,WA,315,olympia wa
+zhvi,394856,"Miami, FL",msa,FL,315,miami fl
+zhvi,394974,"Philadelphia, PA",msa,PA,315,philadelphia pa
+zhvi,394746,"Killeen, TX",msa,TX,315,killeen tx
+zhvi,394820,"Manchester, NH",msa,NH,315,manchester nh
+zhvi,395078,"Seattle, WA",msa,WA,315,seattle wa
+zhvi,394355,"Austin, TX",msa,TX,315,austin tx
+zhvi,394513,"Cumberland, MD",msa,MD,315,cumberland md
+zhvi,394318,"Allentown, PA",msa,PA,315,allentown pa
+zhvi,394802,"London, KY",msa,KY,315,london ky
+zhvi,394543,"Duluth, MN",msa,MN,315,duluth mn
+zhvi,394640,"Grand Rapids, MI",msa,MI,315,grand rapids mi
+zhvi,394938,"Omaha, NE",msa,NE,315,omaha ne
+zhvi,394804,"Longview, WA",msa,WA,315,longview wa
+zhvi,395023,"Richmond, KY",msa,KY,315,richmond ky
+zhvi,395217,"Weirton, WV",msa,OH,315,weirton wv
+zhvi,394843,"McAllen, TX",msa,TX,315,mcallen tx
+zhvi,753878,"Dayton, TN",msa,TN,315,dayton tn
+zhvi,395245,"Youngstown, OH",msa,OH,315,youngstown oh
+zhvi,394358,"Baltimore, MD",msa,MD,315,baltimore md
+zhvi,753906,"North Port, FL",msa,FL,315,north port fl
+zhvi,394530,"Denver, CO",msa,CO,315,denver co
+zhvi,394952,"Oxnard, CA",msa,CA,315,oxnard ca
+zhvi,394896,"Muskegon, MI",msa,MI,315,muskegon mi
+zhvi,395025,"Riverside, CA",msa,CA,315,riverside ca
+zhvi,394729,"Joplin, MO",msa,MO,315,joplin mo
+zhvi,394706,"Indianola, MS",msa,MS,315,indianola ms
+zhvi,394662,"Hanford, CA",msa,CA,315,hanford ca
+zhvi,395235,"Winston, NC",msa,NC,315,winston nc
+zhvi,395164,"Trenton, NJ",msa,NJ,315,trenton nj
+zhvi,394381,"Bennettsville, SC",msa,SC,315,bennettsville sc
+zhvi,394765,"Lake Havasu City, AZ",msa,AZ,315,lake havasu az
+zhvi,395122,"St. Marys, GA",msa,GA,315,st marys ga
+zhvi,394928,"Ocean City, NJ",msa,NJ,315,ocean nj
+zhvi,394997,"Portland, ME",msa,ME,315,portland me
+zhvi,394964,"Parkersburg, WV",msa,WV,315,parkersburg wv
+zhvi,753892,"Jackson, OH",msa,OH,315,jackson oh
+zhvi,394679,"Hickory, NC",msa,NC,315,hickory nc
+zhvi,394429,"Burlington, VT",msa,VT,315,burlington vt
+zhvi,395075,"Scranton, PA",msa,PA,315,scranton pa
+zhvi,394775,"Las Vegas, NV",msa,NV,315,las vegas nv
+zhvi,395221,"Wheeling, WV",msa,OH,315,wheeling wv
+zhvi,394308,"Albany, NY",msa,NY,315,albany ny
+zhvi,394910,"New Orleans, LA",msa,LA,315,new orleans la
+zhvi,394340,"Ashtabula, OH",msa,OH,315,ashtabula oh
+zhvi,394430,"Butte, MT",msa,MT,315,butte mt
+zhvi,394720,"Janesville, WI",msa,WI,315,janesville wi
+zhvi,394488,"Columbus, GA",msa,GA,315,columbus ga
+zhvi,395166,"Truckee, CA",msa,CA,315,truckee ca
+zhvi,395152,"Texarkana, TX",msa,TX,315,texarkana tx
+zhvi,753917,"Santa Maria, CA",msa,CA,315,santa maria ca
+zhvi,394457,"Charleston, SC",msa,SC,315,charleston sc
+zhvi,753880,"Fairfield, IA",msa,IA,315,fairfield ia
+zhvi,394353,"Augusta, ME",msa,ME,315,augusta me
+zhvi,394819,"Malone, NY",msa,NY,315,malone ny
+zhvi,394658,"Gulfport, MS",msa,MS,315,gulfport ms
+zhvi,394901,"Naples, FL",msa,FL,315,naples fl
+zhvi,394439,"Canton, OH",msa,OH,315,canton oh
+zhvi,395148,"Tampa, FL",msa,FL,315,tampa fl
+zhvi,395011,"Racine, WI",msa,WI,315,racine wi
+zhvi,394520,"Davenport, IA",msa,IL,315,davenport ia
+zhvi,395010,"Quincy, IL",msa,IL,315,quincy il
+zhvi,394792,"Lexington, KY",msa,KY,315,lexington ky
+zhvi,394514,"Dallas, TX",msa,TX,315,dallas tx
+zhvi,394708,"Iron Mountain, MI",msa,MI,315,iron mountain mi
+zhvi,394960,"Panama City, FL",msa,FL,315,panama fl
+zhvi,394637,"Grand Forks, ND",msa,MN,315,grand forks nd
+zhvi,394825,"Marinette, WI",msa,WI,315,marinette wi
+zhvi,395103,"Sioux Falls, SD",msa,SD,315,sioux falls sd
+zhvi,394425,"Buffalo, NY",msa,NY,315,buffalo ny
+zhvi,395012,"Raleigh, NC",msa,NC,315,raleigh nc
+zhvi,394372,"Beaumont, TX",msa,TX,315,beaumont tx
+zhvi,394924,"Norwich, CT",msa,CT,315,norwich ct
+zhvi,395213,"Watertown, NY",msa,NY,315,watertown ny
+zhvi,395222,"Whitewater, WI",msa,WI,315,whitewater wi
+zhvi,394346,"Athens, GA",msa,GA,315,athens ga
+zhvi,394669,"Hartford, CT",msa,CT,315,hartford ct
+zhvi,394443,"Carlsbad, NM",msa,NM,315,carlsbad nm
+zhvi,394921,"North Vernon, IN",msa,IN,315,north vernon in
+zhvi,394590,"Fayetteville, AR",msa,AR,315,fayetteville ar
+zhvi,394898,"Myrtle Beach, SC",msa,SC,315,myrtle beach sc
+zhvi,394744,"Key West, FL",msa,FL,315,key west fl
+zhvi,395006,"Provo, UT",msa,UT,315,provo ut
+zhvi,394940,"Ontario, OR",msa,OR,315,ontario or
+zhvi,394392,"Blacksburg, VA",msa,VA,315,blacksburg va
+zhvi,395145,"Talladega, AL",msa,AL,315,talladega al
+zhvi,394911,"New Philadelphia, OH",msa,OH,315,new philadelphia oh
+zhvi,394719,"Jamestown, NY",msa,NY,315,jamestown ny
+zhvi,394798,"Little Rock, AR",msa,AR,315,little rock ar
+zhvi,394519,"Daphne, AL",msa,AL,315,daphne al
+zhvi,395214,"Wauchula, FL",msa,FL,315,wauchula fl
+zhvi,394460,"Chattanooga, TN",msa,TN,315,chattanooga tn
+zhvi,394598,"Florence, AL",msa,AL,315,florence al
+zhvi,394857,"Michigan City, IN",msa,IN,315,michigan in
+zhvi,394531,"Des Moines, IA",msa,IA,315,des moines ia
+zhvi,395120,"St. Joseph, MO",msa,MO,315,st joseph mo
+zhvi,394483,"College Station, TX",msa,TX,315,college station tx
+zhvi,394841,"Maysville, KY",msa,KY,315,maysville ky
+zhvi,395198,"Wahpeton, ND",msa,ND,315,wahpeton nd
+zhvi,394395,"Bloomsburg, PA",msa,PA,315,bloomsburg pa
+zhvi,394784,"Levelland, TX",msa,TX,315,levelland tx
+zhvi,394383,"Berlin, NH",msa,NH,315,berlin nh
+zhvi,753865,"Bardstown, KY",msa,KY,315,bardstown ky
+zhvi,753881,"Glenwood Springs, CO",msa,CO,315,glenwood springs co
+zhvi,394454,"Champaign, IL",msa,IL,315,champaign il
+zhvi,395210,"Waterloo, IA",msa,IA,315,waterloo ia
+zhvi,394396,"Bluefield, WV",msa,VA,315,bluefield wv
+zhvi,394976,"Phoenix, AZ",msa,AZ,315,phoenix az
+zhvi,394602,"Fort Collins, CO",msa,CO,315,fort collins co
+zori,394456,"Charleston, IL",msa,IL,135,charleston il
+zori,394807,"Louisville, KY",msa,KY,135,louisville ky
+zori,394427,"Burlington, IA",msa,IA,135,burlington ia
+zori,395098,"Sierra Vista, AZ",msa,AZ,135,sierra vista az
+zori,394953,"Paducah, KY",msa,KY,135,paducah ky
+zori,395053,"Salt Lake City, UT",msa,UT,135,salt lake ut
+zori,394937,"Olympia, WA",msa,WA,135,olympia wa
+zori,394856,"Miami, FL",msa,FL,135,miami fl
+zori,395068,"Santa Rosa, CA",msa,CA,135,santa rosa ca
+zori,394849,"Memphis, TN",msa,TN,135,memphis tn
+zori,394974,"Philadelphia, PA",msa,PA,135,philadelphia pa
+zori,394746,"Killeen, TX",msa,TX,135,killeen tx
+zori,394628,"Gardnerville Ranchos, NV",msa,NV,135,gardnerville ranchos nv
+zori,394820,"Manchester, NH",msa,NH,135,manchester nh
+zori,394471,"Clarksville, TN",msa,TN,135,clarksville tn
+zori,395078,"Seattle, WA",msa,WA,135,seattle wa
+zori,395168,"Tullahoma, TN",msa,TN,135,tullahoma tn
+zori,394355,"Austin, TX",msa,TX,135,austin tx
+zori,394513,"Cumberland, MD",msa,MD,135,cumberland md
+zori,394318,"Allentown, PA",msa,PA,135,allentown pa
+zori,395113,"Spokane, WA",msa,WA,135,spokane wa
+zori,394352,"Augusta, GA",msa,GA,135,augusta ga
+zori,394543,"Duluth, MN",msa,MN,135,duluth mn
+zori,394653,"Greenville, SC",msa,SC,135,greenville sc
+zori,395153,"The Villages, FL",msa,FL,135,the villages fl
+zori,394640,"Grand Rapids, MI",msa,MI,135,grand rapids mi
+zori,394938,"Omaha, NE",msa,NE,135,omaha ne
+zori,394804,"Longview, WA",msa,WA,135,longview wa
+zori,394766,"Lakeland, FL",msa,FL,135,lakeland fl
+zori,395096,"Shreveport, LA",msa,LA,135,shreveport la
+zori,395023,"Richmond, KY",msa,KY,135,richmond ky
+zori,394756,"La Crosse, WI",msa,WI,135,la crosse wi
+zori,394732,"Kalamazoo, MI",msa,MI,135,kalamazoo mi
+zori,394762,"LaGrange, GA",msa,GA,135,lagrange ga
+zori,395217,"Weirton, WV",msa,OH,135,weirton wv
+zori,394843,"McAllen, TX",msa,TX,135,mcallen tx
+zori,753878,"Dayton, TN",msa,TN,135,dayton tn
+zori,394577,"Eureka, CA",msa,CA,135,eureka ca
+zori,394989,"Point Pleasant, WV",msa,OH,135,point pleasant wv
+zori,395090,"Shelby, NC",msa,NC,135,shelby nc
+zori,394351,"Auburn, AL",msa,AL,135,auburn al
+zori,394747,"Kingsport, TN",msa,TN,135,kingsport tn
+zori,394957,"Palm Bay, FL",msa,FL,135,palm bay fl
+zori,395245,"Youngstown, OH",msa,OH,135,youngstown oh
+zori,394943,"Orlando, FL",msa,FL,135,orlando fl
+zori,394358,"Baltimore, MD",msa,MD,135,baltimore md
+zori,753906,"North Port, FL",msa,FL,135,north port fl
+zori,845172,"Winfield, KS",msa,KS,135,winfield ks
+zori,394530,"Denver, CO",msa,CO,135,denver co
+zori,394952,"Oxnard, CA",msa,CA,135,oxnard ca
+zori,394735,"Kansas City, MO",msa,MO,135,kansas mo
+zori,394648,"Greensboro, NC",msa,NC,135,greensboro nc
+zori,394862,"Milwaukee, WI",msa,WI,135,milwaukee wi
+zori,394896,"Muskegon, MI",msa,MI,135,muskegon mi
+zori,845169,"Rockport, TX",msa,TX,135,rockport tx
+zori,394666,"Harrisburg, PA",msa,PA,135,harrisburg pa
+zori,395025,"Riverside, CA",msa,CA,135,riverside ca
+zori,394729,"Joplin, MO",msa,MO,135,joplin mo
+zori,394660,"Hagerstown, MD",msa,MD,135,hagerstown md
+zori,394705,"Indianapolis, IN",msa,IN,135,indianapolis in
+zori,394932,"Ogdensburg, NY",msa,NY,135,ogdensburg ny
+zori,394662,"Hanford, CA",msa,CA,135,hanford ca
+zori,395235,"Winston, NC",msa,NC,135,winston nc
+zori,394770,"Lansing, MI",msa,MI,135,lansing mi
+zori,395164,"Trenton, NJ",msa,NJ,135,trenton nj
+zori,395107,"South Bend, IN",msa,IN,135,south bend in
+zori,845159,"Poughkeepsie, NY",msa,NY,135,poughkeepsie ny
+zori,394765,"Lake Havasu City, AZ",msa,AZ,135,lake havasu az
+zori,395122,"St. Marys, GA",msa,GA,135,st marys ga
+zori,394928,"Ocean City, NJ",msa,NJ,135,ocean nj
+zori,394576,"Eugene, OR",msa,OR,135,eugene or
+zori,753899,"Los Angeles, CA",msa,CA,135,los angeles ca
+zori,394997,"Portland, ME",msa,ME,135,portland me
+zori,394800,"Logan, UT",msa,UT,135,logan ut
+zori,394964,"Parkersburg, WV",msa,WV,135,parkersburg wv
+zori,394629,"Georgetown, SC",msa,SC,135,georgetown sc
+zori,394412,"Bremerton, WA",msa,WA,135,bremerton wa
+zori,394679,"Hickory, NC",msa,NC,135,hickory nc
+zori,394423,"Brunswick, GA",msa,GA,135,brunswick ga
+zori,394429,"Burlington, VT",msa,VT,135,burlington vt
+zori,395075,"Scranton, PA",msa,PA,135,scranton pa
+zori,394775,"Las Vegas, NV",msa,NV,135,las vegas nv
+zori,395221,"Wheeling, WV",msa,OH,135,wheeling wv
+zori,394944,"Oshkosh, WI",msa,WI,135,oshkosh wi
+zori,394308,"Albany, NY",msa,NY,135,albany ny
+zori,394609,"Fort Smith, AR",msa,AR,135,fort smith ar
+zori,394910,"New Orleans, LA",msa,LA,135,new orleans la
+zori,753887,"Hermiston, OR",msa,OR,135,hermiston or
+zori,394496,"Coos Bay, OR",msa,OR,135,coos bay or
+zori,394998,"Portland, OR",msa,OR,135,portland or
+zori,394691,"Houma, LA",msa,LA,135,houma la
+zori,395057,"San Francisco, CA",msa,CA,135,san francisco ca
+zori,394441,"Cape Girardeau, MO",msa,MO,135,cape girardeau mo
+zori,394430,"Butte, MT",msa,MT,135,butte mt
+zori,394720,"Janesville, WI",msa,WI,135,janesville wi
+zori,394713,"Jackson, WY",msa,WY,135,jackson wy
+zori,394488,"Columbus, GA",msa,GA,135,columbus ga
+zori,395134,"Stockton, CA",msa,CA,135,stockton ca
+zori,753872,"California, MD",msa,MD,135,california md
+zori,394357,"Bakersfield, CA",msa,CA,135,bakersfield ca
+zori,394814,"Madera, CA",msa,CA,135,madera ca
+zori,394680,"Hilo, HI",msa,HI,135,hilo hi
+zori,395166,"Truckee, CA",msa,CA,135,truckee ca
+zori,395152,"Texarkana, TX",msa,TX,135,texarkana tx
+zori,395179,"Utica, NY",msa,NY,135,utica ny
+zori,753917,"Santa Maria, CA",msa,CA,135,santa maria ca
+zori,394788,"Lewiston, ME",msa,ME,135,lewiston me
+zori,395121,"St. Louis, MO",msa,MO,135,st louis mo
+zori,394457,"Charleston, SC",msa,SC,135,charleston sc
+zori,394592,"Fernley, NV",msa,NV,135,fernley nv
+zori,394347,"Atlanta, GA",msa,GA,135,atlanta ga
+zori,394353,"Augusta, ME",msa,ME,135,augusta me
+zori,395055,"San Antonio, TX",msa,TX,135,san antonio tx
+zori,753895,"Lafayette, IN",msa,IN,135,lafayette in
+zori,395132,"Stevens Point, WI",msa,WI,135,stevens point wi
+zori,395102,"Sioux City, IA",msa,IA,135,sioux ia
+zori,394658,"Gulfport, MS",msa,MS,135,gulfport ms
+zori,394901,"Naples, FL",msa,FL,135,naples fl
+zori,394549,"Durham, NC",msa,NC,135,durham nc
+zori,394439,"Canton, OH",msa,OH,135,canton oh
+zori,395079,"Sebastian, FL",msa,FL,135,sebastian fl
+zori,394741,"Kennewick, WA",msa,WA,135,kennewick wa
+zori,394731,"Kahului, HI",msa,HI,135,kahului hi
+zori,395148,"Tampa, FL",msa,FL,135,tampa fl
+zori,395011,"Racine, WI",msa,WI,135,racine wi
+zori,395218,"Wenatchee, WA",msa,WA,135,wenatchee wa
+zori,753912,"Pinehurst, NC",msa,NC,135,pinehurst nc
+zori,394520,"Davenport, IA",msa,IL,135,davenport ia
+zori,395010,"Quincy, IL",msa,IL,135,quincy il
+zori,394697,"Huntington, WV",msa,OH,135,huntington wv
+zori,394348,"Atlantic City, NJ",msa,NJ,135,atlantic nj
+zori,394792,"Lexington, KY",msa,KY,135,lexington ky
+zori,845164,"Lebanon, NH",msa,NH,135,lebanon nh
+zori,394514,"Dallas, TX",msa,TX,135,dallas tx
+zori,394528,"Deltona, FL",msa,FL,135,deltona fl
+zori,394960,"Panama City, FL",msa,FL,135,panama fl
+zori,394637,"Grand Forks, ND",msa,MN,135,grand forks nd
+zori,786253,"Brownsville, TN",msa,TN,135,brownsville tn
+zori,394580,"Fairbanks, AK",msa,AK,135,fairbanks ak
+zori,395065,"Santa Cruz, CA",msa,CA,135,santa cruz ca
+zori,395212,"Watertown, WI",msa,WI,135,watertown wi
+zori,394608,"Fort Polk South, LA",msa,LA,135,fort polk south la
+zori,394825,"Marinette, WI",msa,WI,135,marinette wi
+zori,395103,"Sioux Falls, SD",msa,SD,135,sioux falls sd
+zori,395059,"San Jose, CA",msa,CA,135,san jose ca
+zori,753877,"Cullowhee, NC",msa,NC,135,cullowhee nc
+zori,394425,"Buffalo, NY",msa,NY,135,buffalo ny
+zori,394440,"Cape Coral, FL",msa,FL,135,cape coral fl
+zori,395012,"Raleigh, NC",msa,NC,135,raleigh nc
+zori,395045,"Sacramento, CA",msa,CA,135,sacramento ca
+zori,394372,"Beaumont, TX",msa,TX,135,beaumont tx
+zori,394924,"Norwich, CT",msa,CT,135,norwich ct
+zori,395213,"Watertown, NY",msa,NY,135,watertown ny
+zori,395222,"Whitewater, WI",msa,WI,135,whitewater wi
+zori,394346,"Athens, GA",msa,GA,135,athens ga
+zori,394669,"Hartford, CT",msa,CT,135,hartford ct
+zori,394443,"Carlsbad, NM",msa,NM,135,carlsbad nm
+zori,394681,"Hilton Head Island, SC",msa,SC,135,hilton head island sc
+zori,845160,"Prescott Valley, AZ",msa,AZ,135,prescott valley az
+zori,395005,"Providence, RI",msa,RI,135,providence ri
+zori,394907,"New Castle, PA",msa,PA,135,new castle pa
+zori,394585,"Fargo, ND",msa,ND,135,fargo nd
+zori,394590,"Fayetteville, AR",msa,AR,135,fayetteville ar
+zori,394898,"Myrtle Beach, SC",msa,SC,135,myrtle beach sc
+zori,394813,"Macon, GA",msa,GA,135,macon ga
+zori,394404,"Boston, MA",msa,MA,135,boston ma
+zori,395056,"San Diego, CA",msa,CA,135,san diego ca
+zori,394458,"Charlotte, NC",msa,NC,135,charlotte nc
+zori,394744,"Key West, FL",msa,FL,135,key west fl
+zori,395006,"Provo, UT",msa,UT,135,provo ut
+zori,394940,"Ontario, OR",msa,OR,135,ontario or
+zori,394392,"Blacksburg, VA",msa,VA,135,blacksburg va
+zori,395145,"Talladega, AL",msa,AL,135,talladega al
+zori,395004,"Prineville, OR",msa,OR,135,prineville or
+zori,394719,"Jamestown, NY",msa,NY,135,jamestown ny
+zori,394466,"Cincinnati, OH",msa,OH,135,cincinnati oh
+zori,394798,"Little Rock, AR",msa,AR,135,little rock ar
+zori,394519,"Daphne, AL",msa,AL,135,daphne al
+zori,394460,"Chattanooga, TN",msa,TN,135,chattanooga tn
+zori,394971,"Pensacola, FL",msa,FL,135,pensacola fl
+zori,395209,"Washington, DC",msa,VA,135,washington dc
+zori,845158,"Dayton, OH",msa,OH,135,dayton oh
+zori,394598,"Florence, AL",msa,AL,135,florence al
+zori,394857,"Michigan City, IN",msa,IN,135,michigan in
+zori,394531,"Des Moines, IA",msa,IA,135,des moines ia
+zori,394890,"Mount Vernon, WA",msa,WA,135,mount vernon wa
+zori,395061,"San Luis Obispo, CA",msa,CA,135,san luis obispo ca
+zori,394565,"Elkhart, IN",msa,IN,135,elkhart in
+zori,394421,"Brownsville, TX",msa,TX,135,brownsville tx
+zori,395120,"St. Joseph, MO",msa,MO,135,st joseph mo
+zori,394787,"Lewiston, ID",msa,ID,135,lewiston id
+zori,394483,"College Station, TX",msa,TX,135,college station tx
+zori,395198,"Wahpeton, ND",msa,ND,135,wahpeton nd
+zori,394395,"Bloomsburg, PA",msa,PA,135,bloomsburg pa
+zori,394415,"Bridgeport, CT",msa,CT,135,bridgeport ct
+zori,753875,"Crestview, FL",msa,FL,135,crestview fl
+zori,394586,"Faribault, MN",msa,MN,135,faribault mn
+zori,394463,"Chicago, IL",msa,IL,135,chicago il
+zori,753865,"Bardstown, KY",msa,KY,135,bardstown ky
+zori,753881,"Glenwood Springs, CO",msa,CO,135,glenwood springs co
+zori,394454,"Champaign, IL",msa,IL,135,champaign il
+zori,395210,"Waterloo, IA",msa,IA,135,waterloo ia
+zori,845163,"Jasper, AL",msa,AL,135,jasper al
+zori,394333,"Anniston, AL",msa,AL,135,anniston al
+zori,394865,"Minneapolis, MN",msa,MN,135,minneapolis mn
+zori,753928,"Wisconsin Rapids, WI",msa,WI,135,wisconsin rapids wi
+zori,394396,"Bluefield, WV",msa,VA,135,bluefield wv
+zori,395244,"York, PA",msa,PA,135,york pa
+zori,394902,"Nashville, TN",msa,TN,135,nashville tn
+zori,394976,"Phoenix, AZ",msa,AZ,135,phoenix az
+zori,394602,"Fort Collins, CO",msa,CO,135,fort collins co
+zori,394996,"Portales, NM",msa,NM,135,portales nm

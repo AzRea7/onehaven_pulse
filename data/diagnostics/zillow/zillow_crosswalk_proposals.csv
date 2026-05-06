@@ -1,0 +1,13 @@
+source,source_geo_id,source_geo_name,source_geo_type,canonical_geo_id,match_method,confidence_score,notes,dataset,row_count,matched_geo_name,matched_geo_type
+zillow,395232,"Winchester, VA",msa,county:00840,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA,zhvi,315,"Winchester, VA",county
+zillow,394913,"New York, NY",msa,state_36,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=NY,zhvi,315,New York,state
+zillow,395038,"Rome, GA",msa,metro_40660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=GA,zhvi,315,"Rome, GA",metro
+zillow,394794,"Lima, OH",msa,metro_30620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=OH,zhvi,315,"Lima, OH",metro
+zillow,395194,"Virginia Beach, VA",msa,county:00810,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=VA,zhvi,315,"Virginia Beach, VA",county
+zillow,395247,"Yuma, AZ",msa,metro_49740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zhvi; state_code=AZ,zhvi,315,"Yuma, AZ",metro
+zillow,395232,"Winchester, VA",msa,county:00840,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=VA,zori,135,"Winchester, VA",county
+zillow,395194,"Virginia Beach, VA",msa,county:00810,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=VA,zori,135,"Virginia Beach, VA",county
+zillow,394913,"New York, NY",msa,state_36,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=NY,zori,135,New York,state
+zillow,395247,"Yuma, AZ",msa,metro_49740,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=AZ,zori,135,"Yuma, AZ",metro
+zillow,395038,"Rome, GA",msa,metro_40660,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=GA,zori,135,"Rome, GA",metro
+zillow,394794,"Lima, OH",msa,metro_30620,manual,0.9500,Story 9.2 generated exact normalized name match; dataset=zori; state_code=OH,zori,135,"Lima, OH",metro

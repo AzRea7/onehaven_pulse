@@ -265,7 +265,62 @@ def _ensure_provisional_redfin_geo(record: RawRedfinRecord) -> str:
 
     return geo_id
 
+
+def _lookup_redfin_crosswalk(record: RawRedfinRecord) -> tuple[str, str, Decimal] | None:
+    """Resolve Redfin regions through canonical geo.geo_crosswalk before provisional fallback."""
+
+    candidate_ids = [
+        record.source_region_id,
+        record.region_name,
+    ]
+
+    # The current fallback creates IDs such as metro_redfin_detroit_mi_mi.
+    # Include that generated key so existing/manual seed rows can canonicalize it.
+    normalized_region = re.sub(r"[^a-z0-9]+", "_", record.region_name.lower()).strip("_")
+    state = (record.state_code or "").lower().strip()
+    if normalized_region:
+        if state:
+            candidate_ids.append(f"metro_redfin_{normalized_region}_{state}")
+        else:
+            candidate_ids.append(f"metro_redfin_{normalized_region}")
+
+    candidate_ids = [candidate for candidate in candidate_ids if candidate]
+
+    if not candidate_ids:
+        return None
+
+    sql = text(
+        """
+        SELECT
+            canonical_geo_id,
+            match_method,
+            confidence_score
+        FROM geo.geo_crosswalk
+        WHERE source = 'redfin'
+          AND is_active = true
+          AND source_geo_id = ANY(:candidate_ids)
+        ORDER BY confidence_score DESC
+        LIMIT 1
+        """
+    )
+
+    with engine.begin() as connection:
+        row = connection.execute(sql, {"candidate_ids": candidate_ids}).mappings().first()
+
+    if row is None:
+        return None
+
+    return (
+        str(row["canonical_geo_id"]),
+        str(row["match_method"]),
+        Decimal(str(row["confidence_score"])),
+    )
+
 def _lookup_geo_id(record: RawRedfinRecord) -> tuple[str, str, Decimal] | None:
+    crosswalk_match = _lookup_redfin_crosswalk(record)
+    if crosswalk_match is not None:
+        return crosswalk_match
+
     region_name = _normalize_text(record.region_name)
     region_type = _normalize_text(record.region_type)
 
