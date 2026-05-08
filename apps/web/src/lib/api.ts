@@ -476,12 +476,19 @@ export async function compareMarkets({
 
 export const screenerMarketResultSchema = z.object({
   market: marketIdentitySchema,
-  latest_period: z.string().nullable().optional(),
-  latest_data_period: z.string().nullable().optional(),
-  data_status: z.string().nullable().optional(),
-  cycle_phase: z.string().nullable().optional(),
-  investor_signal: z.string().nullable().optional(),
-  confidence_score: z.number().nullable().optional(),
+  latest_period: z.string().nullable(),
+  latest_data_period: z.string().nullable(),
+  data_status: z.string().nullable(),
+  cycle_phase: z.string().nullable(),
+  investor_signal: z.string().nullable(),
+
+  investor_stance: z.string().nullable().optional(),
+  investor_stance_label: z.string().nullable().optional(),
+  investor_stance_score: z.number().nullable().optional(),
+  investor_signal_rule_version: z.string().nullable().optional(),
+  material_missing_score_inputs: z.boolean().nullable().optional(),
+
+  confidence_score: z.number().nullable(),
   values: z.record(z.string(), z.number().nullable()),
   missing_metrics: z.array(z.string()),
 });
@@ -585,10 +592,12 @@ export async function getMarketMap({
   geoType = "metro",
   metric = "composite_cycle_score",
   periodMonth,
+  state,
 }: {
   geoType?: string;
   metric?: string;
   periodMonth?: string;
+  state?: string;
 }): Promise<MarketMapResponse> {
   const params = new URLSearchParams({
     geo_type: geoType,
@@ -597,6 +606,10 @@ export async function getMarketMap({
 
   if (periodMonth) {
     params.set("period_month", periodMonth);
+  }
+
+  if (state) {
+    params.set("state", state.toUpperCase());
   }
 
   const response = await apiClient.get(`/map/markets?${params.toString()}`);
@@ -720,3 +733,71 @@ export async function searchGeographies(
   return apiFetch<GeographySearchResponse>(`/geographies/search${query}`);
 }
 
+// Story 12.3 — Investor Signal
+
+export type InvestorStance =
+  | "attractive"
+  | "watchlist"
+  | "mixed"
+  | "avoid"
+  | "insufficient_data";
+
+export type InvestorDimensionStatus =
+  | "positive"
+  | "neutral"
+  | "negative"
+  | "missing";
+
+export type InvestorSignalSeverity = "low" | "medium" | "high";
+
+export type InvestorSignalEvidence = {
+  metric_name: string;
+  value: unknown;
+  period: string | null;
+  interpretation: string;
+};
+
+export type InvestorSignalDriver = {
+  name: string;
+  status: InvestorDimensionStatus;
+  message: string;
+  evidence: InvestorSignalEvidence[];
+};
+
+export type InvestorSignalRisk = {
+  name: string;
+  severity: InvestorSignalSeverity;
+  message: string;
+  evidence: InvestorSignalEvidence[];
+};
+
+export type InvestorMarketSignal = {
+  geo_id: string;
+  stance: InvestorStance;
+  stance_label: string;
+  stance_score: number | null;
+  stance_reason: string;
+  rule_version: string;
+  confidence_score: number | null;
+  latest_data_period: string | null;
+  latest_scoreable_period: string | null;
+  required_coverage_present: boolean;
+  material_missing_score_inputs: boolean;
+  coverage: Record<string, boolean>;
+  available_metrics: string[];
+  missing_score_inputs: string[];
+  dimension_statuses: Record<string, InvestorDimensionStatus>;
+  drivers: InvestorSignalDriver[];
+  risks: InvestorSignalRisk[];
+  rule_trace: string[];
+  deterministic: boolean;
+};
+
+export async function getInvestorSignal(
+  geoId: string,
+): Promise<InvestorMarketSignal> {
+  const response = await apiClient.get(
+    `/markets/${encodeURIComponent(geoId)}/investor-signal`,
+  );
+  return response.data as InvestorMarketSignal;
+}

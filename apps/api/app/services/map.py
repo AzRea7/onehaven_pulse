@@ -129,6 +129,7 @@ def get_market_map(
     geo_type: str,
     metric: str,
     period_month: date | None,
+    state: str | None = None,
 ) -> GeoJsonFeatureCollection:
     if geo_type not in VALID_MAP_GEO_TYPES:
         raise ApiError(
@@ -228,12 +229,24 @@ def get_market_map(
             WHERE g.geo_type = :geo_type
               AND g.is_active = true
               AND COALESCE(gg.simplified_geometry, gg.geometry) IS NOT NULL
+              AND (
+                    :state_code IS NULL
+                    OR upper(COALESCE(g.state_code, '')) = :state_code
+                    OR upper(COALESCE(g.name, '')) ~ :state_regex
+                    OR upper(COALESCE(g.display_name, '')) ~ :state_regex
+                  )
             ORDER BY g.display_name NULLS LAST, g.name, g.geo_id
             """
         ),
         {
             "geo_type": geo_type,
             "period_month": selected_period,
+            "state_code": state.strip().upper() if state else None,
+            "state_regex": (
+                f"(^|[^A-Z]){state.strip().upper()}($|[^A-Z])"
+                if state
+                else None
+            ),
         },
     ).mappings().all()
 

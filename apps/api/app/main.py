@@ -18,6 +18,7 @@ from app.routers.audit import router as audit_router
 from app.routers.compare import router as compare_router
 from app.routers.geo import router as geo_router
 from app.routers.health import router as health_router
+from app.routers.investor_signal import router as investor_signal_router
 from app.routers.map import router as map_router
 from app.routers.markets import router as markets_router
 from app.routers.metrics import router as metrics_router
@@ -114,6 +115,7 @@ def create_app() -> FastAPI:
     app.include_router(admin_router)
     app.include_router(compare_router)
     app.include_router(markets_router)
+    app.include_router(investor_signal_router)
     app.include_router(map_router)
     app.include_router(metrics_router)
     app.include_router(geographies.router)

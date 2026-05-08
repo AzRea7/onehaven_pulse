@@ -39,6 +39,14 @@ def get_market_map_endpoint(
             description="Optional map period in YYYY-MM-DD format. Defaults to latest available period for the selected metric.",
         ),
     ] = None,
+    state: Annotated[
+        str | None,
+        Query(
+            min_length=2,
+            max_length=2,
+            description="Optional 2-letter state filter. Example: MI.",
+        ),
+    ] = None,
 ) -> GeoJsonFeatureCollection:
     response.headers["Cache-Control"] = "public, max-age=300"
 
@@ -47,4 +55,5 @@ def get_market_map_endpoint(
         geo_type=geo_type,
         metric=metric,
         period_month=period_month,
+        state=state,
     )

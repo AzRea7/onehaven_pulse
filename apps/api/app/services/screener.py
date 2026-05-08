@@ -6,6 +6,14 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 
+def _float_or_none(value: Any) -> float | None:
+    return float(value) if value is not None else None
+
+
+def _iso_or_none(value: Any) -> str | None:
+    return value.isoformat() if value is not None else None
+
+
 def screen_markets(
     db: Session,
     *,
@@ -33,16 +41,32 @@ def screen_markets(
         params["geo_type"] = geo_type
 
     if state:
-        filters.append("lower(g.state_code) = :state")
-        params["state"] = state.lower()
+        normalized_state = state.lower().strip()
+        filters.append(
+            """(
+                lower(COALESCE(g.state_code, '')) = :state
+                OR lower(COALESCE(g.state_name, '')) = :state
+                OR lower(COALESCE(g.name, '')) LIKE :state_suffix
+                OR lower(COALESCE(g.display_name, '')) LIKE :state_suffix
+            )"""
+        )
+        params["state"] = normalized_state
+        params["state_suffix"] = f"%, {normalized_state}"
 
     if cycle_phase:
         filters.append("lower(COALESCE(labeled.cycle_phase, '')) = :cycle_phase")
         params["cycle_phase"] = cycle_phase.lower()
 
     if investor_signal:
-        filters.append("lower(COALESCE(labeled.investor_signal, '')) = :investor_signal")
-        params["investor_signal"] = investor_signal.lower()
+        normalized_signal = investor_signal.lower().replace("-", "_").replace(" ", "_")
+        filters.append(
+            """(
+                lower(COALESCE(labeled.investor_signal, '')) = :investor_signal
+                OR lower(COALESCE(labeled.investor_stance, '')) = :investor_signal
+                OR lower(replace(COALESCE(labeled.investor_signal, ''), ' ', '_')) = :investor_signal
+            )"""
+        )
+        params["investor_signal"] = normalized_signal
 
     if min_confidence is not None:
         filters.append("COALESCE(labeled.confidence_score, 0) >= :min_confidence")
@@ -98,7 +122,7 @@ def screen_markets(
                       + CASE WHEN m.zori_yoy IS NOT NULL THEN 1 ELSE 0 END
                       + CASE WHEN (m.payment_to_income_ratio IS NOT NULL OR m.price_to_income_ratio IS NOT NULL) THEN 1 ELSE 0 END
                       + CASE WHEN m.unemployment_rate IS NOT NULL THEN 1 ELSE 0 END
-                    )::numeric / 5.0
+                    )::numeric / 4.0
                 ) AS confidence_score,
 
                 LEAST(
@@ -110,31 +134,161 @@ def screen_markets(
                           + COALESCE(m.zhvi_yoy, 0) * 3
                           + COALESCE(m.zori_yoy, 0) * 2
                           - COALESCE(m.unemployment_rate, 0) * 1.5
-                          - GREATEST(COALESCE(m.payment_to_income_ratio, 0) - 20, 0) * 0.75
+                          - GREATEST(COALESCE(m.payment_to_income_ratio, 0) - 0.30, 0) * 50
                         )
                     )
-                )::numeric AS screener_score
+                )::numeric AS screener_score,
+
+                CASE
+                    WHEN m.zhvi_yoy IS NULL THEN 'missing'
+                    WHEN m.zhvi_yoy BETWEEN 2 AND 12 THEN 'positive'
+                    WHEN m.zhvi_yoy BETWEEN -2 AND 18 THEN 'neutral'
+                    ELSE 'negative'
+                END AS price_momentum_status,
+
+                CASE
+                    WHEN m.zori_yoy IS NULL THEN 'missing'
+                    WHEN m.zori_yoy >= 3 THEN 'positive'
+                    WHEN m.zori_yoy >= 0 THEN 'neutral'
+                    ELSE 'negative'
+                END AS rent_momentum_status,
+
+                CASE
+                    WHEN m.payment_to_income_ratio IS NULL THEN 'missing'
+                    WHEN m.payment_to_income_ratio <= 0.28 THEN 'positive'
+                    WHEN m.payment_to_income_ratio <= 0.36 THEN 'neutral'
+                    ELSE 'negative'
+                END AS affordability_status,
+
+                CASE
+                    WHEN m.unemployment_rate IS NULL THEN 'missing'
+                    WHEN m.unemployment_rate <= 4.5 THEN 'positive'
+                    WHEN m.unemployment_rate <= 6.5 THEN 'neutral'
+                    ELSE 'negative'
+                END AS labor_status,
+
+                CASE
+                    WHEN m.building_permits IS NULL THEN true
+                    ELSE false
+                END AS material_missing_score_inputs
 
             FROM latest_rows m
         ),
-        labeled AS (
+        status_counts AS (
             SELECT
                 scored.*,
+
+                (
+                    CASE WHEN price_momentum_status = 'negative' THEN 1 ELSE 0 END
+                  + CASE WHEN rent_momentum_status = 'negative' THEN 1 ELSE 0 END
+                  + CASE WHEN affordability_status = 'negative' THEN 1 ELSE 0 END
+                  + CASE WHEN labor_status = 'negative' THEN 1 ELSE 0 END
+                ) AS core_negative_count,
+
+                (
+                    CASE WHEN price_momentum_status = 'positive' THEN 1 ELSE 0 END
+                  + CASE WHEN rent_momentum_status = 'positive' THEN 1 ELSE 0 END
+                  + CASE WHEN affordability_status = 'positive' THEN 1 ELSE 0 END
+                  + CASE WHEN labor_status = 'positive' THEN 1 ELSE 0 END
+                ) AS core_positive_count,
+
+                (
+                    CASE WHEN price_momentum_status = 'missing' THEN 1 ELSE 0 END
+                  + CASE WHEN rent_momentum_status = 'missing' THEN 1 ELSE 0 END
+                  + CASE WHEN affordability_status = 'missing' THEN 1 ELSE 0 END
+                  + CASE WHEN labor_status = 'missing' THEN 1 ELSE 0 END
+                ) AS core_missing_count
+
+            FROM scored
+        ),
+        labeled AS (
+            SELECT
+                status_counts.*,
+
                 CASE
-                    WHEN scored.confidence_score < 0.4 THEN 'Insufficient Data'
-                    WHEN scored.screener_score >= 70 THEN 'Expansion'
-                    WHEN scored.screener_score >= 50 THEN 'Recovery'
-                    WHEN scored.screener_score >= 35 THEN 'Stabilizing'
+                    WHEN confidence_score < 0.4 OR core_missing_count >= 2 THEN 'Insufficient Data'
+                    WHEN screener_score >= 70 THEN 'Expansion'
+                    WHEN screener_score >= 50 THEN 'Recovery'
+                    WHEN screener_score >= 35 THEN 'Stabilizing'
                     ELSE 'Contraction'
                 END AS cycle_phase,
+
                 CASE
-                    WHEN scored.confidence_score < 0.4 THEN 'Insufficient Data'
-                    WHEN scored.screener_score >= 70 THEN 'Buy Watch'
-                    WHEN scored.screener_score >= 50 THEN 'Hold'
-                    WHEN scored.screener_score >= 35 THEN 'Caution'
+                    WHEN confidence_score < 0.4 OR core_missing_count >= 2 THEN 'Insufficient Data'
+                    WHEN screener_score >= 70 THEN 'Buy Watch'
+                    WHEN screener_score >= 50 THEN 'Hold'
+                    WHEN screener_score >= 35 THEN 'Caution'
                     ELSE 'Avoid'
-                END AS investor_signal
-            FROM scored
+                END AS investor_signal,
+
+                CASE
+                    WHEN confidence_score < 0.4 OR core_missing_count >= 2 THEN 'insufficient_data'
+                    WHEN confidence_score < 0.6 THEN 'avoid'
+                    WHEN core_negative_count >= 3 THEN 'avoid'
+                    WHEN affordability_status = 'negative' AND labor_status = 'negative' THEN 'avoid'
+                    WHEN
+                        confidence_score >= 0.85
+                        AND rent_momentum_status = 'positive'
+                        AND price_momentum_status IN ('positive', 'neutral')
+                        AND affordability_status IN ('positive', 'neutral')
+                        AND labor_status IN ('positive', 'neutral')
+                        AND core_negative_count = 0
+                        AND core_missing_count = 0
+                        AND material_missing_score_inputs = false
+                    THEN 'attractive'
+                    WHEN
+                        core_positive_count >= 2
+                        AND core_negative_count <= 2
+                        AND confidence_score >= 0.7
+                    THEN 'watchlist'
+                    ELSE 'mixed'
+                END AS investor_stance,
+
+                CASE
+                    WHEN confidence_score < 0.4 OR core_missing_count >= 2 THEN 'Insufficient Data'
+                    WHEN confidence_score < 0.6 THEN 'Avoid'
+                    WHEN core_negative_count >= 3 THEN 'Avoid'
+                    WHEN affordability_status = 'negative' AND labor_status = 'negative' THEN 'Avoid'
+                    WHEN
+                        confidence_score >= 0.85
+                        AND rent_momentum_status = 'positive'
+                        AND price_momentum_status IN ('positive', 'neutral')
+                        AND affordability_status IN ('positive', 'neutral')
+                        AND labor_status IN ('positive', 'neutral')
+                        AND core_negative_count = 0
+                        AND core_missing_count = 0
+                        AND material_missing_score_inputs = false
+                    THEN 'Attractive'
+                    WHEN
+                        core_positive_count >= 2
+                        AND core_negative_count <= 2
+                        AND confidence_score >= 0.7
+                    THEN 'Watchlist'
+                    ELSE 'Mixed'
+                END AS investor_stance_label,
+
+                ROUND(
+                    LEAST(
+                        1,
+                        GREATEST(
+                            0,
+                            (
+                                0.50
+                              + CASE WHEN price_momentum_status = 'positive' THEN 0.08 WHEN price_momentum_status = 'negative' THEN -0.12 ELSE 0 END
+                              + CASE WHEN rent_momentum_status = 'positive' THEN 0.12 WHEN rent_momentum_status = 'negative' THEN -0.12 ELSE 0 END
+                              + CASE WHEN affordability_status = 'positive' THEN 0.12 WHEN affordability_status = 'negative' THEN -0.15 ELSE 0 END
+                              + CASE WHEN labor_status = 'positive' THEN 0.08 WHEN labor_status = 'negative' THEN -0.12 ELSE 0 END
+                              + CASE WHEN confidence_score >= 0.85 THEN 0.08 WHEN confidence_score < 0.6 THEN -0.15 ELSE 0 END
+                              + CASE WHEN material_missing_score_inputs THEN -0.05 ELSE 0 END
+                            )
+                        )
+                    ),
+                    4
+                ) AS investor_stance_score,
+
+                'investor_signal_v2'::text AS investor_signal_rule_version
+
+            FROM status_counts
         ),
         filtered AS (
             SELECT
@@ -156,6 +310,11 @@ def screen_markets(
 
                 labeled.cycle_phase,
                 labeled.investor_signal,
+                labeled.investor_stance,
+                labeled.investor_stance_label,
+                labeled.investor_stance_score,
+                labeled.investor_signal_rule_version,
+                labeled.material_missing_score_inputs,
                 labeled.confidence_score,
                 labeled.screener_score,
 
@@ -183,6 +342,7 @@ def screen_markets(
         FROM filtered
         ORDER BY
             confidence_score DESC NULLS LAST,
+            investor_stance_score DESC NULLS LAST,
             screener_score DESC NULLS LAST,
             display_name ASC
         LIMIT :limit
@@ -197,16 +357,16 @@ def screen_markets(
 
     for row in rows:
         values = {
-            "home_price_yoy": float(row["home_price_yoy"]) if row["home_price_yoy"] is not None else None,
-            "rent_yoy": float(row["rent_yoy"]) if row["rent_yoy"] is not None else None,
+            "home_price_yoy": _float_or_none(row["home_price_yoy"]),
+            "rent_yoy": _float_or_none(row["rent_yoy"]),
             "active_listings_yoy": None,
             "months_supply": None,
             "median_days_on_market": None,
-            "payment_to_income_ratio": float(row["payment_to_income_ratio"]) if row["payment_to_income_ratio"] is not None else None,
-            "price_to_income_ratio": float(row["price_to_income_ratio"]) if row["price_to_income_ratio"] is not None else None,
-            "unemployment_rate": float(row["unemployment_rate"]) if row["unemployment_rate"] is not None else None,
-            "building_permits": float(row["building_permits"]) if row["building_permits"] is not None else None,
-            "composite_cycle_score": float(row["composite_cycle_score"]) if row["composite_cycle_score"] is not None else None,
+            "payment_to_income_ratio": _float_or_none(row["payment_to_income_ratio"]),
+            "price_to_income_ratio": _float_or_none(row["price_to_income_ratio"]),
+            "unemployment_rate": _float_or_none(row["unemployment_rate"]),
+            "building_permits": _float_or_none(row["building_permits"]),
+            "composite_cycle_score": _float_or_none(row["composite_cycle_score"]),
         }
 
         missing_metrics = [
@@ -226,17 +386,22 @@ def screen_markets(
                     "cbsa_code": row["cbsa_code"],
                     "zcta": row["zcta"],
                     "country_code": row["country_code"],
-                    "latitude": float(row["latitude"]) if row["latitude"] is not None else None,
-                    "longitude": float(row["longitude"]) if row["longitude"] is not None else None,
+                    "latitude": _float_or_none(row["latitude"]),
+                    "longitude": _float_or_none(row["longitude"]),
                 },
-                "latest_period": row["latest_period"].isoformat() if row["latest_period"] is not None else None,
-                "latest_data_period": row["latest_data_period"].isoformat() if row["latest_data_period"] is not None else None,
+                "latest_period": _iso_or_none(row["latest_period"]),
+                "latest_data_period": _iso_or_none(row["latest_data_period"]),
                 "data_status": "latest_data_period",
                 "cycle_phase": row["cycle_phase"],
                 "investor_signal": row["investor_signal"],
-                "confidence_score": float(row["confidence_score"])
-                if row["confidence_score"] is not None
+                "investor_stance": row["investor_stance"],
+                "investor_stance_label": row["investor_stance_label"],
+                "investor_stance_score": _float_or_none(row["investor_stance_score"]),
+                "investor_signal_rule_version": row["investor_signal_rule_version"],
+                "material_missing_score_inputs": bool(row["material_missing_score_inputs"])
+                if row["material_missing_score_inputs"] is not None
                 else None,
+                "confidence_score": _float_or_none(row["confidence_score"]),
                 "values": values,
                 "missing_metrics": missing_metrics,
             }
